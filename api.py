@@ -200,6 +200,149 @@ class NetworkScanner:
         
         return hosts
     
+    async def scan_ports_and_services(self, ip: str) -> Dict[str, Any]:
+        """Scan ports and identify services on a specific host"""
+        logger.info(f"🔍 Scanning ports and services on {ip}")
+        
+        try:
+            # Comprehensive port scan with service version detection
+            cmd = f"sudo -n nmap -sV -sC --version-all -p- --max-retries 2 --host-timeout 5m {ip}"
+            result = subprocess.run(cmd.split(), capture_output=True, text=True, timeout=360)
+            
+            if result.returncode != 0:
+                logger.warning(f"⚠️ Full port scan failed for {ip}, trying top ports")
+                # Fallback to top 1000 ports
+                cmd = f"sudo -n nmap -sV -sC --top-ports 1000 {ip}"
+                result = subprocess.run(cmd.split(), capture_output=True, text=True, timeout=120)
+            
+            return self.parse_port_scan(result.stdout, ip)
+            
+        except subprocess.TimeoutExpired:
+            logger.warning(f"⏱️ Port scan timed out for {ip}")
+            return {"ip": ip, "ports": [], "services": [], "error": "Scan timeout"}
+        except Exception as e:
+            logger.error(f"❌ Port scan failed for {ip}: {str(e)}")
+            return {"ip": ip, "ports": [], "services": [], "error": str(e)}
+    
+    async def scan_vulnerabilities(self, ip: str, ports: List[int] = None) -> Dict[str, Any]:
+        """Scan for vulnerabilities using nmap NSE scripts"""
+        logger.info(f"🔎 Scanning vulnerabilities on {ip}")
+        
+        try:
+            port_spec = ",".join(map(str, ports)) if ports else "-"
+            
+            # Use vulners and other vulnerability detection scripts
+            scripts = "vulners,vulscan,vuln"
+            cmd = f"sudo -n nmap -sV --script={scripts} --script-args mincvss=5.0 -p {port_spec} {ip}"
+            
+            result = subprocess.run(cmd.split(), capture_output=True, text=True, timeout=300)
+            
+            return self.parse_vulnerability_scan(result.stdout, ip)
+            
+        except subprocess.TimeoutExpired:
+            logger.warning(f"⏱️ Vulnerability scan timed out for {ip}")
+            return {"ip": ip, "vulnerabilities": [], "error": "Scan timeout"}
+        except Exception as e:
+            logger.error(f"❌ Vulnerability scan failed for {ip}: {str(e)}")
+            return {"ip": ip, "vulnerabilities": [], "error": str(e)}
+    
+    def parse_port_scan(self, output: str, ip: str) -> Dict[str, Any]:
+        """Parse nmap port scan output"""
+        ports = []
+        services = []
+        os_info = None
+        
+        lines = output.split('\n')
+        for line in lines:
+            # Parse open ports
+            port_match = re.search(r'(\d+)/(tcp|udp)\s+(open|filtered)\s+(\S+)\s*(.*)', line)
+            if port_match:
+                port_num = int(port_match.group(1))
+                protocol = port_match.group(2)
+                state = port_match.group(3)
+                service = port_match.group(4)
+                version = port_match.group(5).strip() if port_match.group(5) else ""
+                
+                port_info = {
+                    "port": port_num,
+                    "protocol": protocol,
+                    "state": state,
+                    "service": service,
+                    "version": version
+                }
+                
+                ports.append(port_info)
+                
+                if service not in [s["name"] for s in services]:
+                    services.append({
+                        "name": service,
+                        "version": version,
+                        "port": port_num,
+                        "protocol": protocol
+                    })
+            
+            # Parse OS detection
+            os_match = re.search(r'Running: (.+)', line)
+            if os_match:
+                os_info = os_match.group(1)
+        
+        return {
+            "ip": ip,
+            "open_ports": len(ports),
+            "ports": ports,
+            "services": services,
+            "os_detection": os_info
+        }
+    
+    def parse_vulnerability_scan(self, output: str, ip: str) -> Dict[str, Any]:
+        """Parse nmap vulnerability scan output"""
+        vulnerabilities = []
+        
+        lines = output.split('\n')
+        current_cve = None
+        
+        for line in lines:
+            # Look for CVE references
+            cve_match = re.search(r'(CVE-\d{4}-\d+)', line)
+            if cve_match:
+                cve_id = cve_match.group(1)
+                
+                # Extract severity/score if present
+                score_match = re.search(r'(\d+\.\d+)', line)
+                score = float(score_match.group(1)) if score_match else None
+                
+                severity = "Unknown"
+                if score:
+                    if score >= 9.0:
+                        severity = "Critical"
+                    elif score >= 7.0:
+                        severity = "High"
+                    elif score >= 4.0:
+                        severity = "Medium"
+                    else:
+                        severity = "Low"
+                
+                vuln = {
+                    "cve": cve_id,
+                    "cvss_score": score,
+                    "severity": severity,
+                    "description": line.strip()
+                }
+                
+                # Avoid duplicates
+                if not any(v["cve"] == cve_id for v in vulnerabilities):
+                    vulnerabilities.append(vuln)
+        
+        return {
+            "ip": ip,
+            "vulnerability_count": len(vulnerabilities),
+            "vulnerabilities": vulnerabilities,
+            "critical": len([v for v in vulnerabilities if v["severity"] == "Critical"]),
+            "high": len([v for v in vulnerabilities if v["severity"] == "High"]),
+            "medium": len([v for v in vulnerabilities if v["severity"] == "Medium"]),
+            "low": len([v for v in vulnerabilities if v["severity"] == "Low"])
+        }
+    
     async def perform_comprehensive_analysis(self, host: Dict[str, Any]) -> Dict[str, Any]:
         """Analyze device characteristics using external rule engine"""
         device_data = {
@@ -269,28 +412,47 @@ async def root():
     """API documentation and endpoints"""
     return {
         "name": "Network Scanner API",
-        "version": "3.0.0",
-        "description": "Fast and accurate network device discovery with intelligent device identification using external JSON rules",
+        "version": "3.1.0",
+        "description": "Fast and accurate network device discovery with intelligent device identification, port scanning, service detection, and vulnerability assessment",
         "endpoints": {
-            "/scan": "GET - Comprehensive network scan with device identification",
-            "/scan/clean": "GET - Clean format scan with simple JSON output",
-            "/network/info": "GET - Get current network information",
-            "/rules/info": "GET - Get information about loaded device detection rules",
-            "/rules/reload": "POST - Reload device detection rules from JSON files",
-            "/rules/categories": "GET - Get list of available device categories",
-            "/rules/vendors/{category}": "GET - Get vendors for a specific category",
-            "/health": "GET - API health check"
+            "network_scanning": {
+                "/scan": "GET - Comprehensive network scan with device identification",
+                "/scan/clean": "GET - Clean format scan with simple JSON output",
+                "/network/info": "GET - Get current network information"
+            },
+            "port_and_service_scanning": {
+                "/scan/ports/{ip}": "GET - Scan open ports and services on specific host",
+                "/scan/vulnerabilities/{ip}": "GET - Scan for vulnerabilities (optional: ?ports=22,80,443)",
+                "/scan/comprehensive/{ip}": "GET - Full scan: device info + ports + services + vulnerabilities"
+            },
+            "rules_management": {
+                "/rules/info": "GET - Get information about loaded device detection rules",
+                "/rules/reload": "POST - Reload device detection rules from JSON files",
+                "/rules/categories": "GET - Get list of available device categories",
+                "/rules/vendors/{category}": "GET - Get vendors for a specific category"
+            },
+            "health": {
+                "/health": "GET - API health check"
+            }
         },
         "features": {
-            "external_rules": "Device detection powered by comprehensive JSON rule files",
-            "10000_patterns": "Over 10,000 device detection patterns",
+            "device_detection": "10,000+ device patterns from external JSON rules",
+            "port_scanning": "Comprehensive port scanning with service version detection",
+            "vulnerability_scanning": "CVE detection using nmap NSE scripts (vulners, vulscan, vuln)",
+            "service_identification": "Automatic service fingerprinting and version detection",
             "dynamic_loading": "Rules can be updated without server restart",
             "comprehensive_categories": "Smartphones, tablets, routers, smart home, IoT, computers, gaming, printers, NAS, industrial devices"
         },
-        "usage": {
-            "recommended": "/scan - Best balance of speed and accuracy",
-            "simple": "/scan/clean - Clean JSON format perfect for integrations",
-            "rules": "/rules/info - View currently loaded detection rules"
+        "usage_examples": {
+            "network_scan": "GET /scan - Discover all devices on network",
+            "port_scan": "GET /scan/ports/192.168.1.10 - Check open ports on specific device",
+            "vuln_scan": "GET /scan/vulnerabilities/192.168.1.10?ports=22,80,443 - Check vulnerabilities",
+            "full_scan": "GET /scan/comprehensive/192.168.1.10 - Complete security assessment"
+        },
+        "security_scripts": {
+            "vulners": "CVE detection and CVSS scoring",
+            "vulscan": "Vulnerability database scanning",
+            "vuln": "General vulnerability detection scripts"
         },
         "timestamp": datetime.now().isoformat()
     }
@@ -431,6 +593,103 @@ async def scan_network_clean():
         
     except Exception as e:
         logger.error(f"❌ API clean scan error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/scan/ports/{ip}")
+async def scan_host_ports(ip: str):
+    """Scan open ports and services on a specific host"""
+    try:
+        logger.info(f"🔍 API: Port scan requested for {ip}")
+        
+        # Validate IP format
+        if not re.match(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$', ip):
+            raise HTTPException(status_code=400, detail="Invalid IP address format")
+        
+        result = await scanner.scan_ports_and_services(ip)
+        result["timestamp"] = datetime.now().isoformat()
+        result["scan_type"] = "ports_and_services"
+        
+        logger.info(f"✅ API: Port scan completed for {ip} - {result.get('open_ports', 0)} ports found")
+        return result
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"❌ API port scan error for {ip}: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/scan/vulnerabilities/{ip}")
+async def scan_host_vulnerabilities(ip: str, ports: Optional[str] = None):
+    """Scan for vulnerabilities on a specific host
+    
+    Args:
+        ip: Target IP address
+        ports: Optional comma-separated list of ports (e.g., "22,80,443")
+    """
+    try:
+        logger.info(f"🔎 API: Vulnerability scan requested for {ip}")
+        
+        # Validate IP format
+        if not re.match(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$', ip):
+            raise HTTPException(status_code=400, detail="Invalid IP address format")
+        
+        # Parse ports if provided
+        port_list = None
+        if ports:
+            try:
+                port_list = [int(p.strip()) for p in ports.split(',')]
+            except ValueError:
+                raise HTTPException(status_code=400, detail="Invalid port format. Use comma-separated numbers (e.g., 22,80,443)")
+        
+        result = await scanner.scan_vulnerabilities(ip, port_list)
+        result["timestamp"] = datetime.now().isoformat()
+        result["scan_type"] = "vulnerability"
+        
+        logger.info(f"✅ API: Vulnerability scan completed for {ip} - {result.get('vulnerability_count', 0)} vulnerabilities found")
+        return result
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"❌ API vulnerability scan error for {ip}: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/scan/comprehensive/{ip}")
+async def scan_host_comprehensive(ip: str):
+    """Comprehensive scan including device info, ports, services, and vulnerabilities"""
+    try:
+        logger.info(f"🎯 API: Comprehensive host scan requested for {ip}")
+        
+        # Validate IP format
+        if not re.match(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$', ip):
+            raise HTTPException(status_code=400, detail="Invalid IP address format")
+        
+        # Perform all scans
+        port_data = await scanner.scan_ports_and_services(ip)
+        
+        # Extract open ports for vulnerability scan
+        open_ports = [p["port"] for p in port_data.get("ports", [])]
+        vuln_data = await scanner.scan_vulnerabilities(ip, open_ports if open_ports else None)
+        
+        # Combine results
+        result = {
+            "ip": ip,
+            "timestamp": datetime.now().isoformat(),
+            "scan_type": "comprehensive",
+            "ports": port_data,
+            "vulnerabilities": vuln_data
+        }
+        
+        logger.info(f"✅ API: Comprehensive scan completed for {ip}")
+        return result
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"❌ API comprehensive host scan error for {ip}: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
