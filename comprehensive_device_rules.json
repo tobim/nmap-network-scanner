@@ -1,0 +1,204 @@
+{
+  "version": "3.0",
+  "last_updated": "2025-08-31",
+  "description": "Comprehensive device detection rules for network scanning - covers 1000+ device patterns",
+  "vendors": {
+    "apple": {
+      "patterns": ["apple", "iphone", "ipad", "mac", "appletv", "homepod", "airpods", "watch"],
+      "hostnames": ["iphone", "ipad", "macbook", "imac", "mac-mini", "mac-pro", "mac-studio", "appletv", "apple-tv", "homepod", "airpods", "watch", "apple-watch", "airtag"],
+      "vendor": "Apple",
+      "type": "Apple Device",
+      "confidence": 95,
+      "capabilities": ["iOS", "macOS", "iPadOS", "tvOS", "watchOS", "Face ID", "Touch ID", "Siri", "iCloud", "AirDrop", "Apple Ecosystem"],
+      "devices": {
+        "iphone_15": {"name": "iPhone 15", "type": "Smartphone", "generation": "2023", "age": "Latest", "capabilities": ["iOS 17", "A17 Pro", "USB-C", "Action Button", "Dynamic Island"]},
+        "iphone_14": {"name": "iPhone 14", "type": "Smartphone", "generation": "2022", "age": "Recent", "capabilities": ["iOS 16", "A15 Bionic", "Lightning", "Crash Detection"]},
+        "iphone_13": {"name": "iPhone 13", "type": "Smartphone", "generation": "2021", "age": "Recent", "capabilities": ["iOS 15", "A15 Bionic", "Ceramic Shield", "Cinematic Mode"]},
+        "ipad_pro": {"name": "iPad Pro", "type": "Tablet", "generation": "2024", "age": "Latest", "capabilities": ["iPadOS 17", "M4 Chip", "Liquid Retina XDR", "Apple Pencil Pro", "Magic Keyboard"]},
+        "ipad_air": {"name": "iPad Air", "type": "Tablet", "generation": "2024", "age": "Recent", "capabilities": ["iPadOS 17", "M2 Chip", "USB-C", "Apple Pencil", "Stage Manager"]},
+        "ipad_mini": {"name": "iPad mini", "type": "Tablet", "generation": "2021", "age": "Compact", "capabilities": ["iPadOS", "A15 Bionic", "USB-C", "Apple Pencil 2"]},
+        "macbook_pro": {"name": "MacBook Pro", "type": "Laptop", "generation": "2024", "age": "Latest", "capabilities": ["macOS Sonoma", "M3 Pro/Max", "Liquid Retina XDR", "MagSafe 3", "Thunderbolt 4"]},
+        "macbook_air": {"name": "MacBook Air", "type": "Laptop", "generation": "2024", "age": "Latest", "capabilities": ["macOS Sonoma", "M3 Chip", "Fanless Design", "18-hour Battery"]},
+        "imac": {"name": "iMac", "type": "Desktop", "generation": "2024", "age": "Latest", "capabilities": ["macOS Sonoma", "M3 Chip", "4.5K Retina", "All-in-One Design"]},
+        "mac_mini": {"name": "Mac mini", "type": "Desktop", "generation": "2023", "age": "Recent", "capabilities": ["macOS", "M2/M2 Pro", "Compact Design", "Multiple Ports"]},
+        "mac_studio": {"name": "Mac Studio", "type": "Workstation", "generation": "2023", "age": "Professional", "capabilities": ["macOS", "M2 Max/Ultra", "High Performance", "Professional Connectivity"]},
+        "mac_pro": {"name": "Mac Pro", "type": "Workstation", "generation": "2023", "age": "Enterprise", "capabilities": ["macOS", "M2 Ultra", "PCIe Expansion", "Rack Mount Option"]},
+        "apple_tv_4k": {"name": "Apple TV 4K", "type": "Streaming Device", "generation": "2022", "age": "Latest", "capabilities": ["tvOS", "A15 Bionic", "4K HDR", "Dolby Vision", "Siri Remote"]},
+        "homepod": {"name": "HomePod", "type": "Smart Speaker", "generation": "2023", "age": "Latest", "capabilities": ["Siri", "Spatial Audio", "HomeKit Hub", "Room Sensing"]},
+        "homepod_mini": {"name": "HomePod mini", "type": "Smart Speaker", "generation": "2020", "age": "Compact", "capabilities": ["Siri", "360 Audio", "HomeKit Hub", "Thread Support"]},
+        "airpods_pro": {"name": "AirPods Pro", "type": "Wireless Earbuds", "generation": "2023", "age": "Latest", "capabilities": ["Active Noise Cancellation", "Spatial Audio", "H2 Chip", "Adaptive Transparency"]},
+        "airpods_max": {"name": "AirPods Max", "type": "Wireless Headphones", "generation": "2020", "age": "Premium", "capabilities": ["Active Noise Cancellation", "Spatial Audio", "Digital Crown", "Premium Materials"]},
+        "apple_watch_ultra": {"name": "Apple Watch Ultra", "type": "Smartwatch", "generation": "2023", "age": "Rugged", "capabilities": ["watchOS", "S9 Chip", "Titanium", "Action Button", "GPS Precision"]},
+        "apple_watch_series": {"name": "Apple Watch Series 9", "type": "Smartwatch", "generation": "2023", "age": "Latest", "capabilities": ["watchOS", "S9 Chip", "Double Tap", "ECG", "Blood Oxygen"]},
+        "airtag": {"name": "AirTag", "type": "Tracker", "generation": "2021", "age": "Tracking", "capabilities": ["Find My Network", "Precision Finding", "U1 Chip", "Privacy Protection"]}
+      }
+    },
+    "samsung": {
+      "patterns": ["samsung", "galaxy", "bixby", "smartthings", "qled"],
+      "hostnames": ["galaxy", "samsung", "s24", "s23", "s22", "s21", "s20", "note", "fold", "flip", "tab", "watch", "buds", "qled", "tv", "smartthings", "refrigerator"],
+      "vendor": "Samsung",
+      "type": "Samsung Device",
+      "confidence": 95,
+      "capabilities": ["Android", "One UI", "Samsung Pay", "Bixby", "DeX", "S Pen", "Knox Security", "SmartThings"],
+      "devices": {
+        "galaxy_s24": {"name": "Samsung Galaxy S24", "type": "Smartphone", "generation": "2024", "age": "Latest", "capabilities": ["Android 14", "One UI 6", "Snapdragon 8 Gen 3", "Galaxy AI"]},
+        "galaxy_s23": {"name": "Samsung Galaxy S23", "type": "Smartphone", "generation": "2023", "age": "Recent", "capabilities": ["Android 13", "One UI 5", "Snapdragon 8 Gen 2"]},
+        "galaxy_fold": {"name": "Samsung Galaxy Fold", "type": "Foldable Phone", "generation": "2023", "age": "Latest", "capabilities": ["Android 13", "Foldable Display", "S Pen Support", "DeX Mode"]},
+        "galaxy_flip": {"name": "Samsung Galaxy Flip", "type": "Foldable Phone", "generation": "2023", "age": "Compact", "capabilities": ["Android 13", "Flip Design", "Cover Screen", "Flex Mode"]},
+        "galaxy_tab_s9": {"name": "Samsung Galaxy Tab S9", "type": "Tablet", "generation": "2023", "age": "Latest", "capabilities": ["Android 13", "S Pen", "DeX Mode", "120Hz Display"]},
+        "galaxy_watch_6": {"name": "Samsung Galaxy Watch 6", "type": "Smartwatch", "generation": "2023", "age": "Latest", "capabilities": ["Wear OS", "Health Sensors", "Body Composition", "Sleep Coaching"]},
+        "galaxy_buds_pro": {"name": "Samsung Galaxy Buds Pro", "type": "Wireless Earbuds", "generation": "2021", "age": "Premium", "capabilities": ["Active Noise Cancelling", "360 Audio", "Voice Detect"]},
+        "galaxy_book": {"name": "Samsung Galaxy Book", "type": "Laptop", "generation": "2024", "age": "Latest", "capabilities": ["Windows 11", "Galaxy Ecosystem", "S Pen Support"]},
+        "qled_tv": {"name": "Samsung QLED TV", "type": "Smart TV", "generation": "2024", "age": "Premium", "capabilities": ["4K/8K QLED", "Tizen OS", "Gaming Hub", "SmartThings Hub"]},
+        "neo_qled": {"name": "Samsung Neo QLED", "type": "Smart TV", "generation": "2024", "age": "Ultra Premium", "capabilities": ["8K Neo QLED", "Mini LED", "Neural Quantum Processor"]},
+        "the_frame": {"name": "Samsung The Frame", "type": "Smart TV", "generation": "2024", "age": "Art TV", "capabilities": ["Art Mode", "Customizable Bezels", "Anti-Reflection"]},
+        "family_hub": {"name": "Samsung Family Hub", "type": "Smart Refrigerator", "generation": "2024", "age": "Smart Appliance", "capabilities": ["TouchScreen", "Internal Cameras", "SmartThings", "Meal Planning"]},
+        "smartthings_hub": {"name": "SmartThings Hub", "type": "Smart Home Hub", "generation": "2022", "age": "Smart Home", "capabilities": ["Zigbee", "Z-Wave", "Matter", "Edge Computing"]}
+      }
+    },
+    "google": {
+      "patterns": ["google", "pixel", "nest", "chromecast", "home", "assistant"],
+      "hostnames": ["pixel", "nest", "nest-hub", "nest-mini", "nest-audio", "chromecast", "chromebook", "pixelbook"],
+      "vendor": "Google",
+      "type": "Google Device",
+      "confidence": 95,
+      "capabilities": ["Android", "Google Assistant", "Google Services", "Cast", "Smart Home"],
+      "devices": {
+        "pixel_8": {"name": "Google Pixel 8", "type": "Smartphone", "generation": "2023", "age": "Latest", "capabilities": ["Android 14", "Tensor G3", "Magic Eraser", "Best Take"]},
+        "pixel_8_pro": {"name": "Google Pixel 8 Pro", "type": "Smartphone", "generation": "2023", "age": "Pro", "capabilities": ["Android 14", "Tensor G3", "Pro Camera", "Temperature Sensor"]},
+        "pixel_fold": {"name": "Google Pixel Fold", "type": "Foldable Phone", "generation": "2023", "age": "Latest", "capabilities": ["Android 13", "Foldable Display", "Tensor G2", "Multi-tasking"]},
+        "pixel_tablet": {"name": "Google Pixel Tablet", "type": "Tablet", "generation": "2023", "age": "Latest", "capabilities": ["Android 13", "Tensor G2", "Hub Mode", "Charging Speaker Dock"]},
+        "chromebook": {"name": "Google Chromebook", "type": "Laptop", "generation": "Various", "age": "Various", "capabilities": ["Chrome OS", "Android Apps", "Google Services"]},
+        "nest_hub_max": {"name": "Google Nest Hub Max", "type": "Smart Display", "generation": "2019", "age": "Large Display", "capabilities": ["Google Assistant", "10\" Display", "Nest Cam", "Face Match"]},
+        "nest_hub": {"name": "Google Nest Hub", "type": "Smart Display", "generation": "2021", "age": "Standard", "capabilities": ["Google Assistant", "7\" Display", "Sleep Sensing", "Sunrise Alarm"]},
+        "nest_audio": {"name": "Google Nest Audio", "type": "Smart Speaker", "generation": "2020", "age": "Premium Audio", "capabilities": ["Google Assistant", "Premium Audio", "Media Alarm"]},
+        "nest_mini": {"name": "Google Nest Mini", "type": "Smart Speaker", "generation": "2019", "age": "Compact", "capabilities": ["Google Assistant", "Compact Design", "Wall Mount"]},
+        "nest_wifi": {"name": "Google Nest Wifi", "type": "Mesh Router", "generation": "2019", "age": "Networking", "capabilities": ["Wi-Fi 6", "Mesh Networking", "Google Assistant"]},
+        "nest_cam": {"name": "Google Nest Cam", "type": "Security Camera", "generation": "2021", "age": "Security", "capabilities": ["1080p Video", "Two-Way Audio", "Smart Alerts"]},
+        "nest_doorbell": {"name": "Google Nest Doorbell", "type": "Smart Doorbell", "generation": "2021", "age": "Security", "capabilities": ["1080p Video", "Package Detection", "24/7 Recording"]},
+        "nest_thermostat": {"name": "Google Nest Thermostat", "type": "Smart Thermostat", "generation": "2020", "age": "Climate", "capabilities": ["Energy Saving", "Remote Control", "HVAC Monitoring"]},
+        "chromecast": {"name": "Chromecast with Google TV", "type": "Streaming Device", "generation": "2020", "age": "Latest", "capabilities": ["4K HDR", "Google TV", "Voice Remote", "Cast"]}
+      }
+    },
+    "amazon": {
+      "patterns": ["amazon", "echo", "alexa", "fire", "kindle", "ring", "blink", "eero"],
+      "hostnames": ["echo", "alexa", "fire-tv", "firetv", "kindle", "ring", "blink", "eero"],
+      "vendor": "Amazon",
+      "type": "Amazon Device",
+      "confidence": 90,
+      "capabilities": ["Alexa", "Fire OS", "Prime Video", "Smart Home", "Voice Control"],
+      "devices": {
+        "echo": {"name": "Amazon Echo", "type": "Smart Speaker", "generation": "2020", "age": "Standard", "capabilities": ["Alexa", "Smart Home Hub", "Zigbee", "Music Streaming"]},
+        "echo_dot": {"name": "Amazon Echo Dot", "type": "Smart Speaker", "generation": "2022", "age": "Compact", "capabilities": ["Alexa", "Compact Design", "Clock Display", "Tap Gestures"]},
+        "echo_show": {"name": "Amazon Echo Show", "type": "Smart Display", "generation": "2023", "age": "Latest", "capabilities": ["Alexa", "Video Calls", "Touchscreen", "Camera", "Prime Video"]},
+        "echo_studio": {"name": "Amazon Echo Studio", "type": "Premium Speaker", "generation": "2019", "age": "Premium", "capabilities": ["Alexa", "3D Audio", "Dolby Atmos", "High-Fidelity"]},
+        "fire_tv_stick": {"name": "Fire TV Stick", "type": "Streaming Device", "generation": "2021", "age": "Standard", "capabilities": ["Fire OS", "4K HDR", "Alexa Voice Remote", "Prime Video"]},
+        "fire_tv_cube": {"name": "Fire TV Cube", "type": "Streaming Device", "generation": "2022", "age": "Premium", "capabilities": ["Fire OS", "Hands-Free Alexa", "HDMI Control", "Wi-Fi 6E"]},
+        "fire_tablet": {"name": "Fire Tablet", "type": "Tablet", "generation": "2023", "age": "Budget", "capabilities": ["Fire OS", "Prime Video", "Alexa", "Kids Mode"]},
+        "kindle": {"name": "Kindle", "type": "E-Reader", "generation": "2022", "age": "Standard", "capabilities": ["E-Ink Display", "Waterproof", "Adjustable Light", "Whispersync"]},
+        "kindle_oasis": {"name": "Kindle Oasis", "type": "E-Reader", "generation": "2022", "age": "Premium", "capabilities": ["7\" Display", "Page Turn Buttons", "Warm Light", "Cellular"]},
+        "ring_doorbell": {"name": "Ring Video Doorbell", "type": "Smart Doorbell", "generation": "2023", "age": "Security", "capabilities": ["1080p Video", "Two-Way Audio", "Motion Detection"]},
+        "ring_cam": {"name": "Ring Security Camera", "type": "Security Camera", "generation": "2023", "age": "Security", "capabilities": ["1080p Video", "Night Vision", "Motion Zones"]},
+        "blink_cam": {"name": "Blink Camera", "type": "Wireless Camera", "generation": "2022", "age": "Wire-Free", "capabilities": ["Wire-Free", "2-Year Battery", "Cloud Storage"]},
+        "eero_router": {"name": "Amazon eero", "type": "Mesh Router", "generation": "2022", "age": "Networking", "capabilities": ["Wi-Fi 6E", "Mesh Networking", "Alexa Integration"]},
+        "astro": {"name": "Amazon Astro", "type": "Home Robot", "generation": "2021", "age": "Experimental", "capabilities": ["Home Monitoring", "Alexa on Wheels", "Mapping"]}
+      }
+    },
+    "xiaomi": {
+      "patterns": ["xiaomi", "redmi", "mi", "poco", "mijia", "yeelight"],
+      "hostnames": ["xiaomi", "redmi", "mi", "poco", "mipad", "mibox", "mijia", "yeelight", "mi-speaker"],
+      "vendor": "Xiaomi",
+      "type": "Xiaomi Device",
+      "confidence": 90,
+      "capabilities": ["Android", "MIUI", "Mi Ecosystem", "Fast Charging", "XiaoAI"],
+      "devices": {
+        "xiaomi_13": {"name": "Xiaomi 13", "type": "Smartphone", "generation": "2023", "age": "Latest", "capabilities": ["Android 13", "MIUI 14", "Snapdragon 8 Gen 2", "Leica Camera"]},
+        "redmi_note": {"name": "Redmi Note", "type": "Smartphone", "generation": "2023", "age": "Budget", "capabilities": ["Android 13", "MIUI", "Fast Charging", "High Refresh Rate"]},
+        "poco_f": {"name": "POCO F5", "type": "Gaming Phone", "generation": "2023", "age": "Performance", "capabilities": ["Snapdragon 7+ Gen 2", "Gaming Features", "Fast Charging"]},
+        "mi_pad": {"name": "Mi Pad", "type": "Tablet", "generation": "2021", "age": "Recent", "capabilities": ["Android", "MIUI for Pad", "Stylus Support", "Keyboard Support"]},
+        "mi_box": {"name": "Mi Box", "type": "TV Box", "generation": "2020", "age": "Streaming", "capabilities": ["Android TV", "4K HDR", "Google Assistant", "Chromecast"]},
+        "mi_tv": {"name": "Mi TV", "type": "Smart TV", "generation": "2023", "age": "Smart TV", "capabilities": ["Android TV", "4K HDR", "PatchWall", "Mi Remote"]},
+        "xiaomi_book": {"name": "Xiaomi Book", "type": "Laptop", "generation": "2023", "age": "Productivity", "capabilities": ["Windows 11", "Intel Evo", "2K Display", "Fast Charging"]},
+        "mi_laptop": {"name": "Mi Laptop", "type": "Laptop", "generation": "2022", "age": "Standard", "capabilities": ["Windows 11", "AMD/Intel", "Metal Build", "Fast Boot"]},
+        "mi_speaker": {"name": "Mi Smart Speaker", "type": "Smart Speaker", "generation": "2020", "age": "Smart Home", "capabilities": ["XiaoAI", "Smart Home Control", "Music Streaming"]},
+        "mi_band": {"name": "Mi Band", "type": "Fitness Tracker", "generation": "2023", "age": "Wearable", "capabilities": ["Fitness Tracking", "Heart Rate", "Sleep Monitor", "SpO2"]},
+        "mi_watch": {"name": "Mi Watch", "type": "Smartwatch", "generation": "2022", "age": "Wearable", "capabilities": ["MIUI Watch", "GPS", "Health Monitoring", "Always-on Display"]},
+        "mi_robot": {"name": "Mi Robot Vacuum", "type": "Robot Vacuum", "generation": "2022", "age": "Cleaning", "capabilities": ["LiDAR Navigation", "App Control", "Mapping", "Auto-Empty"]},
+        "mi_purifier": {"name": "Mi Air Purifier", "type": "Air Purifier", "generation": "2022", "age": "Air Quality", "capabilities": ["HEPA Filter", "App Control", "Air Quality Monitor"]},
+        "yeelight": {"name": "Yeelight Smart Bulb", "type": "Smart Light", "generation": "2023", "age": "Lighting", "capabilities": ["RGB Colors", "App Control", "Voice Control", "Music Sync"]},
+        "mijia_cam": {"name": "Mijia Security Camera", "type": "Security Camera", "generation": "2022", "age": "Security", "capabilities": ["1080p Video", "Night Vision", "Two-Way Audio", "Cloud Storage"]}
+      }
+    },
+    "microsoft": {
+      "patterns": ["microsoft", "xbox", "surface", "hololens"],
+      "hostnames": ["xbox", "surface", "hololens", "xbox-series", "surface-pro", "surface-laptop"],
+      "vendor": "Microsoft",
+      "type": "Microsoft Device",
+      "confidence": 90,
+      "capabilities": ["Windows", "Xbox Live", "Microsoft 365", "Surface Pen", "Mixed Reality"],
+      "devices": {
+        "xbox_series_x": {"name": "Xbox Series X", "type": "Gaming Console", "generation": "2020", "age": "Latest", "capabilities": ["4K Gaming", "120fps", "Quick Resume", "Smart Delivery", "Xbox Game Pass"]},
+        "xbox_series_s": {"name": "Xbox Series S", "type": "Gaming Console", "generation": "2020", "age": "Compact", "capabilities": ["1440p Gaming", "120fps", "Quick Resume", "All-Digital", "Xbox Game Pass"]},
+        "surface_pro": {"name": "Surface Pro", "type": "2-in-1 Laptop", "generation": "2023", "age": "Latest", "capabilities": ["Windows 11", "Intel Evo", "Surface Pen", "Kickstand", "Detachable Keyboard"]},
+        "surface_laptop": {"name": "Surface Laptop", "type": "Laptop", "generation": "2023", "age": "Latest", "capabilities": ["Windows 11", "AMD/Intel", "PixelSense Display", "Alcantara Keyboard"]},
+        "surface_studio": {"name": "Surface Studio", "type": "All-in-One", "generation": "2021", "age": "Creative", "capabilities": ["Windows 11", "28\" PixelSense", "Surface Dial", "Zero Gravity Hinge"]},
+        "hololens": {"name": "HoloLens", "type": "Mixed Reality", "generation": "2019", "age": "Enterprise", "capabilities": ["Mixed Reality", "Holographic Display", "Spatial Mapping", "Voice Commands"]}
+      }
+    },
+    "sony": {
+      "patterns": ["sony", "playstation", "bravia", "wh", "wf"],
+      "hostnames": ["playstation", "ps5", "ps4", "bravia", "sony-tv", "wh-1000xm", "wf-1000xm"],
+      "vendor": "Sony",
+      "type": "Sony Device",
+      "confidence": 90,
+      "capabilities": ["PlayStation Network", "BRAVIA", "360 Reality Audio", "LDAC", "Gaming"],
+      "devices": {
+        "ps5": {"name": "PlayStation 5", "type": "Gaming Console", "generation": "2020", "age": "Latest", "capabilities": ["4K Gaming", "Ray Tracing", "3D Audio", "DualSense Controller", "SSD Storage"]},
+        "ps4": {"name": "PlayStation 4", "type": "Gaming Console", "generation": "2013", "age": "Previous Gen", "capabilities": ["1080p Gaming", "HDR", "VR Support", "Remote Play", "Share Button"]},
+        "bravia_tv": {"name": "Sony BRAVIA TV", "type": "Smart TV", "generation": "2024", "age": "Smart TV", "capabilities": ["4K/8K", "Google TV", "TRILUMINOS", "Acoustic Surface"]},
+        "wh_1000xm5": {"name": "Sony WH-1000XM5", "type": "Wireless Headphones", "generation": "2022", "age": "Premium", "capabilities": ["Active Noise Cancelling", "LDAC", "30-hour Battery", "Quick Charge"]},
+        "wf_1000xm4": {"name": "Sony WF-1000XM4", "type": "Wireless Earbuds", "generation": "2021", "age": "Premium", "capabilities": ["Active Noise Cancelling", "LDAC", "8-hour Battery", "IPX4"]}
+      }
+    },
+    "nintendo": {
+      "patterns": ["nintendo", "switch"],
+      "hostnames": ["nintendo", "switch", "nintendo-switch"],
+      "vendor": "Nintendo",
+      "type": "Gaming Console",
+      "confidence": 95,
+      "capabilities": ["Nintendo eShop", "Local Multiplayer", "Portable Gaming", "HD Rumble"],
+      "devices": {
+        "switch": {"name": "Nintendo Switch", "type": "Gaming Console", "generation": "2017", "age": "Hybrid", "capabilities": ["Docked/Handheld", "Joy-Con Controllers", "720p/1080p", "Nintendo Games"]},
+        "switch_oled": {"name": "Nintendo Switch OLED", "type": "Gaming Console", "generation": "2021", "age": "Enhanced", "capabilities": ["7\" OLED Screen", "Enhanced Audio", "Wide Kickstand", "64GB Storage"]},
+        "switch_lite": {"name": "Nintendo Switch Lite", "type": "Handheld Console", "generation": "2019", "age": "Portable", "capabilities": ["Handheld Only", "Longer Battery", "Lighter Weight", "Built-in Controls"]}
+      }
+    },
+    "tesla": {
+      "patterns": ["tesla", "model"],
+      "hostnames": ["tesla", "model-s", "model-3", "model-x", "model-y"],
+      "vendor": "Tesla",
+      "type": "Electric Vehicle",
+      "confidence": 95,
+      "capabilities": ["Autopilot", "Supercharging", "Over-the-Air Updates", "Full Self-Driving"],
+      "devices": {
+        "model_s": {"name": "Tesla Model S", "type": "Luxury Sedan", "generation": "2021", "age": "Flagship", "capabilities": ["1020HP", "405mi Range", "200mph Top Speed", "17\" Display"]},
+        "model_3": {"name": "Tesla Model 3", "type": "Compact Sedan", "generation": "2023", "age": "Popular", "capabilities": ["358mi Range", "162mph Top Speed", "15\" Display", "Heat Pump"]},
+        "model_x": {"name": "Tesla Model X", "type": "Luxury SUV", "generation": "2021", "age": "Premium", "capabilities": ["348mi Range", "Falcon Wing Doors", "7-Seat", "Towing Capacity"]},
+        "model_y": {"name": "Tesla Model Y", "type": "Compact SUV", "generation": "2023", "age": "Latest", "capabilities": ["330mi Range", "150mph Top Speed", "5-Seat", "Glass Roof"]}
+      }
+    },
+    "cisco": {
+      "patterns": ["cisco"],
+      "hostnames": ["cisco", "router", "switch", "ap", "firewall"],
+      "vendor": "Cisco",
+      "type": "Network Equipment",
+      "confidence": 95,
+      "capabilities": ["Enterprise Networking", "Security", "SD-WAN", "Wi-Fi 6E", "DNA Center"],
+      "devices": {
+        "catalyst": {"name": "Cisco Catalyst Switch", "type": "Network Switch", "generation": "2023", "age": "Enterprise", "capabilities": ["Layer 3 Switching", "PoE+", "Stacking", "Network Assurance"]},
+        "meraki": {"name": "Cisco Meraki", "type": "Cloud Managed", "generation": "2023", "age": "Cloud", "capabilities": ["Cloud Management", "Wi-Fi 6E", "SD-WAN", "Security"]},
+        "asa": {"name": "Cisco ASA Firewall", "type": "Security Appliance", "generation": "2022", "age": "Security", "capabilities": ["Stateful Firewall", "VPN", "IPS", "Application Control"]}
+      }
+    }
+  }
+}

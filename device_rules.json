@@ -1,0 +1,1573 @@
+{
+  "version": "1.0",
+  "last_updated": "2025-08-31",
+  "rules": {
+    "smartphones": {
+      "apple": {
+        "patterns": ["apple", "iphone", "ipad", "mac", "appletv", "homepod", "airpods", "watch"],
+        "hostnames": ["iphone", "iphone-15", "iphone-14", "iphone-13", "iphone-12", "iphone-11", "iphone-x", "iphone-xs", "iphone-xr", "iphone-se", "ipad", "ipad-pro", "ipad-air", "ipad-mini", "macbook", "imac", "mac-mini", "mac-pro", "mac-studio", "appletv", "apple-tv", "homepod", "homepod-mini", "airpods", "airpods-pro", "airpods-max", "watch", "apple-watch"],
+        "vendor": "Apple",
+        "type": "Smartphone",
+        "confidence": 95,
+        "capabilities": ["iOS", "Face ID", "Touch ID", "Siri", "iCloud", "AirDrop", "CarPlay", "MagSafe", "Lightning", "USB-C", "Apple Ecosystem"],
+        "models": {
+          "iphone-15": {"name": "iPhone 15", "generation": "2023", "age": "Latest"},
+          "iphone-14": {"name": "iPhone 14", "generation": "2022", "age": "Recent"},
+          "iphone-13": {"name": "iPhone 13", "generation": "2021", "age": "Recent"},
+          "iphone-12": {"name": "iPhone 12", "generation": "2020", "age": "Moderate"},
+          "iphone-11": {"name": "iPhone 11", "generation": "2019", "age": "Moderate"},
+          "iphone-x": {"name": "iPhone X", "generation": "2017", "age": "Old"},
+          "ipad-pro": {"name": "iPad Pro", "generation": "2024", "age": "Latest", "type": "Tablet", "capabilities": ["iPadOS", "Apple Pencil", "Magic Keyboard", "M4 Chip", "Liquid Retina XDR", "Face ID"]},
+          "ipad-air": {"name": "iPad Air", "generation": "2024", "age": "Recent", "type": "Tablet", "capabilities": ["iPadOS", "Apple Pencil", "M2 Chip", "Touch ID", "USB-C"]},
+          "ipad-mini": {"name": "iPad mini", "generation": "2021", "age": "Recent", "type": "Tablet", "capabilities": ["iPadOS", "Apple Pencil", "A15 Bionic", "Touch ID", "USB-C"]},
+          "ipad": {"name": "iPad", "generation": "2022", "age": "Standard", "type": "Tablet", "capabilities": ["iPadOS", "Apple Pencil", "A14 Bionic", "Touch ID", "USB-C"]},
+          "macbook-pro": {"name": "MacBook Pro", "generation": "2024", "age": "Latest", "type": "Laptop", "capabilities": ["macOS", "M3 Pro/Max", "Liquid Retina XDR", "Touch ID", "MagSafe", "Thunderbolt"]},
+          "macbook-air": {"name": "MacBook Air", "generation": "2024", "age": "Latest", "type": "Laptop", "capabilities": ["macOS", "M3 Chip", "Liquid Retina", "Touch ID", "MagSafe", "Fanless Design"]},
+          "imac": {"name": "iMac", "generation": "2024", "age": "Latest", "type": "Desktop Computer", "capabilities": ["macOS", "M3 Chip", "4.5K Retina", "Touch ID", "Magic Keyboard", "All-in-One"]},
+          "mac-mini": {"name": "Mac mini", "generation": "2023", "age": "Recent", "type": "Desktop Computer", "capabilities": ["macOS", "M2/M2 Pro", "Compact Design", "Thunderbolt", "HDMI"]},
+          "mac-pro": {"name": "Mac Pro", "generation": "2023", "age": "Professional", "type": "Workstation", "capabilities": ["macOS", "M2 Ultra", "PCIe Expansion", "Professional Graphics", "Rack Mount"]},
+          "mac-studio": {"name": "Mac Studio", "generation": "2023", "age": "Recent", "type": "Desktop Computer", "capabilities": ["macOS", "M2 Max/Ultra", "Compact Design", "Professional Performance", "Multiple Ports"]},
+          "apple-tv-4k": {"name": "Apple TV 4K", "generation": "2022", "age": "Latest", "type": "Streaming Device", "capabilities": ["tvOS", "A15 Bionic", "4K HDR", "Dolby Vision", "AirPlay", "HomeKit Hub", "Siri Remote"]},
+          "apple-tv": {"name": "Apple TV", "generation": "Various", "age": "Various", "type": "Streaming Device", "capabilities": ["tvOS", "AirPlay", "App Store", "Siri Remote", "HomeKit"]},
+          "homepod": {"name": "HomePod", "generation": "2023", "age": "Latest", "type": "Smart Speaker", "capabilities": ["Siri", "Spatial Audio", "HomeKit Hub", "Apple Music", "Intercom", "Sound Recognition"]},
+          "homepod-mini": {"name": "HomePod mini", "generation": "2020", "age": "Compact", "type": "Smart Speaker", "capabilities": ["Siri", "360 Audio", "HomeKit Hub", "Apple Music", "Intercom", "Thread"]},
+          "airpods-pro": {"name": "AirPods Pro", "generation": "2023", "age": "Latest", "type": "Wireless Earbuds", "capabilities": ["Active Noise Cancellation", "Spatial Audio", "Adaptive Transparency", "MagSafe Charging", "H2 Chip"]},
+          "airpods-max": {"name": "AirPods Max", "generation": "2020", "age": "Premium", "type": "Wireless Headphones", "capabilities": ["Active Noise Cancellation", "Spatial Audio", "Digital Crown", "H1 Chip", "Premium Materials"]},
+          "airpods": {"name": "AirPods", "generation": "2022", "age": "Standard", "type": "Wireless Earbuds", "capabilities": ["Spatial Audio", "Lightning Charging", "H1 Chip", "Automatic Switching"]},
+          "apple-watch-ultra": {"name": "Apple Watch Ultra", "generation": "2023", "age": "Rugged", "type": "Smartwatch", "capabilities": ["watchOS", "GPS", "Cellular", "ECG", "Blood Oxygen", "Action Button", "Titanium", "49mm"]},
+          "apple-watch-series": {"name": "Apple Watch Series 9", "generation": "2023", "age": "Latest", "type": "Smartwatch", "capabilities": ["watchOS", "S9 Chip", "Digital Crown", "ECG", "Blood Oxygen", "Always-On Retina"]},
+          "apple-watch-se": {"name": "Apple Watch SE", "generation": "2022", "age": "Affordable", "type": "Smartwatch", "capabilities": ["watchOS", "GPS", "Heart Rate", "Fall Detection", "Retina Display"]},
+          "studio-display": {"name": "Studio Display", "generation": "2022", "age": "Professional", "type": "Monitor", "capabilities": ["5K Retina", "A13 Bionic", "Center Stage", "Spatial Audio", "Thunderbolt 3"]},
+          "pro-display-xdr": {"name": "Pro Display XDR", "generation": "2019", "age": "Professional", "type": "Professional Monitor", "capabilities": ["6K Retina", "XDR", "P3 Wide Color", "Professional Reference", "Thunderbolt 3"]},
+          "airtag": {"name": "AirTag", "generation": "2021", "age": "Tracking", "type": "Tracker", "capabilities": ["Find My Network", "Precision Finding", "U1 Chip", "Privacy Protection", "Replaceable Battery"]}
+        }
+      },
+      "samsung": {
+        "patterns": ["samsung", "galaxy", "bixby", "smartthings"],
+        "hostnames": ["galaxy", "samsung", "s24", "s23", "s22", "s21", "s20", "s10", "s9", "s8", "note", "fold", "flip", "tab", "watch", "buds", "tv", "qled", "smartthings", "refrigerator", "washer", "dryer"],
+        "vendor": "Samsung",
+        "type": "Smartphone",
+        "confidence": 95,
+        "capabilities": ["Android", "One UI", "Samsung Pay", "Bixby", "DeX", "S Pen", "Knox Security", "Wireless Charging", "SmartThings"],
+        "models": {
+          "s24": {"name": "Samsung Galaxy S24", "generation": "2024", "age": "Latest"},
+          "s23": {"name": "Samsung Galaxy S23", "generation": "2023", "age": "Recent"},
+          "s22": {"name": "Samsung Galaxy S22", "generation": "2022", "age": "Recent"},
+          "s21": {"name": "Samsung Galaxy S21", "generation": "2021", "age": "Moderate"},
+          "s20": {"name": "Samsung Galaxy S20", "generation": "2020", "age": "Moderate"},
+          "note": {"name": "Samsung Galaxy Note", "generation": "Various", "age": "Various"},
+          "fold": {"name": "Samsung Galaxy Fold", "generation": "Various", "age": "Various"},
+          "flip": {"name": "Samsung Galaxy Flip", "generation": "Various", "age": "Various"},
+          "tab_s9": {"name": "Samsung Galaxy Tab S9", "generation": "2023", "age": "Latest", "type": "Tablet", "capabilities": ["Android", "One UI", "S Pen", "DeX", "Snapdragon 8 Gen 2"]},
+          "tab_s8": {"name": "Samsung Galaxy Tab S8", "generation": "2022", "age": "Recent", "type": "Tablet", "capabilities": ["Android", "One UI", "S Pen", "DeX", "120Hz Display"]},
+          "tab_a": {"name": "Samsung Galaxy Tab A", "generation": "Budget", "age": "Various", "type": "Tablet", "capabilities": ["Android", "One UI", "Family Hub", "Kids Mode"]},
+          "watch_6": {"name": "Samsung Galaxy Watch 6", "generation": "2023", "age": "Latest", "type": "Smartwatch", "capabilities": ["Wear OS", "Rotating Bezel", "Health Monitoring", "Samsung Pay"]},
+          "watch_5": {"name": "Samsung Galaxy Watch 5", "generation": "2022", "age": "Recent", "type": "Smartwatch", "capabilities": ["Wear OS", "Health Sensors", "Body Composition", "Sleep Tracking"]},
+          "watch_4": {"name": "Samsung Galaxy Watch 4", "generation": "2021", "age": "Moderate", "type": "Smartwatch", "capabilities": ["Wear OS", "One UI Watch", "ECG", "Blood Pressure"]},
+          "buds_2": {"name": "Samsung Galaxy Buds 2", "generation": "2021", "age": "Recent", "type": "Wireless Earbuds", "capabilities": ["Active Noise Cancelling", "Ambient Sound", "360 Audio", "SmartThings Find"]},
+          "buds_pro": {"name": "Samsung Galaxy Buds Pro", "generation": "2021", "age": "Recent", "type": "Wireless Earbuds", "capabilities": ["Premium ANC", "Pro Audio", "Spatial Audio", "Voice Detect"]},
+          "qled_tv": {"name": "Samsung QLED TV", "generation": "2024", "age": "Latest", "type": "Smart TV", "capabilities": ["4K QLED", "Tizen OS", "SmartThings Hub", "Gaming Hub", "Bixby Voice"]},
+          "neo_qled": {"name": "Samsung Neo QLED", "generation": "2024", "age": "Premium", "type": "Smart TV", "capabilities": ["8K Neo QLED", "Mini LED", "Neural Quantum Processor", "Object Tracking Sound"]},
+          "the_frame": {"name": "Samsung The Frame", "generation": "2024", "age": "Art TV", "type": "Smart TV", "capabilities": ["Art Mode", "Customizable Bezels", "Motion Sensor", "Anti-Reflection"]},
+          "galaxy_book": {"name": "Samsung Galaxy Book", "generation": "2024", "age": "Latest", "type": "Laptop", "capabilities": ["Windows 11", "Intel/Snapdragon", "Galaxy Ecosystem", "Second Screen"]},
+          "chromebook": {"name": "Samsung Chromebook", "generation": "2023", "age": "Recent", "type": "Laptop", "capabilities": ["Chrome OS", "Android Apps", "Convertible", "S Pen Support"]},
+          "smartthings_hub": {"name": "SmartThings Hub", "generation": "2022", "age": "Smart Home", "type": "Smart Home Hub", "capabilities": ["Zigbee", "Z-Wave", "Matter", "WiFi 6", "Edge Computing"]},
+          "smartthings_cam": {"name": "SmartThings Cam", "generation": "2023", "age": "Security", "type": "Security Camera", "capabilities": ["1080p Video", "Two-Way Audio", "Motion Detection", "Cloud Storage"]},
+          "family_hub": {"name": "Samsung Family Hub Refrigerator", "generation": "2024", "age": "Smart Appliance", "type": "Smart Refrigerator", "capabilities": ["21.5\" Touchscreen", "Internal Cameras", "Meal Planning", "Grocery Lists", "SmartThings"]},
+          "smart_washer": {"name": "Samsung Smart Washer", "generation": "2024", "age": "Smart Appliance", "type": "Smart Washer", "capabilities": ["AI-Powered Washing", "SmartThings", "Steam Sanitize", "Self Clean"]},
+          "smart_dryer": {"name": "Samsung Smart Dryer", "generation": "2024", "age": "Smart Appliance", "type": "Smart Dryer", "capabilities": ["AI Dry", "Steam Sanitize", "Wrinkle Prevent", "SmartThings"]},
+          "soundbar": {"name": "Samsung Soundbar", "generation": "2024", "age": "Audio", "type": "Soundbar", "capabilities": ["Dolby Atmos", "Q-Symphony", "Adaptive Sound", "Wireless Subwoofer"]}
+        }
+      },
+      "google": {
+        "patterns": ["google", "pixel", "nest", "chromecast", "home", "assistant", "chromebook"],
+        "hostnames": ["pixel", "pixel-8", "pixel-7", "pixel-6", "pixel-5", "pixel-4", "nexus", "nest", "nest-hub", "nest-mini", "nest-audio", "nest-cam", "nest-doorbell", "chromecast", "chromebook", "pixelbook"],
+        "vendor": "Google",
+        "type": "Smartphone", 
+        "confidence": 95,
+        "capabilities": ["Android", "Pure Android", "Google Assistant", "Pixel Camera", "Call Screen", "Hold for Me", "Google Services"],
+        "models": {
+          "pixel-8": {"name": "Google Pixel 8", "generation": "2023", "age": "Latest"},
+          "pixel-7": {"name": "Google Pixel 7", "generation": "2022", "age": "Recent"},
+          "pixel-6": {"name": "Google Pixel 6", "generation": "2021", "age": "Recent"},
+          "pixel-8-pro": {"name": "Google Pixel 8 Pro", "generation": "2023", "age": "Latest", "type": "Smartphone", "capabilities": ["Android 14", "Tensor G3", "Magic Eraser", "Real Tone", "Live Translate"]},
+          "pixel-7a": {"name": "Google Pixel 7a", "generation": "2023", "age": "Mid-range", "type": "Smartphone", "capabilities": ["Android 13", "Tensor G2", "Pixel Camera", "Wireless Charging"]},
+          "pixel-fold": {"name": "Google Pixel Fold", "generation": "2023", "age": "Latest", "type": "Foldable Phone", "capabilities": ["Android 13", "Tensor G2", "7.6\" Foldable Display", "Multi-tasking"]},
+          "pixel-tablet": {"name": "Google Pixel Tablet", "generation": "2023", "age": "Latest", "type": "Tablet", "capabilities": ["Android 13", "Tensor G2", "11\" Display", "Charging Speaker Dock", "Hub Mode"]},
+          "pixelbook": {"name": "Google Pixelbook", "generation": "2017", "age": "Discontinued", "type": "Laptop", "capabilities": ["Chrome OS", "Google Assistant", "Convertible", "Pixel Pen"]},
+          "chromebook": {"name": "Google Chromebook", "generation": "Various", "age": "Various", "type": "Laptop", "capabilities": ["Chrome OS", "Android Apps", "Google Services", "Cloud Storage"]},
+          "nest-hub-max": {"name": "Google Nest Hub Max", "generation": "2019", "age": "Smart Display", "type": "Smart Display", "capabilities": ["Google Assistant", "10\" Display", "Nest Cam", "YouTube Music", "Smart Home Control"]},
+          "nest-hub": {"name": "Google Nest Hub", "generation": "2021", "age": "Smart Display", "type": "Smart Display", "capabilities": ["Google Assistant", "7\" Display", "Sleep Sensing", "YouTube Music", "Smart Home Control"]},
+          "nest-audio": {"name": "Google Nest Audio", "generation": "2020", "age": "Smart Speaker", "type": "Smart Speaker", "capabilities": ["Google Assistant", "Premium Audio", "Media Alarm", "Voice Match", "Smart Home Control"]},
+          "nest-mini": {"name": "Google Nest Mini", "generation": "2019", "age": "Compact Speaker", "type": "Smart Speaker", "capabilities": ["Google Assistant", "Compact Design", "Wall Mount", "Voice Match", "Smart Home Control"]},
+          "nest-wifi": {"name": "Google Nest Wifi", "generation": "2019", "age": "Router", "type": "Mesh Router", "capabilities": ["Wi-Fi 6", "Mesh Networking", "Google Assistant", "Parental Controls", "Easy Setup"]},
+          "nest-cam": {"name": "Google Nest Cam", "generation": "2021", "age": "Security Camera", "type": "Security Camera", "capabilities": ["1080p Video", "Night Vision", "Two-Way Audio", "Smart Alerts", "Cloud Storage"]},
+          "nest-doorbell": {"name": "Google Nest Doorbell", "generation": "2021", "age": "Smart Doorbell", "type": "Smart Doorbell", "capabilities": ["1080p Video", "Two-Way Audio", "Smart Alerts", "Package Detection", "Cloud Storage"]},
+          "nest-thermostat": {"name": "Google Nest Thermostat", "generation": "2020", "age": "Smart Thermostat", "type": "Smart Thermostat", "capabilities": ["Energy Saving", "Remote Control", "Learning", "HVAC Monitoring", "Eco Mode"]},
+          "nest-protect": {"name": "Google Nest Protect", "generation": "2013", "age": "Safety Device", "type": "Smart Smoke Detector", "capabilities": ["Smoke Detection", "CO Detection", "App Alerts", "Voice Alerts", "Pathlight"]},
+          "chromecast": {"name": "Chromecast with Google TV", "generation": "2020", "age": "Streaming Device", "type": "Streaming Device", "capabilities": ["4K HDR", "Google TV", "Voice Remote", "Cast", "Google Assistant"]},
+          "chromecast-ultra": {"name": "Chromecast Ultra", "generation": "2016", "age": "4K Streaming", "type": "Streaming Device", "capabilities": ["4K HDR", "Cast", "Ethernet Port", "Fast Performance"]},
+          "google-tv": {"name": "Google TV", "generation": "2020", "age": "Smart TV Platform", "type": "Smart TV OS", "capabilities": ["Content Discovery", "Google Assistant", "Personalized Recommendations", "Voice Search"]},
+          "google-home": {"name": "Google Home", "generation": "2016", "age": "Original Speaker", "type": "Smart Speaker", "capabilities": ["Google Assistant", "Smart Home Control", "Music Streaming", "Voice Commands"]},
+          "stadia": {"name": "Google Stadia Controller", "generation": "2019", "age": "Gaming", "type": "Gaming Controller", "capabilities": ["Cloud Gaming", "Wi-Fi Direct", "Google Assistant", "Capture Button"]}
+        }
+      },
+      "oneplus": {
+        "patterns": ["oneplus", "1+"],
+        "hostnames": ["oneplus", "op", "1plus"],
+        "vendor": "OnePlus",
+        "type": "Smartphone",
+        "confidence": 90,
+        "capabilities": ["Android", "OxygenOS", "Warp Charge", "Alert Slider", "Dash Charge"]
+      },
+      "xiaomi": {
+        "patterns": ["xiaomi", "redmi", "mi", "poco", "mipad", "mibox", "miai", "miband"],
+        "hostnames": ["xiaomi", "redmi", "mi", "poco", "mipad", "mibox", "miai", "miband", "mijia", "yeelight"],
+        "vendor": "Xiaomi",
+        "type": "Smartphone",
+        "confidence": 90,
+        "capabilities": ["Android", "MIUI", "Fast Charging", "Mi Ecosystem"],
+        "models": {
+          "13": {"name": "Xiaomi 13", "generation": "2023", "age": "New"},
+          "12": {"name": "Xiaomi 12", "generation": "2022", "age": "Recent"},
+          "11": {"name": "Xiaomi 11", "generation": "2021", "age": "Moderate"},
+          "redmi_note": {"name": "Redmi Note", "generation": "Budget", "age": "Various"},
+          "poco_f": {"name": "POCO F", "generation": "Gaming", "age": "Performance"},
+          "mipad": {"name": "Mi Pad", "generation": "Tablet", "age": "Various", "type": "Tablet", "capabilities": ["Android", "MIUI for Pad", "Stylus Support"]},
+          "mibox": {"name": "Mi Box", "generation": "TV Box", "age": "Various", "type": "Media Device", "capabilities": ["Android TV", "4K HDR", "Google Assistant", "Chromecast"]},
+          "mi_tv": {"name": "Mi TV", "generation": "Smart TV", "age": "Various", "type": "Smart TV", "capabilities": ["Android TV", "4K HDR", "Mi Remote", "PatchWall"]},
+          "mi_laptop": {"name": "Mi Laptop", "generation": "Notebook", "age": "Various", "type": "Laptop", "capabilities": ["Windows 11", "Intel/AMD", "Fast Charging", "Metal Build"]},
+          "xiaomi_book": {"name": "Xiaomi Book", "generation": "Premium", "age": "Recent", "type": "Laptop", "capabilities": ["Windows 11", "Intel Evo", "Thunderbolt", "2K Display"]},
+          "mi_speaker": {"name": "Mi Smart Speaker", "generation": "Smart Speaker", "age": "Various", "type": "Smart Speaker", "capabilities": ["XiaoAI", "Smart Home Control", "Music Streaming", "Voice Commands"]},
+          "mi_band": {"name": "Mi Band", "generation": "Fitness", "age": "Various", "type": "Wearable", "capabilities": ["Fitness Tracking", "Heart Rate", "Sleep Monitor", "Mi Fit App"]},
+          "mi_watch": {"name": "Mi Watch", "generation": "Smartwatch", "age": "Various", "type": "Smartwatch", "capabilities": ["MIUI Watch", "GPS", "Health Monitoring", "Always-on Display"]},
+          "mi_robot": {"name": "Mi Robot Vacuum", "generation": "Cleaning", "age": "Various", "type": "Robot Vacuum", "capabilities": ["LiDAR Navigation", "App Control", "Mapping", "Mi Home"]},
+          "mi_purifier": {"name": "Mi Air Purifier", "generation": "Air Quality", "age": "Various", "type": "Air Purifier", "capabilities": ["HEPA Filter", "App Control", "Air Quality Monitor", "Smart Scheduling"]},
+          "yeelight": {"name": "Yeelight", "generation": "Smart Lighting", "age": "Various", "type": "Smart Light", "capabilities": ["RGB Colors", "App Control", "Voice Control", "Scheduling"]},
+          "mijia": {"name": "Mijia Device", "generation": "Smart Home", "age": "Various", "type": "Smart Home Device", "capabilities": ["Mi Home App", "Automation", "Scene Control", "Remote Access"]}
+        }
+      },
+      "huawei": {
+        "patterns": ["huawei", "honor"],
+        "hostnames": ["huawei", "honor", "mate", "p30", "p40", "p50"],
+        "vendor": "Huawei",
+        "type": "Smartphone",
+        "confidence": 90,
+        "capabilities": ["Android", "HarmonyOS", "EMUI", "Leica Camera", "Kirin Chipset"]
+      },
+      "oppo": {
+        "patterns": ["oppo", "realme"],
+        "hostnames": ["oppo", "realme", "find", "reno"],
+        "vendor": "OPPO",
+        "type": "Smartphone",
+        "confidence": 85,
+        "capabilities": ["Android", "ColorOS", "SuperVOOC", "Fast Charging"]
+      },
+      "vivo": {
+        "patterns": ["vivo", "iqoo"],
+        "hostnames": ["vivo", "iqoo", "nex", "x60"],
+        "vendor": "Vivo",
+        "type": "Smartphone", 
+        "confidence": 85,
+        "capabilities": ["Android", "Funtouch OS", "Fast Charging"]
+      }
+    },
+    "tablets": {
+      "apple": {
+        "patterns": ["apple"],
+        "hostnames": ["ipad", "ipad-pro", "ipad-air", "ipad-mini"],
+        "vendor": "Apple",
+        "type": "Tablet",
+        "confidence": 95,
+        "capabilities": ["iPadOS", "Apple Pencil", "Magic Keyboard", "Touch ID", "Face ID", "AirDrop"],
+        "models": {
+          "ipad-pro": {"name": "iPad Pro", "generation": "Various", "age": "Various"},
+          "ipad-air": {"name": "iPad Air", "generation": "Various", "age": "Various"},
+          "ipad-mini": {"name": "iPad mini", "generation": "Various", "age": "Various"}
+        }
+      },
+      "samsung": {
+        "patterns": ["samsung"],
+        "hostnames": ["tab", "galaxy-tab", "tab-s", "tab-a"],
+        "vendor": "Samsung",
+        "type": "Tablet",
+        "confidence": 95,
+        "capabilities": ["Android", "One UI", "S Pen", "DeX Mode", "Multi Window"]
+      },
+      "microsoft": {
+        "patterns": ["microsoft"],
+        "hostnames": ["surface", "surface-pro", "surface-go"],
+        "vendor": "Microsoft",
+        "type": "Tablet",
+        "confidence": 90,
+        "capabilities": ["Windows", "Surface Pen", "Touch Screen", "Detachable Keyboard"]
+      }
+    },
+    "routers": {
+      "zyxel": {
+        "patterns": ["zyxel"],
+        "ip_patterns": [".1", ".254"],
+        "vendor": "Zyxel",
+        "type": "Router",
+        "confidence": 95,
+        "capabilities": ["WiFi", "Ethernet", "DHCP", "NAT", "Firewall", "VPN"]
+      },
+      "netgear": {
+        "patterns": ["netgear"],
+        "ip_patterns": [".1", ".254"],
+        "vendor": "Netgear",
+        "type": "Router", 
+        "confidence": 95,
+        "capabilities": ["WiFi 6", "MU-MIMO", "Beamforming", "QoS", "Guest Network"]
+      },
+      "cisco": {
+        "patterns": ["cisco"],
+        "ip_patterns": [".1", ".254"],
+        "vendor": "Cisco",
+        "type": "Router",
+        "confidence": 95,
+        "capabilities": ["Enterprise WiFi", "Advanced Security", "VLAN", "Enterprise Management"]
+      },
+      "linksys": {
+        "patterns": ["linksys"],
+        "ip_patterns": [".1", ".254"],
+        "vendor": "Linksys",
+        "type": "Router",
+        "confidence": 95,
+        "capabilities": ["Mesh WiFi", "Smart WiFi", "Guest Access", "Parental Controls"]
+      },
+      "tp-link": {
+        "patterns": ["tp-link", "tplink"],
+        "ip_patterns": [".1", ".254"],
+        "vendor": "TP-Link",
+        "type": "Router",
+        "confidence": 95,
+        "capabilities": ["WiFi 6", "OneMesh", "HomeShield", "Tether App"]
+      },
+      "asus": {
+        "patterns": ["asus", "asustek"],
+        "ip_patterns": [".1", ".254"],
+        "vendor": "ASUS",
+        "type": "Router",
+        "confidence": 95,
+        "capabilities": ["AiMesh", "Adaptive QoS", "AiProtection", "Gaming Mode"]
+      },
+      "d-link": {
+        "patterns": ["d-link", "dlink"],
+        "ip_patterns": [".1", ".254"],
+        "vendor": "D-Link",
+        "type": "Router",
+        "confidence": 95,
+        "capabilities": ["WiFi", "Cloud Management", "QoS", "Guest Zone"]
+      }
+    },
+    "smart_home": {
+      "amazon": {
+        "patterns": ["amazon"],
+        "hostnames": ["echo", "alexa", "fire-tv", "firetv", "kindle", "ring"],
+        "vendor": "Amazon",
+        "confidence": 90,
+        "devices": {
+          "echo": {
+            "type": "Smart Speaker",
+            "name": "Amazon Echo",
+            "capabilities": ["Alexa", "Voice Control", "Smart Home Hub", "Music Streaming", "Drop In"]
+          },
+          "echo-dot": {
+            "type": "Smart Speaker", 
+            "name": "Amazon Echo Dot",
+            "capabilities": ["Alexa", "Voice Control", "Compact Design", "Smart Home Control"]
+          },
+          "echo-show": {
+            "type": "Smart Display",
+            "name": "Amazon Echo Show",
+            "capabilities": ["Alexa", "Video Calls", "Smart Home Control", "Touchscreen", "Camera"]
+          },
+          "fire-tv": {
+            "type": "Media Device",
+            "name": "Amazon Fire TV",
+            "capabilities": ["Fire OS", "4K Streaming", "Alexa Voice Remote", "Gaming"]
+          },
+          "ring": {
+            "type": "Security Device",
+            "name": "Ring Doorbell/Camera",
+            "capabilities": ["Video Recording", "Motion Detection", "Two-Way Audio", "Cloud Storage"]
+          }
+        }
+      },
+      "google": {
+        "patterns": ["google"],
+        "hostnames": ["nest", "chromecast", "google-home", "nest-mini", "nest-hub"],
+        "vendor": "Google",
+        "confidence": 90,
+        "devices": {
+          "nest-mini": {
+            "type": "Smart Speaker",
+            "name": "Google Nest Mini", 
+            "capabilities": ["Google Assistant", "Voice Control", "Smart Home Control", "Music Streaming"]
+          },
+          "nest-hub": {
+            "type": "Smart Display",
+            "name": "Google Nest Hub",
+            "capabilities": ["Google Assistant", "Visual Interface", "Photo Frame", "Smart Home Control"]
+          },
+          "chromecast": {
+            "type": "Media Device",
+            "name": "Google Chromecast",
+            "capabilities": ["Cast", "4K Streaming", "Google TV", "Voice Remote"]
+          },
+          "nest-cam": {
+            "type": "Security Camera",
+            "name": "Google Nest Cam",
+            "capabilities": ["HD Video", "Night Vision", "Motion Detection", "Intelligent Alerts"]
+          },
+          "nest-doorbell": {
+            "type": "Smart Doorbell",
+            "name": "Google Nest Doorbell",
+            "capabilities": ["HD Video", "Two-Way Audio", "Motion Detection", "Package Detection"]
+          },
+          "nest-thermostat": {
+            "type": "Smart Thermostat",
+            "name": "Google Nest Thermostat",
+            "capabilities": ["Auto-Schedule", "Energy Saving", "Remote Control", "Learning"]
+          }
+        }
+      },
+      "apple": {
+        "patterns": ["apple"],
+        "hostnames": ["appletv", "apple-tv", "homepod", "homepod-mini"],
+        "vendor": "Apple",
+        "confidence": 95,
+        "devices": {
+          "appletv": {
+            "type": "Media Device",
+            "name": "Apple TV",
+            "capabilities": ["tvOS", "AirPlay", "4K HDR", "Dolby Vision", "Apple Arcade", "HomeKit Hub"]
+          },
+          "homepod": {
+            "type": "Smart Speaker",
+            "name": "Apple HomePod",
+            "capabilities": ["Siri", "Spatial Audio", "HomeKit Hub", "Intercom", "Apple Music"]
+          },
+          "homepod-mini": {
+            "type": "Smart Speaker", 
+            "name": "Apple HomePod mini",
+            "capabilities": ["Siri", "HomeKit Control", "Intercom", "Handoff", "Compact Design"]
+          }
+        }
+      }
+    },
+    "iot_devices": {
+      "security_cameras": {
+        "patterns": ["camera", "cam", "security", "surveillance"],
+        "hostnames": ["camera", "cam", "ipcam", "webcam", "security", "surveillance"],
+        "vendors": {
+          "hikvision": {
+            "patterns": ["hikvision", "hik"],
+            "type": "IP Camera",
+            "capabilities": ["HD Video", "Night Vision", "Motion Detection", "Remote Access"]
+          },
+          "dahua": {
+            "patterns": ["dahua"],
+            "type": "IP Camera", 
+            "capabilities": ["4K Video", "Smart Detection", "WDR", "Audio Recording"]
+          },
+          "axis": {
+            "patterns": ["axis"],
+            "type": "IP Camera",
+            "capabilities": ["Professional Grade", "Analytics", "Weatherproof", "PTZ Control"]
+          },
+          "ubiquiti": {
+            "patterns": ["ubiquiti", "unifi"],
+            "type": "Security Camera",
+            "capabilities": ["UniFi Protect", "4K Recording", "Smart Detection", "Local Storage"]
+          }
+        }
+      },
+      "smart_lights": {
+        "patterns": ["light", "bulb", "lamp"],
+        "hostnames": ["light", "bulb", "lamp", "hue", "lifx"],
+        "vendors": {
+          "philips": {
+            "patterns": ["philips", "hue"],
+            "type": "Smart Light",
+            "capabilities": ["Color Changing", "Dimming", "Voice Control", "Scheduling", "Zigbee"]
+          },
+          "lifx": {
+            "patterns": ["lifx"],
+            "type": "Smart Light",
+            "capabilities": ["WiFi Direct", "16 Million Colors", "No Hub Required", "Music Sync"]
+          },
+          "tp-link": {
+            "patterns": ["tp-link", "kasa"],
+            "type": "Smart Light",
+            "capabilities": ["Kasa App", "Voice Control", "Scheduling", "Energy Monitoring"]
+          }
+        }
+      },
+      "smart_plugs": {
+        "patterns": ["plug", "outlet", "switch"],
+        "hostnames": ["plug", "outlet", "switch", "smart-plug"],
+        "vendors": {
+          "tp-link": {
+            "patterns": ["tp-link", "kasa"],
+            "type": "Smart Plug",
+            "capabilities": ["Remote Control", "Energy Monitoring", "Voice Control", "Scheduling"]
+          },
+          "amazon": {
+            "patterns": ["amazon", "smart-plug"],
+            "type": "Smart Plug", 
+            "capabilities": ["Alexa Control", "Simple Setup", "Voice Control", "App Control"]
+          }
+        }
+      },
+      "thermostats": {
+        "patterns": ["thermostat", "hvac"],
+        "hostnames": ["thermostat", "hvac", "nest", "ecobee", "honeywell"],
+        "vendors": {
+          "nest": {
+            "patterns": ["nest", "google"],
+            "type": "Smart Thermostat",
+            "capabilities": ["Learning", "Auto-Schedule", "Energy History", "Remote Control"]
+          },
+          "ecobee": {
+            "patterns": ["ecobee"],
+            "type": "Smart Thermostat",
+            "capabilities": ["Room Sensors", "Voice Control", "Smart Recovery", "Weather Compensation"]
+          },
+          "honeywell": {
+            "patterns": ["honeywell"],
+            "type": "Smart Thermostat",
+            "capabilities": ["7-Day Programming", "Geofencing", "Energy Reports", "Smart Alerts"]
+          }
+        }
+      },
+      "door_locks": {
+        "patterns": ["lock", "door", "deadbolt"],
+        "hostnames": ["lock", "door", "smart-lock", "deadbolt"],
+        "vendors": {
+          "august": {
+            "patterns": ["august"],
+            "type": "Smart Lock",
+            "capabilities": ["Auto-Lock", "Remote Access", "Guest Access", "Activity Monitoring"]
+          },
+          "yale": {
+            "patterns": ["yale"],
+            "type": "Smart Lock",
+            "capabilities": ["Keypad Entry", "Z-Wave", "Tamper Alerts", "Auto Relock"]
+          },
+          "schlage": {
+            "patterns": ["schlage"],
+            "type": "Smart Lock",
+            "capabilities": ["Built-in Alarm", "Keypad", "Z-Wave Plus", "Voice Control"]
+          }
+        }
+      },
+      "garage_doors": {
+        "patterns": ["garage", "door", "opener"],
+        "hostnames": ["garage", "garage-door", "opener"],
+        "vendors": {
+          "chamberlain": {
+            "patterns": ["chamberlain", "myq"],
+            "type": "Smart Garage Door",
+            "capabilities": ["MyQ App", "Remote Control", "Smartphone Alerts", "Timer-to-Close"]
+          },
+          "genie": {
+            "patterns": ["genie"],
+            "type": "Smart Garage Door", 
+            "capabilities": ["Aladdin Connect", "Real-time Monitoring", "Vacation Mode"]
+          }
+        }
+      },
+      "sprinkler_systems": {
+        "patterns": ["sprinkler", "irrigation", "water"],
+        "hostnames": ["sprinkler", "irrigation", "rachio", "rainbird"],
+        "vendors": {
+          "rachio": {
+            "patterns": ["rachio"],
+            "type": "Smart Sprinkler Controller",
+            "capabilities": ["Weather Intelligence", "Zone Control", "Water Savings", "Scheduling"]
+          },
+          "rainbird": {
+            "patterns": ["rainbird", "rain-bird"],
+            "type": "Smart Sprinkler Controller",
+            "capabilities": ["WiFi Control", "Weather Adjustment", "Zone Management"]
+          }
+        }
+      }
+    },
+    "computers": {
+      "apple": {
+        "patterns": ["apple"],
+        "hostnames": ["mac", "imac", "macbook", "mac-mini", "mac-pro", "mac-studio"],
+        "vendor": "Apple",
+        "type": "Computer",
+        "confidence": 95,
+        "capabilities": ["macOS", "AirDrop", "Handoff", "Universal Clipboard", "Sidecar", "iCloud"],
+        "models": {
+          "macbook-pro": {"name": "MacBook Pro", "type": "Laptop"},
+          "macbook-air": {"name": "MacBook Air", "type": "Laptop"}, 
+          "imac": {"name": "iMac", "type": "Desktop"},
+          "mac-mini": {"name": "Mac mini", "type": "Mini PC"},
+          "mac-pro": {"name": "Mac Pro", "type": "Workstation"},
+          "mac-studio": {"name": "Mac Studio", "type": "Desktop"}
+        }
+      },
+      "windows": {
+        "patterns": ["microsoft", "windows"],
+        "hostnames": ["desktop", "pc", "laptop", "workstation", "dell", "hp", "lenovo", "asus", "acer"],
+        "vendor": "Various",
+        "type": "Computer",
+        "confidence": 85,
+        "capabilities": ["Windows", "DirectX", "Windows Hello", "Cortana"],
+        "brands": {
+          "dell": {"vendor": "Dell", "confidence": 90},
+          "hp": {"vendor": "HP", "confidence": 90},
+          "lenovo": {"vendor": "Lenovo", "confidence": 90},
+          "asus": {"vendor": "ASUS", "confidence": 90},
+          "acer": {"vendor": "Acer", "confidence": 90}
+        }
+      },
+      "linux": {
+        "patterns": ["linux"],
+        "hostnames": ["ubuntu", "debian", "fedora", "centos", "arch", "linux"],
+        "vendor": "Various",
+        "type": "Computer", 
+        "confidence": 85,
+        "capabilities": ["Open Source", "Terminal", "Package Manager", "Customizable"]
+      }
+    },
+    "gaming": {
+      "sony": {
+        "patterns": ["sony", "playstation"],
+        "hostnames": ["ps5", "ps4", "playstation"],
+        "vendor": "Sony",
+        "type": "Gaming Console",
+        "confidence": 95,
+        "capabilities": ["Gaming", "Media Streaming", "Blu-ray", "VR Support"],
+        "models": {
+          "ps5": {"name": "PlayStation 5", "generation": "2020"},
+          "ps4": {"name": "PlayStation 4", "generation": "2013"}
+        }
+      },
+      "microsoft": {
+        "patterns": ["microsoft", "xbox"],
+        "hostnames": ["xbox", "xbox-series", "xbox-one"],
+        "vendor": "Microsoft",
+        "type": "Gaming Console",
+        "confidence": 95,
+        "capabilities": ["Gaming", "Game Pass", "Media Streaming", "Backward Compatibility"],
+        "models": {
+          "xbox-series": {"name": "Xbox Series X/S", "generation": "2020"},
+          "xbox-one": {"name": "Xbox One", "generation": "2013"}
+        }
+      },
+      "nintendo": {
+        "patterns": ["nintendo"],
+        "hostnames": ["switch", "nintendo-switch"],
+        "vendor": "Nintendo",
+        "type": "Gaming Console",
+        "confidence": 95,
+        "capabilities": ["Portable Gaming", "Docked Gaming", "Joy-Con Controllers"]
+      }
+    },
+    "printers": {
+      "hp": {
+        "patterns": ["hp", "hewlett-packard"],
+        "hostnames": ["printer", "hp", "laserjet", "officejet", "envy"],
+        "vendor": "HP",
+        "type": "Printer",
+        "confidence": 90,
+        "capabilities": ["Printing", "Scanning", "WiFi", "Mobile Printing", "HP Smart"]
+      },
+      "canon": {
+        "patterns": ["canon"],
+        "hostnames": ["printer", "canon", "pixma", "maxify"],
+        "vendor": "Canon",
+        "type": "Printer",
+        "confidence": 90,
+        "capabilities": ["Photo Printing", "Document Printing", "Scanning", "WiFi"]
+      },
+      "epson": {
+        "patterns": ["epson"],
+        "hostnames": ["printer", "epson", "workforce", "expression"],
+        "vendor": "Epson",
+        "type": "Printer",
+        "confidence": 90,
+        "capabilities": ["EcoTank", "Photo Printing", "Wide Format", "WiFi Direct"]
+      },
+      "brother": {
+        "patterns": ["brother"],
+        "hostnames": ["printer", "brother", "dcp", "mfc"],
+        "vendor": "Brother",
+        "type": "Printer",
+        "confidence": 90,
+        "capabilities": ["Laser Printing", "Toner Save", "Mobile Connect", "Duplex Printing"]
+      }
+    },
+    "network_storage": {
+      "synology": {
+        "patterns": ["synology"],
+        "hostnames": ["nas", "synology", "diskstation"],
+        "vendor": "Synology", 
+        "type": "NAS",
+        "confidence": 95,
+        "capabilities": ["RAID", "DSM", "Cloud Sync", "Media Server", "Backup"]
+      },
+      "qnap": {
+        "patterns": ["qnap"],
+        "hostnames": ["nas", "qnap"],
+        "vendor": "QNAP",
+        "type": "NAS",
+        "confidence": 95,
+        "capabilities": ["QTS", "Virtualization", "Container Station", "Media Transcoding"]
+      },
+      "drobo": {
+        "patterns": ["drobo"],
+        "hostnames": ["nas", "drobo"],
+        "vendor": "Drobo",
+        "type": "NAS",
+        "confidence": 95,
+        "capabilities": ["BeyondRAID", "Data Protection", "Self-Healing", "Hot Swappable"]
+      }
+    },
+    "industrial": {
+      "scada": {
+        "patterns": ["scada", "hmi", "plc"],
+        "hostnames": ["scada", "hmi", "plc", "industrial"],
+        "type": "Industrial Control",
+        "confidence": 85,
+        "capabilities": ["Process Control", "Monitoring", "Automation", "Data Logging"]
+      },
+      "sensors": {
+        "patterns": ["sensor", "monitoring"],
+        "hostnames": ["sensor", "temp", "humidity", "pressure"],
+        "type": "Industrial Sensor",
+        "confidence": 80,
+        "capabilities": ["Data Collection", "Monitoring", "Alerts", "Remote Access"]
+      }
+    },
+    "wearables": {
+      "apple_watch": {
+        "patterns": ["apple", "watch"],
+        "hostnames": ["watch", "apple-watch", "applewatch", "iwatch"],
+        "vendor": "Apple",
+        "type": "Smartwatch",
+        "confidence": 95,
+        "capabilities": ["watchOS", "Health Monitoring", "Fitness Tracking", "Siri", "Apple Pay", "ECG", "Blood Oxygen"],
+        "models": {
+          "series-9": {"name": "Apple Watch Series 9", "generation": "2023", "age": "Latest"},
+          "series-8": {"name": "Apple Watch Series 8", "generation": "2022", "age": "Recent"},
+          "series-7": {"name": "Apple Watch Series 7", "generation": "2021", "age": "Recent"},
+          "ultra": {"name": "Apple Watch Ultra", "generation": "2022", "age": "Recent"},
+          "se": {"name": "Apple Watch SE", "generation": "2022", "age": "Budget"}
+        }
+      },
+      "samsung_watch": {
+        "patterns": ["samsung", "galaxy watch"],
+        "hostnames": ["galaxy-watch", "galaxywatch", "samsung-watch", "watch4", "watch5", "watch6"],
+        "vendor": "Samsung",
+        "type": "Smartwatch",
+        "confidence": 90,
+        "capabilities": ["Wear OS", "Tizen", "Health Monitoring", "Fitness Tracking", "Samsung Pay", "SpO2"],
+        "models": {
+          "watch6": {"name": "Galaxy Watch6", "generation": "2023", "age": "Latest"},
+          "watch5": {"name": "Galaxy Watch5", "generation": "2022", "age": "Recent"},
+          "watch4": {"name": "Galaxy Watch4", "generation": "2021", "age": "Moderate"}
+        }
+      },
+      "fitbit": {
+        "patterns": ["fitbit"],
+        "hostnames": ["fitbit", "versa", "charge", "inspire", "sense"],
+        "vendor": "Fitbit",
+        "type": "Fitness Tracker",
+        "confidence": 95,
+        "capabilities": ["Fitness Tracking", "Heart Rate", "Sleep Tracking", "GPS", "Fitbit Pay"],
+        "models": {
+          "sense2": {"name": "Fitbit Sense 2", "generation": "2022", "age": "Recent"},
+          "versa4": {"name": "Fitbit Versa 4", "generation": "2022", "age": "Recent"},
+          "charge5": {"name": "Fitbit Charge 5", "generation": "2021", "age": "Moderate"}
+        }
+      },
+      "garmin": {
+        "patterns": ["garmin"],
+        "hostnames": ["garmin", "fenix", "vivoactive", "forerunner", "instinct"],
+        "vendor": "Garmin",
+        "type": "Sports Watch",
+        "confidence": 90,
+        "capabilities": ["GPS", "Sports Tracking", "Heart Rate", "Multi-Sport", "Navigation"],
+        "models": {
+          "fenix7": {"name": "Garmin Fenix 7", "generation": "2022", "age": "Recent"},
+          "forerunner955": {"name": "Garmin Forerunner 955", "generation": "2022", "age": "Recent"}
+        }
+      }
+    },
+    "audio_devices": {
+      "airpods": {
+        "patterns": ["apple", "airpods"],
+        "hostnames": ["airpods", "airpods-pro", "airpods-max", "apple-buds"],
+        "vendor": "Apple",
+        "type": "Wireless Earbuds",
+        "confidence": 95,
+        "capabilities": ["Bluetooth", "Noise Cancellation", "Spatial Audio", "Hey Siri", "Find My"],
+        "models": {
+          "pro2": {"name": "AirPods Pro (2nd generation)", "generation": "2022", "age": "Latest"},
+          "pro": {"name": "AirPods Pro", "generation": "2019", "age": "Moderate"},
+          "max": {"name": "AirPods Max", "generation": "2020", "age": "Recent"},
+          "3": {"name": "AirPods (3rd generation)", "generation": "2021", "age": "Recent"}
+        }
+      },
+      "galaxy_buds": {
+        "patterns": ["samsung", "galaxy buds"],
+        "hostnames": ["galaxy-buds", "galaxybuds", "buds-pro", "buds2"],
+        "vendor": "Samsung",
+        "type": "Wireless Earbuds",
+        "confidence": 90,
+        "capabilities": ["Bluetooth", "Active Noise Cancelling", "360 Audio", "Galaxy Wearable"],
+        "models": {
+          "buds2pro": {"name": "Galaxy Buds2 Pro", "generation": "2022", "age": "Recent"},
+          "buds2": {"name": "Galaxy Buds2", "generation": "2021", "age": "Moderate"}
+        }
+      },
+      "sony_audio": {
+        "patterns": ["sony"],
+        "hostnames": ["wh-1000xm", "wf-1000xm", "sony-headphones", "linkbuds"],
+        "vendor": "Sony",
+        "type": "Audio Device",
+        "confidence": 90,
+        "capabilities": ["Bluetooth", "Noise Cancellation", "LDAC", "Hi-Res Audio", "360 Reality Audio"],
+        "models": {
+          "wh1000xm5": {"name": "Sony WH-1000XM5", "generation": "2022", "age": "Recent"},
+          "wf1000xm4": {"name": "Sony WF-1000XM4", "generation": "2021", "age": "Moderate"}
+        }
+      },
+      "bose": {
+        "patterns": ["bose"],
+        "hostnames": ["bose", "quietcomfort", "soundlink", "sport"],
+        "vendor": "Bose",
+        "type": "Audio Device",
+        "confidence": 90,
+        "capabilities": ["Bluetooth", "Active Noise Cancelling", "Bose Connect", "Voice Assistant"],
+        "models": {
+          "qc45": {"name": "Bose QuietComfort 45", "generation": "2021", "age": "Recent"},
+          "sport": {"name": "Bose SoundSport", "generation": "2020", "age": "Moderate"}
+        }
+      }
+    },
+    "smart_speakers": {
+      "amazon_echo": {
+        "patterns": ["amazon", "echo"],
+        "hostnames": ["echo", "echo-dot", "echo-show", "echo-studio", "alexa"],
+        "vendor": "Amazon",
+        "type": "Smart Speaker",
+        "confidence": 95,
+        "capabilities": ["Alexa", "Voice Control", "Smart Home Hub", "Music Streaming", "Skills"],
+        "models": {
+          "echo5": {"name": "Echo (5th Gen)", "generation": "2022", "age": "Recent"},
+          "dot5": {"name": "Echo Dot (5th Gen)", "generation": "2022", "age": "Recent"},
+          "show15": {"name": "Echo Show 15", "generation": "2021", "age": "Recent"},
+          "studio": {"name": "Echo Studio", "generation": "2019", "age": "Moderate"}
+        }
+      },
+      "google_home": {
+        "patterns": ["google", "nest"],
+        "hostnames": ["google-home", "nest-mini", "nest-hub", "nest-audio", "home-mini"],
+        "vendor": "Google",
+        "type": "Smart Speaker",
+        "confidence": 95,
+        "capabilities": ["Google Assistant", "Voice Control", "Smart Home Control", "Chromecast Built-in"],
+        "models": {
+          "nest-hub-max": {"name": "Nest Hub Max", "generation": "2019", "age": "Moderate"},
+          "nest-hub": {"name": "Nest Hub (2nd Gen)", "generation": "2021", "age": "Recent"},
+          "nest-audio": {"name": "Nest Audio", "generation": "2020", "age": "Recent"},
+          "nest-mini": {"name": "Nest Mini", "generation": "2019", "age": "Moderate"}
+        }
+      },
+      "apple_homepod": {
+        "patterns": ["apple", "homepod"],
+        "hostnames": ["homepod", "homepod-mini", "apple-speaker"],
+        "vendor": "Apple",
+        "type": "Smart Speaker",
+        "confidence": 95,
+        "capabilities": ["Siri", "HomeKit Hub", "Spatial Audio", "AirPlay 2", "Intercom"],
+        "models": {
+          "homepod2": {"name": "HomePod (2nd generation)", "generation": "2023", "age": "Latest"},
+          "mini": {"name": "HomePod mini", "generation": "2020", "age": "Recent"}
+        }
+      },
+      "sonos": {
+        "patterns": ["sonos"],
+        "hostnames": ["sonos", "play", "beam", "arc", "one", "five"],
+        "vendor": "Sonos",
+        "type": "Wireless Speaker",
+        "confidence": 90,
+        "capabilities": ["Multi-room Audio", "AirPlay 2", "Voice Assistant", "Trueplay"],
+        "models": {
+          "arc": {"name": "Sonos Arc", "generation": "2020", "age": "Recent"},
+          "beam": {"name": "Sonos Beam", "generation": "2021", "age": "Recent"},
+          "one": {"name": "Sonos One", "generation": "2020", "age": "Recent"}
+        }
+      }
+    },
+    "streaming_devices": {
+      "roku": {
+        "patterns": ["roku"],
+        "hostnames": ["roku", "roku-ultra", "roku-stick", "roku-express"],
+        "vendor": "Roku",
+        "type": "Streaming Device",
+        "confidence": 95,
+        "capabilities": ["4K Streaming", "HDR", "Roku OS", "Voice Remote", "Private Listening"],
+        "models": {
+          "ultra": {"name": "Roku Ultra", "generation": "2022", "age": "Recent"},
+          "stick4k": {"name": "Roku Streaming Stick 4K+", "generation": "2021", "age": "Recent"},
+          "express4k": {"name": "Roku Express 4K+", "generation": "2021", "age": "Recent"}
+        }
+      },
+      "fire_tv": {
+        "patterns": ["amazon", "fire tv"],
+        "hostnames": ["firetv", "fire-tv", "fire-stick", "fire-cube"],
+        "vendor": "Amazon",
+        "type": "Streaming Device",
+        "confidence": 95,
+        "capabilities": ["4K Streaming", "HDR", "Fire TV OS", "Alexa Voice Remote", "Gaming"],
+        "models": {
+          "stick4k": {"name": "Fire TV Stick 4K Max", "generation": "2021", "age": "Recent"},
+          "cube": {"name": "Fire TV Cube", "generation": "2022", "age": "Recent"}
+        }
+      },
+      "nvidia_shield": {
+        "patterns": ["nvidia", "shield"],
+        "hostnames": ["shield", "nvidia-shield", "shield-tv"],
+        "vendor": "NVIDIA",
+        "type": "Streaming Device",
+        "confidence": 95,
+        "capabilities": ["4K HDR Streaming", "Gaming", "AI Upscaling", "Google Assistant", "Plex Server"],
+        "models": {
+          "pro": {"name": "SHIELD TV Pro", "generation": "2019", "age": "Moderate"},
+          "tv": {"name": "SHIELD TV", "generation": "2019", "age": "Moderate"}
+        }
+      }
+    },
+    "laptops_extended": {
+      "dell": {
+        "patterns": ["dell"],
+        "hostnames": ["dell", "latitude", "precision", "inspiron", "vostro", "alienware"],
+        "vendor": "Dell",
+        "type": "Laptop",
+        "confidence": 90,
+        "capabilities": ["Windows", "Business Grade", "Remote Management", "Security Features"],
+        "models": {
+          "xps13": {"name": "Dell XPS 13", "generation": "2023", "age": "Latest"},
+          "latitude": {"name": "Dell Latitude", "generation": "Various", "age": "Business"},
+          "alienware": {"name": "Dell Alienware", "generation": "Various", "age": "Gaming"}
+        }
+      },
+      "hp": {
+        "patterns": ["hp", "hewlett"],
+        "hostnames": ["hp", "elitebook", "probook", "pavilion", "envy", "omen", "spectre"],
+        "vendor": "HP",
+        "type": "Laptop",
+        "confidence": 90,
+        "capabilities": ["Windows", "HP Sure Start", "HP Wolf Security", "Bang & Olufsen Audio"],
+        "models": {
+          "spectre": {"name": "HP Spectre", "generation": "2023", "age": "Premium"},
+          "elitebook": {"name": "HP EliteBook", "generation": "Various", "age": "Business"},
+          "omen": {"name": "HP OMEN", "generation": "Various", "age": "Gaming"}
+        }
+      },
+      "lenovo": {
+        "patterns": ["lenovo"],
+        "hostnames": ["lenovo", "thinkpad", "ideapad", "legion", "yoga"],
+        "vendor": "Lenovo",
+        "type": "Laptop",
+        "confidence": 90,
+        "capabilities": ["Windows", "ThinkShutter", "Dolby Audio", "Rapid Charge"],
+        "models": {
+          "thinkpad": {"name": "Lenovo ThinkPad", "generation": "Various", "age": "Business"},
+          "legion": {"name": "Lenovo Legion", "generation": "Various", "age": "Gaming"},
+          "yoga": {"name": "Lenovo Yoga", "generation": "Various", "age": "Convertible"}
+        }
+      },
+      "asus": {
+        "patterns": ["asus"],
+        "hostnames": ["asus", "zenbook", "vivobook", "rog", "tuf", "expertbook"],
+        "vendor": "ASUS",
+        "type": "Laptop",
+        "confidence": 90,
+        "capabilities": ["Windows", "ScreenPad", "Harman Kardon Audio", "Fast Charging"],
+        "models": {
+          "zenbook": {"name": "ASUS ZenBook", "generation": "2023", "age": "Premium"},
+          "rog": {"name": "ASUS ROG", "generation": "Various", "age": "Gaming"},
+          "vivobook": {"name": "ASUS VivoBook", "generation": "Various", "age": "Consumer"}
+        }
+      },
+      "acer": {
+        "patterns": ["acer"],
+        "hostnames": ["acer", "aspire", "swift", "predator", "nitro", "spin"],
+        "vendor": "Acer",
+        "type": "Laptop",
+        "confidence": 85,
+        "capabilities": ["Windows", "Acer Color Intelligence", "DTS Audio"],
+        "models": {
+          "swift": {"name": "Acer Swift", "generation": "2023", "age": "Ultrabook"},
+          "predator": {"name": "Acer Predator", "generation": "Various", "age": "Gaming"}
+        }
+      },
+      "msi": {
+        "patterns": ["msi"],
+        "hostnames": ["msi", "gaming", "stealth", "prestige", "creator"],
+        "vendor": "MSI",
+        "type": "Gaming Laptop",
+        "confidence": 90,
+        "capabilities": ["Windows", "Gaming", "RGB Lighting", "MSI Center", "Cooler Boost"],
+        "models": {
+          "stealth": {"name": "MSI Stealth", "generation": "2023", "age": "Gaming"},
+          "creator": {"name": "MSI Creator", "generation": "2023", "age": "Content Creation"}
+        }
+      }
+    },
+    "smart_displays": {
+      "ipad_pro": {
+        "patterns": ["apple", "ipad pro"],
+        "hostnames": ["ipad-pro", "ipadpro"],
+        "vendor": "Apple",
+        "type": "Tablet Pro",
+        "confidence": 95,
+        "capabilities": ["iPadOS", "Apple Pencil", "Magic Keyboard", "M2 Chip", "ProRes Video"],
+        "models": {
+          "pro12-6": {"name": "iPad Pro 12.9\" (6th generation)", "generation": "2022", "age": "Latest"},
+          "pro11-4": {"name": "iPad Pro 11\" (4th generation)", "generation": "2022", "age": "Latest"}
+        }
+      },
+      "surface": {
+        "patterns": ["microsoft", "surface"],
+        "hostnames": ["surface", "surface-pro", "surface-book", "surface-studio"],
+        "vendor": "Microsoft",
+        "type": "2-in-1 Device",
+        "confidence": 95,
+        "capabilities": ["Windows 11", "Surface Pen", "Type Cover", "PixelSense Display"],
+        "models": {
+          "pro9": {"name": "Surface Pro 9", "generation": "2022", "age": "Latest"},
+          "laptop5": {"name": "Surface Laptop 5", "generation": "2022", "age": "Latest"},
+          "studio": {"name": "Surface Studio", "generation": "2021", "age": "Creative"}
+        }
+      }
+    },
+    "security_cameras": {
+      "ring_cameras": {
+        "patterns": ["ring"],
+        "hostnames": ["ring", "doorbell", "spotlight", "floodlight", "indoor", "stick"],
+        "vendor": "Ring (Amazon)",
+        "type": "Security Camera",
+        "confidence": 95,
+        "capabilities": ["1080p Video", "Motion Detection", "Two-Way Audio", "Night Vision", "Cloud Recording"],
+        "models": {
+          "doorbell-pro2": {"name": "Ring Video Doorbell Pro 2", "generation": "2021", "age": "Recent"},
+          "spotlight": {"name": "Ring Spotlight Cam", "generation": "2021", "age": "Recent"},
+          "indoor": {"name": "Ring Indoor Cam", "generation": "2020", "age": "Recent"}
+        }
+      },
+      "arlo_cameras": {
+        "patterns": ["arlo"],
+        "hostnames": ["arlo", "pro", "ultra", "essential", "go"],
+        "vendor": "Arlo",
+        "type": "Security Camera",
+        "confidence": 95,
+        "capabilities": ["4K Video", "Color Night Vision", "Wireless", "Smart Detection", "Cloud Storage"],
+        "models": {
+          "pro5": {"name": "Arlo Pro 5S", "generation": "2022", "age": "Recent"},
+          "ultra2": {"name": "Arlo Ultra 2", "generation": "2021", "age": "Recent"}
+        }
+      },
+      "nest_cameras": {
+        "patterns": ["nest", "google"],
+        "hostnames": ["nest-cam", "nestcam", "nest-doorbell", "nest-hub"],
+        "vendor": "Google Nest",
+        "type": "Security Camera",
+        "confidence": 95,
+        "capabilities": ["1080p Video", "Intelligent Alerts", "Familiar Face Detection", "Package Detection"],
+        "models": {
+          "cam-outdoor": {"name": "Nest Cam (outdoor or indoor, battery)", "generation": "2021", "age": "Recent"},
+          "doorbell": {"name": "Nest Doorbell (battery)", "generation": "2021", "age": "Recent"}
+        }
+      },
+      "wyze": {
+        "patterns": ["wyze"],
+        "hostnames": ["wyze", "cam", "pan"],
+        "vendor": "Wyze",
+        "type": "Security Camera",
+        "confidence": 90,
+        "capabilities": ["1080p Video", "Motion Detection", "Two-Way Audio", "Night Vision", "Local Storage"],
+        "models": {
+          "cam-v3": {"name": "Wyze Cam v3", "generation": "2020", "age": "Recent"},
+          "cam-pan": {"name": "Wyze Cam Pan v3", "generation": "2021", "age": "Recent"}
+        }
+      },
+      "eufy": {
+        "patterns": ["eufy", "anker"],
+        "hostnames": ["eufy", "eufycam", "homebase"],
+        "vendor": "Eufy (Anker)",
+        "type": "Security Camera",
+        "confidence": 90,
+        "capabilities": ["2K/4K Video", "Local Storage", "No Monthly Fees", "AI Detection", "Solar Panel Compatible"],
+        "models": {
+          "cam3": {"name": "EufyCam 3", "generation": "2022", "age": "Recent"},
+          "indoor2k": {"name": "Eufy Indoor Cam 2K", "generation": "2021", "age": "Recent"}
+        }
+      }
+    },
+    "enterprise_storage": {
+      "synology": {
+        "patterns": ["synology"],
+        "hostnames": ["synology", "diskstation", "ds", "nas"],
+        "vendor": "Synology",
+        "type": "Network Attached Storage",
+        "confidence": 95,
+        "capabilities": ["RAID", "DSM OS", "Cloud Sync", "Surveillance Station", "File Sharing", "Docker"],
+        "models": {
+          "ds923": {"name": "DiskStation DS923+", "generation": "2022", "age": "Recent"},
+          "ds220": {"name": "DiskStation DS220+", "generation": "2020", "age": "Entry-level"}
+        }
+      },
+      "qnap": {
+        "patterns": ["qnap"],
+        "hostnames": ["qnap", "ts", "nas"],
+        "vendor": "QNAP",
+        "type": "Network Attached Storage",
+        "confidence": 95,
+        "capabilities": ["RAID", "QTS OS", "Virtualization", "Container Station", "Surveillance", "Qtier"],
+        "models": {
+          "ts464": {"name": "QNAP TS-464", "generation": "2022", "age": "Recent"},
+          "ts251": {"name": "QNAP TS-251+", "generation": "2020", "age": "Entry-level"}
+        }
+      },
+      "drobo": {
+        "patterns": ["drobo"],
+        "hostnames": ["drobo", "5n2", "8d"],
+        "vendor": "Drobo",
+        "type": "Storage Array",
+        "confidence": 90,
+        "capabilities": ["BeyondRAID", "Thin Provisioning", "Self-Healing", "Hot-Swappable"],
+        "models": {
+          "5n2": {"name": "Drobo 5N2", "generation": "2016", "age": "Mature"},
+          "8d": {"name": "Drobo 8D", "generation": "2018", "age": "Professional"}
+        }
+      }
+    },
+    "enterprise_equipment": {
+      "cisco_switches": {
+        "patterns": ["cisco"],
+        "hostnames": ["cisco", "catalyst", "nexus", "meraki", "switch"],
+        "vendor": "Cisco",
+        "type": "Network Switch",
+        "confidence": 95,
+        "capabilities": ["VLAN", "PoE", "Stacking", "SNMP", "Security Features", "QoS"],
+        "models": {
+          "catalyst9300": {"name": "Catalyst 9300", "generation": "2017", "age": "Enterprise"},
+          "meraki": {"name": "Meraki Switch", "generation": "Various", "age": "Cloud-Managed"}
+        }
+      },
+      "ubiquiti": {
+        "patterns": ["ubiquiti", "unifi"],
+        "hostnames": ["unifi", "udm", "usg", "usw", "uap", "dream"],
+        "vendor": "Ubiquiti",
+        "type": "Network Equipment",
+        "confidence": 95,
+        "capabilities": ["UniFi Controller", "PoE", "VLAN", "VPN", "Traffic Analysis", "Guest Networks"],
+        "models": {
+          "udm-pro": {"name": "UniFi Dream Machine Pro", "generation": "2020", "age": "Recent"},
+          "usg": {"name": "UniFi Security Gateway", "generation": "2016", "age": "Mature"}
+        }
+      },
+      "aruba": {
+        "patterns": ["aruba", "hp"],
+        "hostnames": ["aruba", "procurve", "instant"],
+        "vendor": "Aruba (HPE)",
+        "type": "Network Equipment",
+        "confidence": 90,
+        "capabilities": ["Centralized Management", "AI-Powered", "Zero Trust Security", "Cloud Native"],
+        "models": {
+          "6300": {"name": "Aruba 6300 Switch", "generation": "2019", "age": "Enterprise"},
+          "instant": {"name": "Aruba Instant Access Point", "generation": "Various", "age": "Wireless"}
+        }
+      }
+    },
+    "medical_devices": {
+      "philips": {
+        "patterns": ["philips"],
+        "hostnames": ["philips", "respironics", "dreamstation", "cpap"],
+        "vendor": "Philips",
+        "type": "Medical Device",
+        "confidence": 90,
+        "capabilities": ["Sleep Therapy", "Patient Monitoring", "Data Logging", "Remote Monitoring"],
+        "models": {
+          "dreamstation": {"name": "DreamStation CPAP", "generation": "2021", "age": "Medical"},
+          "respironics": {"name": "Philips Respironics", "generation": "Various", "age": "Respiratory"}
+        }
+      },
+      "ge_healthcare": {
+        "patterns": ["ge", "general electric"],
+        "hostnames": ["ge", "vivid", "logiq", "healthcare"],
+        "vendor": "GE Healthcare",
+        "type": "Medical Equipment",
+        "confidence": 85,
+        "capabilities": ["Imaging", "Patient Monitoring", "Diagnostic", "DICOM"],
+        "models": {
+          "vivid": {"name": "Vivid Ultrasound", "generation": "Various", "age": "Imaging"},
+          "logiq": {"name": "LOGIQ Ultrasound", "generation": "Various", "age": "Point of Care"}
+        }
+      }
+    },
+    "industrial_automation": {
+      "plc_systems": {
+        "patterns": ["plc", "siemens", "allen", "bradley", "schneider", "mitsubishi", "omron", "rockwell", "automation"],
+        "hostnames": ["plc", "controller", "automation", "scada", "hmi"],
+        "vendors": {
+          "siemens": {
+            "patterns": ["siemens", "s7", "simatic", "logo", "sitop"],
+            "type": "Industrial Controller",
+            "confidence": 90,
+            "capabilities": ["PLC", "SCADA", "Industrial Ethernet", "Profinet", "Modbus"],
+            "models": {
+              "s7-1200": {"name": "SIMATIC S7-1200", "generation": "Compact", "age": "Entry Level"},
+              "s7-1500": {"name": "SIMATIC S7-1500", "generation": "Advanced", "age": "High Performance"},
+              "s7-300": {"name": "SIMATIC S7-300", "generation": "Modular", "age": "Standard"},
+              "s7-400": {"name": "SIMATIC S7-400", "generation": "High-end", "age": "Enterprise"},
+              "logo": {"name": "SIMATIC LOGO!", "generation": "Logic Module", "age": "Basic"}
+            }
+          },
+          "allen_bradley": {
+            "patterns": ["allen", "bradley", "rockwell", "compactlogix", "controllogix", "micrologix"],
+            "type": "Industrial Controller",
+            "confidence": 90,
+            "capabilities": ["PLC", "EtherNet/IP", "DeviceNet", "ControlNet", "RSLogix"],
+            "models": {
+              "compactlogix": {"name": "CompactLogix", "generation": "Compact", "age": "Mid-range"},
+              "controllogix": {"name": "ControlLogix", "generation": "Modular", "age": "High Performance"},
+              "micrologix": {"name": "MicroLogix", "generation": "Micro", "age": "Entry Level"},
+              "guardlogix": {"name": "GuardLogix", "generation": "Safety", "age": "Safety PLC"}
+            }
+          },
+          "schneider": {
+            "patterns": ["schneider", "modicon", "unity", "ecostruxure", "vijeo"],
+            "type": "Industrial Controller",
+            "confidence": 85,
+            "capabilities": ["PLC", "Modbus", "Ethernet IP", "Unity Pro", "EcoStruxure"],
+            "models": {
+              "m340": {"name": "Modicon M340", "generation": "Performance", "age": "Mid-range"},
+              "m580": {"name": "Modicon M580", "generation": "High Performance", "age": "Enterprise"},
+              "m221": {"name": "Modicon M221", "generation": "Compact", "age": "Entry Level"}
+            }
+          }
+        }
+      },
+      "hmi_panels": {
+        "patterns": ["hmi", "panel", "touchscreen", "display", "operator", "interface"],
+        "hostnames": ["hmi", "panel", "display", "touch", "operator"],
+        "vendors": {
+          "siemens": {
+            "patterns": ["siemens", "simatic", "comfort", "basic", "mobile"],
+            "type": "HMI Panel",
+            "confidence": 85,
+            "capabilities": ["Touch Interface", "WinCC", "Profinet", "Web Server"],
+            "models": {
+              "comfort": {"name": "SIMATIC Comfort Panel", "generation": "Advanced", "age": "High Performance"},
+              "basic": {"name": "SIMATIC Basic Panel", "generation": "Entry", "age": "Standard"},
+              "mobile": {"name": "SIMATIC Mobile Panel", "generation": "Portable", "age": "Mobile HMI"}
+            }
+          }
+        }
+      },
+      "variable_frequency_drives": {
+        "patterns": ["vfd", "drive", "inverter", "frequency", "motor", "speed"],
+        "hostnames": ["vfd", "drive", "inverter", "motor", "speed"],
+        "vendors": {
+          "abb": {
+            "patterns": ["abb", "acs", "dcs", "micro"],
+            "type": "Variable Frequency Drive",
+            "confidence": 85,
+            "capabilities": ["AC Motor Control", "Modbus", "Ethernet", "Energy Saving"],
+            "models": {
+              "acs580": {"name": "ACS580", "generation": "General Purpose", "age": "Standard"},
+              "acs880": {"name": "ACS880", "generation": "Industrial", "age": "High Performance"}
+            }
+          }
+        }
+      }
+    },
+    "transportation_systems": {
+      "railway_equipment": {
+        "patterns": ["railway", "train", "rail", "signaling", "locomotive", "wayside"],
+        "hostnames": ["rail", "train", "signal", "locomotive", "wayside"],
+        "vendors": {
+          "bombardier": {
+            "patterns": ["bombardier", "alstom"],
+            "type": "Railway System",
+            "confidence": 85,
+            "capabilities": ["Train Control", "Signaling", "Communication", "ETCS"],
+            "models": {
+              "regina": {"name": "Regina EMU", "generation": "Electric", "age": "Passenger"},
+              "traxx": {"name": "TRAXX Locomotive", "generation": "Electric/Diesel", "age": "Freight/Passenger"}
+            }
+          },
+          "siemens_mobility": {
+            "patterns": ["siemens", "mobility", "velaro", "vectron", "desiro"],
+            "type": "Railway System",
+            "confidence": 85,
+            "capabilities": ["High Speed", "Regional", "Freight", "Digital Services"],
+            "models": {
+              "velaro": {"name": "Velaro High-Speed", "generation": "High Speed", "age": "Passenger"},
+              "vectron": {"name": "Vectron Locomotive", "generation": "Multi-System", "age": "Freight/Passenger"}
+            }
+          }
+        }
+      },
+      "aviation_systems": {
+        "patterns": ["aviation", "aircraft", "airport", "atc", "radar", "navigation"],
+        "hostnames": ["aircraft", "airport", "atc", "radar", "nav"],
+        "vendors": {
+          "honeywell_aerospace": {
+            "patterns": ["honeywell", "aerospace"],
+            "type": "Aviation System",
+            "confidence": 85,
+            "capabilities": ["Flight Management", "Navigation", "Communication", "Weather Radar"],
+            "models": {
+              "fms": {"name": "Flight Management System", "generation": "Avionics", "age": "Navigation"},
+              "wx_radar": {"name": "Weather Radar", "generation": "Detection", "age": "Safety"}
+            }
+          }
+        }
+      },
+      "marine_systems": {
+        "patterns": ["marine", "ship", "vessel", "maritime", "navigation", "radar"],
+        "hostnames": ["ship", "vessel", "marine", "nav", "radar"],
+        "vendors": {
+          "furuno": {
+            "patterns": ["furuno"],
+            "type": "Marine Electronics",
+            "confidence": 85,
+            "capabilities": ["Marine Radar", "GPS", "Fish Finder", "Chart Plotter"],
+            "models": {
+              "radar": {"name": "Marine Radar", "generation": "Navigation", "age": "Safety"},
+              "gps": {"name": "GPS Navigator", "generation": "Position", "age": "Navigation"}
+            }
+          }
+        }
+      }
+    },
+    "retail_pos_systems": {
+      "point_of_sale": {
+        "patterns": ["pos", "cash", "register", "retail", "checkout", "payment"],
+        "hostnames": ["pos", "register", "checkout", "payment", "till"],
+        "vendors": {
+          "square": {
+            "patterns": ["square"],
+            "type": "POS Terminal",
+            "confidence": 90,
+            "capabilities": ["Payment Processing", "Inventory", "Analytics", "Cloud Sync"],
+            "models": {
+              "terminal": {"name": "Square Terminal", "generation": "All-in-One", "age": "Portable"},
+              "register": {"name": "Square Register", "generation": "Countertop", "age": "Full Service"},
+              "reader": {"name": "Square Reader", "generation": "Mobile", "age": "Basic"}
+            }
+          },
+          "toast": {
+            "patterns": ["toast"],
+            "type": "Restaurant POS",
+            "confidence": 85,
+            "capabilities": ["Restaurant Management", "Order Management", "Kitchen Display", "Analytics"],
+            "models": {
+              "flex": {"name": "Toast Flex", "generation": "Handheld", "age": "Mobile"},
+              "go": {"name": "Toast Go", "generation": "Tablet", "age": "Tableside"}
+            }
+          },
+          "shopify": {
+            "patterns": ["shopify"],
+            "type": "POS System",
+            "confidence": 85,
+            "capabilities": ["E-commerce Integration", "Inventory", "Customer Management", "Analytics"],
+            "models": {
+              "pos": {"name": "Shopify POS", "generation": "Retail", "age": "Omnichannel"}
+            }
+          }
+        }
+      },
+      "barcode_scanners": {
+        "patterns": ["barcode", "scanner", "zebra", "honeywell", "datalogic", "symbol"],
+        "hostnames": ["scanner", "barcode", "zebra", "symbol"],
+        "vendors": {
+          "zebra": {
+            "patterns": ["zebra", "symbol", "motorola"],
+            "type": "Barcode Scanner",
+            "confidence": 90,
+            "capabilities": ["1D/2D Scanning", "Wireless", "Batch Mode", "Industrial Design"],
+            "models": {
+              "ds3608": {"name": "DS3608-SR", "generation": "Ultra-Rugged", "age": "Industrial"},
+              "li3608": {"name": "LI3608-ER", "generation": "Linear Imager", "age": "Standard"},
+              "cs4070": {"name": "CS4070", "generation": "Companion", "age": "Bluetooth"}
+            }
+          },
+          "honeywell": {
+            "patterns": ["honeywell", "intermec"],
+            "type": "Barcode Scanner",
+            "confidence": 85,
+            "capabilities": ["High Performance", "Durability", "Ergonomic", "Multiple Interfaces"],
+            "models": {
+              "voyager": {"name": "Voyager 1400g", "generation": "General Purpose", "age": "Standard"},
+              "granit": {"name": "Granit 1911i", "generation": "Industrial", "age": "Ultra-Rugged"}
+            }
+          }
+        }
+      },
+      "digital_signage": {
+        "patterns": ["signage", "display", "digital", "kiosk", "screen"],
+        "hostnames": ["signage", "display", "kiosk", "screen", "digital"],
+        "vendors": {
+          "samsung_display": {
+            "patterns": ["samsung", "display"],
+            "type": "Digital Signage",
+            "confidence": 85,
+            "capabilities": ["4K Display", "SMART Signage", "MagicINFO", "Commercial Grade"],
+            "models": {
+              "qm_series": {"name": "QM Series", "generation": "UHD", "age": "Professional"},
+              "om_series": {"name": "OM Series", "generation": "Outdoor", "age": "Weather Resistant"}
+            }
+          },
+          "lg_display": {
+            "patterns": ["lg", "display"],
+            "type": "Digital Signage",
+            "confidence": 85,
+            "capabilities": ["webOS", "SuperSign", "Commercial Display", "Video Wall"],
+            "models": {
+              "um_series": {"name": "UM Series", "generation": "UHD", "age": "Commercial"},
+              "vl_series": {"name": "VL Series", "generation": "Video Wall", "age": "Large Format"}
+            }
+          }
+        }
+      }
+    },
+    "building_automation": {
+      "hvac_systems": {
+        "patterns": ["hvac", "air", "conditioning", "heating", "ventilation", "climate"],
+        "hostnames": ["hvac", "air", "climate", "heat", "vent"],
+        "vendors": {
+          "carrier": {
+            "patterns": ["carrier"],
+            "type": "HVAC System",
+            "confidence": 85,
+            "capabilities": ["Climate Control", "Energy Management", "BACnet", "Remote Monitoring"],
+            "models": {
+              "infinity": {"name": "Infinity System", "generation": "Variable Speed", "age": "High Efficiency"},
+              "comfort": {"name": "Comfort Series", "generation": "Standard", "age": "Residential"}
+            }
+          },
+          "trane": {
+            "patterns": ["trane"],
+            "type": "HVAC System",
+            "confidence": 85,
+            "capabilities": ["Climate Control", "Energy Efficiency", "Building Automation", "Maintenance"],
+            "models": {
+              "intellipak": {"name": "Intellipak", "generation": "Rooftop", "age": "Commercial"},
+              "tracer": {"name": "Tracer", "generation": "Chiller", "age": "Large Commercial"}
+            }
+          }
+        }
+      },
+      "lighting_control": {
+        "patterns": ["lighting", "control", "dimmer", "switch", "lutron", "leviton"],
+        "hostnames": ["light", "lighting", "dimmer", "switch", "control"],
+        "vendors": {
+          "lutron": {
+            "patterns": ["lutron", "caseta", "radiora"],
+            "type": "Lighting Control",
+            "confidence": 90,
+            "capabilities": ["Dimming", "Scene Control", "Scheduling", "Energy Saving"],
+            "models": {
+              "caseta": {"name": "Caseta Wireless", "generation": "Smart", "age": "Residential"},
+              "radiora": {"name": "RadioRA 2", "generation": "Whole Home", "age": "Premium"},
+              "quantum": {"name": "Quantum", "generation": "Commercial", "age": "Enterprise"}
+            }
+          },
+          "leviton": {
+            "patterns": ["leviton", "decora"],
+            "type": "Lighting Control",
+            "confidence": 85,
+            "capabilities": ["Smart Controls", "Load Management", "Scene Control", "Voice Control"],
+            "models": {
+              "decora": {"name": "Decora Smart", "generation": "WiFi", "age": "Residential"},
+              "vizia": {"name": "Vizia RF+", "generation": "Z-Wave", "age": "Home Automation"}
+            }
+          }
+        }
+      },
+      "access_control": {
+        "patterns": ["access", "control", "card", "reader", "door", "lock", "badge"],
+        "hostnames": ["access", "door", "lock", "reader", "badge"],
+        "vendors": {
+          "hid_global": {
+            "patterns": ["hid", "global", "prox", "iclass"],
+            "type": "Access Control",
+            "confidence": 90,
+            "capabilities": ["Card Reading", "Biometrics", "Mobile Access", "Multi-Technology"],
+            "models": {
+              "iclass": {"name": "iCLASS SE", "generation": "Contactless", "age": "High Security"},
+              "prox": {"name": "ProxPoint Plus", "generation": "Proximity", "age": "Standard"},
+              "signo": {"name": "SIGNO", "generation": "Biometric", "age": "Multi-Factor"}
+            }
+          },
+          "axis": {
+            "patterns": ["axis", "communications"],
+            "type": "Access Control",
+            "confidence": 85,
+            "capabilities": ["Network Access", "Video Integration", "Analytics", "Open Platform"],
+            "models": {
+              "a1001": {"name": "A1001 Network Door Controller", "generation": "IP-based", "age": "Single Door"}
+            }
+          }
+        }
+      }
+    },
+    "laboratory_equipment": {
+      "analytical_instruments": {
+        "patterns": ["spectro", "chromato", "mass", "spec", "hplc", "gcms", "ftir"],
+        "hostnames": ["spec", "chromato", "hplc", "gcms", "ftir", "lab"],
+        "vendors": {
+          "agilent": {
+            "patterns": ["agilent", "hp"],
+            "type": "Analytical Instrument",
+            "confidence": 90,
+            "capabilities": ["Chemical Analysis", "Data Acquisition", "Method Development", "Compliance"],
+            "models": {
+              "1260": {"name": "1260 Infinity II LC", "generation": "HPLC", "age": "Liquid Chromatography"},
+              "7890": {"name": "7890B GC", "generation": "Gas Chromatography", "age": "High Performance"},
+              "6546": {"name": "6546 Q-TOF", "generation": "Mass Spectrometry", "age": "High Resolution"}
+            }
+          },
+          "waters": {
+            "patterns": ["waters", "acquity", "xevo"],
+            "type": "Analytical Instrument",
+            "confidence": 85,
+            "capabilities": ["UPLC", "Mass Spectrometry", "Informatics", "Method Development"],
+            "models": {
+              "acquity": {"name": "ACQUITY UPLC", "generation": "Ultra Performance", "age": "High Speed"},
+              "xevo": {"name": "Xevo MS", "generation": "Mass Spectrometry", "age": "Quantitative"}
+            }
+          }
+        }
+      },
+      "microscopy": {
+        "patterns": ["microscope", "imaging", "optical", "electron", "confocal"],
+        "hostnames": ["microscope", "imaging", "optical", "scope"],
+        "vendors": {
+          "zeiss": {
+            "patterns": ["zeiss", "carl"],
+            "type": "Microscope System",
+            "confidence": 90,
+            "capabilities": ["High Resolution Imaging", "3D Analysis", "Live Cell Imaging", "Automation"],
+            "models": {
+              "axio": {"name": "Axio Observer", "generation": "Inverted", "age": "Research"},
+              "lsm": {"name": "LSM 980", "generation": "Confocal", "age": "High-End"}
+            }
+          }
+        }
+      }
+    },
+    "energy_management": {
+      "solar_inverters": {
+        "patterns": ["solar", "inverter", "pv", "photovoltaic", "grid", "tie"],
+        "hostnames": ["solar", "inverter", "pv", "grid"],
+        "vendors": {
+          "sma": {
+            "patterns": ["sma", "sunny"],
+            "type": "Solar Inverter",
+            "confidence": 90,
+            "capabilities": ["Grid-Tie", "Monitoring", "Optimization", "Safety Shutdown"],
+            "models": {
+              "tripower": {"name": "Sunny Tripower", "generation": "Three Phase", "age": "Commercial"},
+              "boy": {"name": "Sunny Boy", "generation": "Single Phase", "age": "Residential"}
+            }
+          },
+          "fronius": {
+            "patterns": ["fronius"],
+            "type": "Solar Inverter",
+            "confidence": 85,
+            "capabilities": ["Maximum Power Point Tracking", "Arc Fault Detection", "Monitoring"],
+            "models": {
+              "primo": {"name": "Fronius Primo", "generation": "Single Phase", "age": "Residential"},
+              "symo": {"name": "Fronius Symo", "generation": "Three Phase", "age": "Commercial"}
+            }
+          }
+        }
+      },
+      "battery_systems": {
+        "patterns": ["battery", "storage", "powerwall", "tesla", "energy"],
+        "hostnames": ["battery", "storage", "power", "energy"],
+        "vendors": {
+          "tesla_energy": {
+            "patterns": ["tesla", "powerwall", "megapack"],
+            "type": "Battery Storage",
+            "confidence": 95,
+            "capabilities": ["Energy Storage", "Grid Services", "Backup Power", "Solar Integration"],
+            "models": {
+              "powerwall": {"name": "Powerwall 2", "generation": "Residential", "age": "Home Storage"},
+              "powerpack": {"name": "Powerpack", "generation": "Commercial", "age": "Utility Scale"},
+              "megapack": {"name": "Megapack", "generation": "Utility", "age": "Grid Scale"}
+            }
+          }
+        }
+      }
+    },
+    "gaming_arcade": {
+      "arcade_machines": {
+        "patterns": ["arcade", "cabinet", "pinball", "jukebox", "redemption"],
+        "hostnames": ["arcade", "game", "cabinet", "pinball"],
+        "vendors": {
+          "stern_pinball": {
+            "patterns": ["stern", "pinball"],
+            "type": "Pinball Machine",
+            "confidence": 90,
+            "capabilities": ["Digital Display", "LED Lighting", "Sound System", "Score Tracking"],
+            "models": {
+              "spike": {"name": "SPIKE System", "generation": "Modern", "age": "Digital Pinball"}
+            }
+          },
+          "raw_thrills": {
+            "patterns": ["raw", "thrills"],
+            "type": "Arcade Game",
+            "confidence": 85,
+            "capabilities": ["High Definition", "Motion Platform", "Ticket Redemption", "Networked"],
+            "models": {
+              "driving": {"name": "Racing Game", "generation": "Simulator", "age": "Motion Platform"}
+            }
+          }
+        }
+      }
+    },
+    "broadcast_media": {
+      "broadcast_equipment": {
+        "patterns": ["broadcast", "transmitter", "antenna", "rf", "studio", "mixer"],
+        "hostnames": ["broadcast", "transmitter", "rf", "studio", "mixer"],
+        "vendors": {
+          "harris": {
+            "patterns": ["harris", "broadcast"],
+            "type": "Broadcast Equipment",
+            "confidence": 85,
+            "capabilities": ["RF Transmission", "Digital Broadcasting", "Studio Integration", "Remote Control"],
+            "models": {
+              "flexstar": {"name": "FlexStar", "generation": "Exciter", "age": "Digital TV"}
+            }
+          },
+          "yamaha_pro": {
+            "patterns": ["yamaha", "mixer", "console"],
+            "type": "Audio Mixer",
+            "confidence": 85,
+            "capabilities": ["Digital Mixing", "Effects Processing", "Recording", "Live Sound"],
+            "models": {
+              "cl_series": {"name": "CL Series", "generation": "Digital", "age": "Live Sound"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

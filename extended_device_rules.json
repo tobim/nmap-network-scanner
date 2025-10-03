@@ -1,0 +1,1231 @@
+{
+  "version": "2.0",
+  "last_updated": "2025-08-31",
+  "extended_iot_rules": {
+    "smart_home_sensors": {
+      "motion_sensors": {
+        "patterns": ["motion", "pir", "sensor", "detect"],
+        "hostnames": ["motion", "pir", "sensor", "movement", "occupancy"],
+        "vendors": {
+          "philips_hue": {"patterns": ["hue", "philips"], "type": "Motion Sensor", "capabilities": ["Motion Detection", "Light Level", "Temperature", "Zigbee"]},
+          "samsung_smartthings": {"patterns": ["smartthings", "samsung"], "type": "Motion Sensor", "capabilities": ["SmartThings", "Z-Wave", "Zigbee"]},
+          "aqara": {"patterns": ["aqara", "xiaomi"], "type": "Motion Sensor", "capabilities": ["HomeKit", "Motion Detection", "Light Detection"]},
+          "ring": {"patterns": ["ring"], "type": "Motion Detector", "capabilities": ["Ring Alarm", "Pet Immune", "Wireless"]},
+          "nest": {"patterns": ["nest", "google"], "type": "Motion Sensor", "capabilities": ["Nest Secure", "Activity Zones", "Pathlight"]}
+        }
+      },
+      "door_window_sensors": {
+        "patterns": ["door", "window", "contact", "magnetic"],
+        "hostnames": ["door", "window", "contact", "entry", "sensor"],
+        "vendors": {
+          "ring": {"patterns": ["ring"], "type": "Contact Sensor", "capabilities": ["Ring Alarm", "Tamper Protection", "Extended Range"]},
+          "smartthings": {"patterns": ["smartthings"], "type": "Contact Sensor", "capabilities": ["SmartThings", "Z-Wave", "Open/Close Detection"]},
+          "aqara": {"patterns": ["aqara"], "type": "Door/Window Sensor", "capabilities": ["HomeKit", "Xiaomi Mi Home", "Zigbee"]},
+          "wyze": {"patterns": ["wyze"], "type": "Contact Sensor", "capabilities": ["Wyze App", "Battery Powered", "Adhesive Mount"]}
+        }
+      },
+      "temperature_sensors": {
+        "patterns": ["temperature", "temp", "climate", "weather"],
+        "hostnames": ["temp", "temperature", "climate", "weather", "thermo"],
+        "vendors": {
+          "ecobee": {"patterns": ["ecobee"], "type": "Room Sensor", "capabilities": ["Temperature", "Occupancy", "SmartSensor"]},
+          "sensibo": {"patterns": ["sensibo"], "type": "Climate Sensor", "capabilities": ["Temperature", "Humidity", "AC Control"]},
+          "nest": {"patterns": ["nest"], "type": "Temperature Sensor", "capabilities": ["Nest Thermostat", "Room Temperature", "Occupancy"]},
+          "eve": {"patterns": ["eve", "elgato"], "type": "Room Sensor", "capabilities": ["HomeKit", "Temperature", "Humidity", "Air Quality"]}
+        }
+      },
+      "water_leak_sensors": {
+        "patterns": ["water", "leak", "flood", "moisture"],
+        "hostnames": ["water", "leak", "flood", "moisture", "wet"],
+        "vendors": {
+          "ring": {"patterns": ["ring"], "type": "Water Sensor", "capabilities": ["Flood Detection", "Freeze Detection", "Mobile Alerts"]},
+          "smartthings": {"patterns": ["smartthings"], "type": "Water Leak Sensor", "capabilities": ["SmartThings", "Z-Wave", "Moisture Detection"]},
+          "flo": {"patterns": ["flo", "moen"], "type": "Water Monitor", "capabilities": ["Pressure Monitoring", "Leak Detection", "Automatic Shutoff"]},
+          "phyn": {"patterns": ["phyn"], "type": "Water Monitor", "capabilities": ["AI Detection", "Pressure Analysis", "Usage Tracking"]}
+        }
+      },
+      "smoke_detectors": {
+        "patterns": ["smoke", "fire", "detector", "alarm"],
+        "hostnames": ["smoke", "fire", "detector", "alarm", "safety"],
+        "vendors": {
+          "nest": {"patterns": ["nest", "protect"], "type": "Smoke Detector", "capabilities": ["Smoke Detection", "CO Detection", "Pathlight", "App Alerts"]},
+          "first_alert": {"patterns": ["first-alert", "onelink"], "type": "Smoke Detector", "capabilities": ["OneLink", "Voice Alerts", "Hardwired", "Battery Backup"]},
+          "ring": {"patterns": ["ring"], "type": "Smoke Listener", "capabilities": ["Ring Alarm", "Audio Detection", "Smart Alerts"]},
+          "roost": {"patterns": ["roost"], "type": "Smart Battery", "capabilities": ["Smoke Detector Upgrade", "Mobile Alerts", "9V Battery"]}
+        }
+      }
+    },
+    "smart_appliances": {
+      "refrigerators": {
+        "patterns": ["fridge", "refrigerator", "freezer"],
+        "hostnames": ["fridge", "refrigerator", "freezer", "rf", "smart-fridge"],
+        "vendors": {
+          "samsung": {"patterns": ["samsung"], "type": "Smart Refrigerator", "capabilities": ["Family Hub", "FlexZone", "Twin Cooling Plus", "WiFi"]},
+          "lg": {"patterns": ["lg"], "type": "Smart Refrigerator", "capabilities": ["InstaView", "ThinQ", "Door-in-Door", "Smart Diagnosis"]},
+          "whirlpool": {"patterns": ["whirlpool"], "type": "Smart Refrigerator", "capabilities": ["6th Sense", "App Control", "Temperature Control"]},
+          "ge": {"patterns": ["ge", "general-electric"], "type": "Smart Refrigerator", "capabilities": ["WiFi Connect", "SmartHQ", "Precise Fill"]}
+        }
+      },
+      "washing_machines": {
+        "patterns": ["washer", "washing", "laundry"],
+        "hostnames": ["washer", "washing", "laundry", "wm", "wash"],
+        "vendors": {
+          "lg": {"patterns": ["lg"], "type": "Smart Washer", "capabilities": ["ThinQ", "Steam Technology", "Smart Diagnosis", "Add Item"]},
+          "samsung": {"patterns": ["samsung"], "type": "Smart Washer", "capabilities": ["SmartThings", "AddWash", "EcoBubble", "Super Speed"]},
+          "whirlpool": {"patterns": ["whirlpool"], "type": "Smart Washer", "capabilities": ["Smart Capable", "Load & Go", "Precision Dispense"]},
+          "bosch": {"patterns": ["bosch"], "type": "Smart Washer", "capabilities": ["Home Connect", "i-DOS", "SpeedPerfect", "AllergyPlus"]}
+        }
+      },
+      "dryers": {
+        "patterns": ["dryer", "drying"],
+        "hostnames": ["dryer", "drying", "dry", "tumble"],
+        "vendors": {
+          "lg": {"patterns": ["lg"], "type": "Smart Dryer", "capabilities": ["ThinQ", "Steam Fresh", "Sensor Dry", "Wrinkle Care"]},
+          "samsung": {"patterns": ["samsung"], "type": "Smart Dryer", "capabilities": ["SmartThings", "Multi-Steam", "Sensor Dry", "Smart Care"]},
+          "whirlpool": {"patterns": ["whirlpool"], "type": "Smart Dryer", "capabilities": ["Smart Capable", "Advanced Moisture Sensing", "Wrinkle Shield"]}
+        }
+      },
+      "dishwashers": {
+        "patterns": ["dishwasher", "dish"],
+        "hostnames": ["dishwasher", "dish", "dw", "dishes"],
+        "vendors": {
+          "bosch": {"patterns": ["bosch"], "type": "Smart Dishwasher", "capabilities": ["Home Connect", "PrecisionWash", "CrystalDry", "InfoLight"]},
+          "lg": {"patterns": ["lg"], "type": "Smart Dishwasher", "capabilities": ["ThinQ", "QuadWash", "TrueSteam", "Smart Diagnosis"]},
+          "samsung": {"patterns": ["samsung"], "type": "Smart Dishwasher", "capabilities": ["SmartThings", "Zone Booster", "AutoRelease Door"]},
+          "ge": {"patterns": ["ge"], "type": "Smart Dishwasher", "capabilities": ["SmartHQ", "Piranha Food Disposer", "Dry Boost"]}
+        }
+      },
+      "ovens": {
+        "patterns": ["oven", "range", "cooktop", "stove"],
+        "hostnames": ["oven", "range", "cooktop", "stove", "kitchen"],
+        "vendors": {
+          "samsung": {"patterns": ["samsung"], "type": "Smart Oven", "capabilities": ["SmartThings", "Flex Duo", "Steam Cook", "Air Fry"]},
+          "lg": {"patterns": ["lg"], "type": "Smart Oven", "capabilities": ["ThinQ", "ProBake Convection", "EasyClean", "InstaView"]},
+          "ge": {"patterns": ["ge"], "type": "Smart Oven", "capabilities": ["SmartHQ", "True Convection", "Steam Clean", "WiFi Connect"]},
+          "whirlpool": {"patterns": ["whirlpool"], "type": "Smart Oven", "capabilities": ["Smart Capable", "Frozen Bake Technology", "TimeSavor Plus"]}
+        }
+      },
+      "microwaves": {
+        "patterns": ["microwave", "micro"],
+        "hostnames": ["microwave", "micro", "mw"],
+        "vendors": {
+          "samsung": {"patterns": ["samsung"], "type": "Smart Microwave", "capabilities": ["SmartThings", "Slim Fry", "Ceramic Enamel Interior"]},
+          "lg": {"patterns": ["lg"], "type": "Smart Microwave", "capabilities": ["ThinQ", "ScanToCook", "EasyClean Interior"]},
+          "ge": {"patterns": ["ge"], "type": "Smart Microwave", "capabilities": ["SmartHQ", "Scan-to-Cook", "Voice Control"]}
+        }
+      },
+      "air_conditioners": {
+        "patterns": ["ac", "air-conditioner", "hvac", "cooling"],
+        "hostnames": ["ac", "airconditioner", "cooling", "hvac"],
+        "vendors": {
+          "lg": {"patterns": ["lg"], "type": "Smart AC", "capabilities": ["ThinQ", "Dual Inverter", "Energy Saving", "Voice Control"]},
+          "samsung": {"patterns": ["samsung"], "type": "Smart AC", "capabilities": ["SmartThings", "Wind-Free Cooling", "Energy Efficiency"]},
+          "carrier": {"patterns": ["carrier"], "type": "Smart AC", "capabilities": ["Infinity System", "Cor Thermostat", "Remote Diagnostics"]},
+          "trane": {"patterns": ["trane"], "type": "Smart AC", "capabilities": ["ComfortLink II", "Variable Speed", "CleanEffects"]}
+        }
+      }
+    },
+    "entertainment_devices": {
+      "smart_tvs": {
+        "patterns": ["tv", "television", "smart-tv"],
+        "hostnames": ["tv", "television", "smart-tv", "roku-tv", "android-tv"],
+        "vendors": {
+          "samsung": {"patterns": ["samsung"], "type": "Smart TV", "capabilities": ["Tizen OS", "SmartThings", "Bixby", "8K", "QLED"]},
+          "lg": {"patterns": ["lg"], "type": "Smart TV", "capabilities": ["webOS", "ThinQ AI", "Magic Remote", "OLED", "NanoCell"]},
+          "sony": {"patterns": ["sony"], "type": "Smart TV", "capabilities": ["Android TV", "Google Assistant", "BRAVIA", "4K HDR"]},
+          "tcl": {"patterns": ["tcl"], "type": "Smart TV", "capabilities": ["Roku TV", "4K HDR", "Dolby Vision", "Voice Remote"]},
+          "hisense": {"patterns": ["hisense"], "type": "Smart TV", "capabilities": ["Android TV", "ULED", "Dolby Vision", "Voice Control"]},
+          "vizio": {"patterns": ["vizio"], "type": "Smart TV", "capabilities": ["SmartCast", "Voice Control", "Quantum Dot", "4K HDR"]}
+        }
+      },
+      "streaming_devices": {
+        "patterns": ["roku", "fire-tv", "apple-tv", "chromecast", "nvidia-shield"],
+        "hostnames": ["roku", "firetv", "appletv", "chromecast", "shield"],
+        "vendors": {
+          "roku": {"patterns": ["roku"], "type": "Streaming Device", "capabilities": ["Roku OS", "Voice Remote", "Private Listening", "4K HDR"]},
+          "amazon": {"patterns": ["amazon", "fire"], "type": "Streaming Device", "capabilities": ["Fire TV OS", "Alexa Voice Remote", "4K Ultra HD"]},
+          "apple": {"patterns": ["apple"], "type": "Streaming Device", "capabilities": ["tvOS", "Siri Remote", "AirPlay", "HomeKit Hub"]},
+          "google": {"patterns": ["google", "chromecast"], "type": "Streaming Device", "capabilities": ["Google TV", "Voice Remote", "Cast"]},
+          "nvidia": {"patterns": ["nvidia", "shield"], "type": "Streaming Device", "capabilities": ["Android TV", "GeForce Now", "AI Upscaling", "Gaming"]}
+        }
+      },
+      "sound_systems": {
+        "patterns": ["speaker", "soundbar", "audio", "sound"],
+        "hostnames": ["speaker", "soundbar", "audio", "sound", "bose", "sonos"],
+        "vendors": {
+          "sonos": {"patterns": ["sonos"], "type": "Smart Speaker", "capabilities": ["Multi-Room Audio", "Trueplay", "Voice Control", "Streaming"]},
+          "bose": {"patterns": ["bose"], "type": "Smart Speaker", "capabilities": ["SoundTouch", "QuietComfort", "Voice Control", "Bluetooth"]},
+          "samsung": {"patterns": ["samsung"], "type": "Soundbar", "capabilities": ["Q-Symphony", "Dolby Atmos", "SmartThings", "Adaptive Sound"]},
+          "lg": {"patterns": ["lg"], "type": "Soundbar", "capabilities": ["Meridian Audio", "Dolby Atmos", "AI Sound Pro", "ThinQ"]},
+          "yamaha": {"patterns": ["yamaha"], "type": "Audio Receiver", "capabilities": ["MusicCast", "Surround:AI", "YPAO", "Voice Control"]}
+        }
+      }
+    },
+    "health_fitness": {
+      "fitness_trackers": {
+        "patterns": ["fitbit", "garmin", "tracker", "fitness"],
+        "hostnames": ["fitbit", "garmin", "tracker", "fitness", "watch"],
+        "vendors": {
+          "fitbit": {"patterns": ["fitbit"], "type": "Fitness Tracker", "capabilities": ["Heart Rate", "Sleep Tracking", "GPS", "Exercise Modes"]},
+          "garmin": {"patterns": ["garmin"], "type": "Fitness Watch", "capabilities": ["GPS", "Heart Rate", "Training Metrics", "Smart Notifications"]},
+          "samsung": {"patterns": ["samsung", "galaxy-watch"], "type": "Smart Watch", "capabilities": ["Tizen OS", "Heart Rate", "GPS", "Samsung Pay"]},
+          "apple": {"patterns": ["apple", "watch"], "type": "Smart Watch", "capabilities": ["watchOS", "ECG", "Blood Oxygen", "Fall Detection"]}
+        }
+      },
+      "smart_scales": {
+        "patterns": ["scale", "weight", "body"],
+        "hostnames": ["scale", "weight", "body", "withings", "fitbit-aria"],
+        "vendors": {
+          "withings": {"patterns": ["withings"], "type": "Smart Scale", "capabilities": ["Body Composition", "Heart Rate", "Weather", "WiFi Sync"]},
+          "fitbit": {"patterns": ["fitbit", "aria"], "type": "Smart Scale", "capabilities": ["BMI", "Lean Mass", "Body Fat", "Multi-User"]},
+          "garmin": {"patterns": ["garmin"], "type": "Smart Scale", "capabilities": ["Body Composition", "Garmin Connect", "Trend Data"]}
+        }
+      },
+      "blood_pressure_monitors": {
+        "patterns": ["blood-pressure", "bp", "pressure"],
+        "hostnames": ["bp", "blood-pressure", "pressure", "omron", "withings"],
+        "vendors": {
+          "omron": {"patterns": ["omron"], "type": "Blood Pressure Monitor", "capabilities": ["Heart Guide", "Bluetooth", "App Sync", "Irregular Heartbeat"]},
+          "withings": {"patterns": ["withings"], "type": "Blood Pressure Monitor", "capabilities": ["BPM Connect", "Color Coding", "Multi-User", "Medical Grade"]}
+        }
+      },
+      "sleep_trackers": {
+        "patterns": ["sleep", "mattress", "bed"],
+        "hostnames": ["sleep", "mattress", "bed", "eight", "sleepnumber"],
+        "vendors": {
+          "eight_sleep": {"patterns": ["eight"], "type": "Smart Mattress", "capabilities": ["Temperature Control", "Sleep Tracking", "Health Metrics"]},
+          "sleep_number": {"patterns": ["sleepnumber"], "type": "Smart Bed", "capabilities": ["SleepIQ", "Adjustable Firmness", "Sleep Tracking"]},
+          "withings": {"patterns": ["withings"], "type": "Sleep Sensor", "capabilities": ["Under-Mattress", "Sleep Cycles", "Heart Rate", "Snoring Detection"]}
+        }
+      }
+    },
+    "automotive": {
+      "tesla": {
+        "patterns": ["tesla"],
+        "hostnames": ["tesla", "model-s", "model-3", "model-x", "model-y"],
+        "vendor": "Tesla",
+        "type": "Electric Vehicle",
+        "confidence": 95,
+        "capabilities": ["Autopilot", "Over-the-Air Updates", "Supercharging", "Mobile Connector", "Sentry Mode"]
+      },
+      "bmw": {
+        "patterns": ["bmw"],
+        "hostnames": ["bmw", "connectedrive"],
+        "vendor": "BMW",
+        "type": "Connected Vehicle",
+        "confidence": 90,
+        "capabilities": ["ConnectedDrive", "BMW App", "Remote Services", "Concierge"]
+      },
+      "mercedes": {
+        "patterns": ["mercedes", "benz"],
+        "hostnames": ["mercedes", "benz", "mbux"],
+        "vendor": "Mercedes-Benz",
+        "type": "Connected Vehicle",
+        "confidence": 90,
+        "capabilities": ["Mercedes me", "MBUX", "Remote Start", "Vehicle Monitoring"]
+      },
+      "audi": {
+        "patterns": ["audi"],
+        "hostnames": ["audi", "mmi"],
+        "vendor": "Audi",
+        "type": "Connected Vehicle",
+        "confidence": 90,
+        "capabilities": ["Audi connect", "MMI", "myAudi", "Remote Services"]
+      }
+    },
+    "industrial_iot": {
+      "manufacturing": {
+        "patterns": ["plc", "hmi", "scada", "industrial"],
+        "hostnames": ["plc", "hmi", "scada", "industrial", "factory", "automation"],
+        "vendors": {
+          "siemens": {"patterns": ["siemens"], "type": "Industrial Controller", "capabilities": ["SIMATIC", "TIA Portal", "PROFINET", "Industrial Ethernet"]},
+          "allen_bradley": {"patterns": ["allen-bradley", "rockwell"], "type": "PLC", "capabilities": ["ControlLogix", "CompactLogix", "EtherNet/IP", "Studio 5000"]},
+          "schneider": {"patterns": ["schneider"], "type": "Industrial Controller", "capabilities": ["Modicon", "EcoStruxure", "Ethernet", "Unity Pro"]},
+          "omron": {"patterns": ["omron"], "type": "Industrial Controller", "capabilities": ["Sysmac", "CX-Programmer", "EtherCAT", "DeviceNet"]}
+        }
+      },
+      "energy_monitoring": {
+        "patterns": ["energy", "power", "meter", "monitoring"],
+        "hostnames": ["energy", "power", "meter", "monitoring", "smart-meter"],
+        "vendors": {
+          "itron": {"patterns": ["itron"], "type": "Smart Meter", "capabilities": ["AMI", "OpenWay", "Smart Grid", "Remote Reading"]},
+          "landis_gyr": {"patterns": ["landis"], "type": "Smart Meter", "capabilities": ["Gridstream", "E650", "Advanced Metering", "Grid Analytics"]},
+          "sensus": {"patterns": ["sensus"], "type": "Smart Meter", "capabilities": ["FlexNet", "Water Metering", "Gas Metering", "Two-Way Communication"]}
+        }
+      },
+      "environmental_monitoring": {
+        "patterns": ["environmental", "weather", "climate", "air-quality"],
+        "hostnames": ["weather", "climate", "environment", "air-quality", "pollution"],
+        "vendors": {
+          "davis": {"patterns": ["davis"], "type": "Weather Station", "capabilities": ["WeatherLink", "Wireless", "Solar Powered", "Real-Time Data"]},
+          "ambient": {"patterns": ["ambient"], "type": "Weather Station", "capabilities": ["AmbientWeather", "WiFi", "Weather Underground", "IFTTT"]},
+          "purpleair": {"patterns": ["purpleair"], "type": "Air Quality Monitor", "capabilities": ["PM2.5", "Real-Time", "PurpleAir Map", "WiFi"]}
+        }
+      }
+    },
+    "commercial_systems": {
+      "pos_systems": {
+        "patterns": ["pos", "point-of-sale", "register", "cash"],
+        "hostnames": ["pos", "register", "cash", "retail", "checkout"],
+        "vendors": {
+          "square": {"patterns": ["square"], "type": "POS System", "capabilities": ["Square Register", "Payment Processing", "Inventory", "Analytics"]},
+          "clover": {"patterns": ["clover"], "type": "POS System", "capabilities": ["Clover Station", "Payment Processing", "Business Management"]},
+          "toast": {"patterns": ["toast"], "type": "Restaurant POS", "capabilities": ["Order Management", "Kitchen Display", "Payment Processing"]}
+        }
+      },
+      "digital_signage": {
+        "patterns": ["signage", "display", "digital-sign"],
+        "hostnames": ["signage", "display", "digital", "sign", "kiosk"],
+        "vendors": {
+          "samsung": {"patterns": ["samsung"], "type": "Digital Display", "capabilities": ["SMART Signage", "MagicINFO", "Commercial Grade"]},
+          "lg": {"patterns": ["lg"], "type": "Digital Display", "capabilities": ["webOS Signage", "SuperSign", "Commercial Display"]},
+          "brightsign": {"patterns": ["brightsign"], "type": "Media Player", "capabilities": ["Digital Signage", "BrightAuthor", "HTML5"]}
+        }
+      },
+      "access_control": {
+        "patterns": ["access", "door", "card", "badge"],
+        "hostnames": ["access", "door", "card", "badge", "security"],
+        "vendors": {
+          "hid": {"patterns": ["hid"], "type": "Access Control", "capabilities": ["Proximity Cards", "Smart Cards", "Mobile Access"]},
+          "honeywell": {"patterns": ["honeywell"], "type": "Access Control", "capabilities": ["Pro-Watch", "WIN-PAK", "Badge Readers"]},
+          "schlage": {"patterns": ["schlage"], "type": "Electronic Lock", "capabilities": ["Access Control", "Audit Trail", "Remote Management"]}
+        }
+      }
+    },
+    "smart_lighting": {
+      "smart_bulbs": {
+        "patterns": ["bulb", "light", "lamp", "led"],
+        "hostnames": ["bulb", "light", "lamp", "hue", "lifx", "kasa"],
+        "vendors": {
+          "philips_hue": {"patterns": ["hue", "philips"], "type": "Smart Bulb", "capabilities": ["Color Changing", "Dimming", "Voice Control", "Zigbee", "Bridge Required"]},
+          "lifx": {"patterns": ["lifx"], "type": "Smart Bulb", "capabilities": ["WiFi Direct", "Color Changing", "No Hub Required", "Music Sync"]},
+          "tp_link_kasa": {"patterns": ["kasa", "tp-link"], "type": "Smart Bulb", "capabilities": ["WiFi", "Scheduling", "Energy Monitoring", "Voice Control"]},
+          "wyze": {"patterns": ["wyze"], "type": "Smart Bulb", "capabilities": ["Color Temperature", "Dimming", "Scheduling", "Budget Friendly"]},
+          "nanoleaf": {"patterns": ["nanoleaf"], "type": "Smart Light Panel", "capabilities": ["Modular Design", "Touch Reactive", "Music Sync", "Thread"]}
+        }
+      },
+      "smart_switches": {
+        "patterns": ["switch", "dimmer", "outlet"],
+        "hostnames": ["switch", "dimmer", "outlet", "plug"],
+        "vendors": {
+          "lutron": {"patterns": ["lutron"], "type": "Smart Switch", "capabilities": ["Caseta Wireless", "Professional Installation", "Geofencing"]},
+          "leviton": {"patterns": ["leviton"], "type": "Smart Switch", "capabilities": ["Decora Smart", "My Leviton App", "Alexa Built-in"]},
+          "kasa": {"patterns": ["kasa"], "type": "Smart Switch", "capabilities": ["WiFi", "Scheduling", "Remote Control", "Energy Monitoring"]},
+          "ge": {"patterns": ["ge", "jasco"], "type": "Smart Switch", "capabilities": ["Z-Wave", "In-Wall", "LED Indicator"]}
+        }
+      },
+      "smart_sensors": {
+        "patterns": ["sensor", "detector", "monitor"],
+        "hostnames": ["sensor", "detector", "monitor", "multi"],
+        "vendors": {
+          "aeotec": {"patterns": ["aeotec"], "type": "Multi Sensor", "capabilities": ["Motion", "Light", "Temperature", "Humidity", "Z-Wave Plus"]},
+          "fibaro": {"patterns": ["fibaro"], "type": "Motion Sensor", "capabilities": ["Multi-Color LED", "Tamper Protection", "Z-Wave Plus"]},
+          "zooz": {"patterns": ["zooz"], "type": "4-in-1 Sensor", "capabilities": ["Motion", "Light", "Temperature", "Humidity", "USB Powered"]}
+        }
+      }
+    },
+    "industrial_iot": {
+      "manufacturing_equipment": {
+        "patterns": ["plc", "scada", "hmi", "cnc", "robot"],
+        "hostnames": ["plc", "scada", "hmi", "cnc", "robot", "cell", "line"],
+        "vendors": {
+          "siemens": {"patterns": ["siemens"], "type": "Industrial Controller", "capabilities": ["SIMATIC", "Profinet", "Industrial Ethernet", "Safety Functions"]},
+          "allen_bradley": {"patterns": ["allen-bradley", "rockwell"], "type": "PLC Controller", "capabilities": ["ControlLogix", "CompactLogix", "EtherNet/IP", "Safety"]},
+          "schneider": {"patterns": ["schneider", "modicon"], "type": "Industrial Controller", "capabilities": ["Modicon", "Modbus", "Ethernet/IP", "Safety"]},
+          "fanuc": {"patterns": ["fanuc"], "type": "CNC Controller", "capabilities": ["CNC Control", "Robot Control", "FOCAS", "Ethernet"]},
+          "abb": {"patterns": ["abb"], "type": "Industrial Robot", "capabilities": ["Robot Control", "Safety", "Ethernet/IP", "Profinet"]},
+          "kuka": {"patterns": ["kuka"], "type": "Industrial Robot", "capabilities": ["Robot Control", "KRC Controller", "Safety", "Ethernet"]}
+        }
+      },
+      "process_control": {
+        "patterns": ["dcs", "pid", "controller", "valve", "transmitter"],
+        "hostnames": ["dcs", "pid", "controller", "valve", "transmitter", "flow", "pressure"],
+        "vendors": {
+          "honeywell": {"patterns": ["honeywell"], "type": "Process Controller", "capabilities": ["DCS", "Safety Systems", "Batch Control", "Advanced Control"]},
+          "emerson": {"patterns": ["emerson", "deltav"], "type": "Process Controller", "capabilities": ["DeltaV", "Safety Systems", "Batch", "Continuous Control"]},
+          "yokogawa": {"patterns": ["yokogawa"], "type": "Process Controller", "capabilities": ["Centum VP", "ProSafe-RS", "Batch", "Continuous"]},
+          "fisher": {"patterns": ["fisher"], "type": "Control Valve", "capabilities": ["Valve Control", "Positioner", "Smart Diagnostics"]}
+        }
+      },
+      "field_devices": {
+        "patterns": ["transmitter", "sensor", "actuator", "analyzer"],
+        "hostnames": ["transmitter", "sensor", "actuator", "analyzer", "field"],
+        "vendors": {
+          "rosemount": {"patterns": ["rosemount"], "type": "Field Transmitter", "capabilities": ["HART", "Foundation Fieldbus", "WirelessHART", "Smart Diagnostics"]},
+          "endress_hauser": {"patterns": ["endress", "hauser"], "type": "Field Instrument", "capabilities": ["HART", "Profibus", "Foundation Fieldbus", "Ethernet/IP"]},
+          "vega": {"patterns": ["vega"], "type": "Level Transmitter", "capabilities": ["Radar", "Ultrasonic", "HART", "Profibus"]},
+          "ifm": {"patterns": ["ifm"], "type": "Industrial Sensor", "capabilities": ["IO-Link", "AS-Interface", "Profinet", "EtherNet/IP"]}
+        }
+      }
+    },
+    "automotive_iot": {
+      "vehicle_systems": {
+        "patterns": ["vehicle", "car", "truck", "obd", "ecu"],
+        "hostnames": ["vehicle", "car", "truck", "obd", "ecu", "telematics"],
+        "vendors": {
+          "tesla": {"patterns": ["tesla"], "type": "Electric Vehicle", "capabilities": ["Autopilot", "Over-the-Air Updates", "Supercharging", "Mobile Connector"]},
+          "gm_onstar": {"patterns": ["onstar", "gm"], "type": "Vehicle Telematics", "capabilities": ["Emergency Services", "Remote Diagnostics", "WiFi Hotspot", "Remote Start"]},
+          "ford_sync": {"patterns": ["sync", "ford"], "type": "Vehicle Infotainment", "capabilities": ["Voice Control", "Smartphone Integration", "Navigation", "WiFi"]},
+          "bmw_connecteddrive": {"patterns": ["bmw", "connected"], "type": "Vehicle Connectivity", "capabilities": ["Remote Services", "Concierge", "Real-time Traffic", "WiFi"]}
+        }
+      },
+      "fleet_management": {
+        "patterns": ["fleet", "tracking", "gps", "telematics"],
+        "hostnames": ["fleet", "tracking", "gps", "telematics", "vehicle"],
+        "vendors": {
+          "geotab": {"patterns": ["geotab"], "type": "Fleet Tracker", "capabilities": ["GPS Tracking", "Driver Behavior", "Fuel Management", "Maintenance"]},
+          "samsara": {"patterns": ["samsara"], "type": "Fleet Management", "capabilities": ["Video Dash Cam", "GPS Tracking", "Driver Safety", "Compliance"]},
+          "verizon_connect": {"patterns": ["verizon", "networkfleet"], "type": "Fleet Telematics", "capabilities": ["GPS Tracking", "Route Optimization", "Driver Behavior", "Compliance"]},
+          "fleetmatics": {"patterns": ["fleetmatics"], "type": "Fleet GPS", "capabilities": ["Real-time Tracking", "Route Planning", "Driver Reports", "Fuel Cards"]}
+        }
+      }
+    },
+    "healthcare_iot": {
+      "patient_monitoring": {
+        "patterns": ["monitor", "patient", "vital", "ecg", "pulse"],
+        "hostnames": ["monitor", "patient", "vital", "ecg", "pulse", "bp"],
+        "vendors": {
+          "philips_healthcare": {"patterns": ["philips"], "type": "Patient Monitor", "capabilities": ["Multi-parameter", "Wireless", "Clinical Decision Support", "IntelliVue"]},
+          "ge_healthcare": {"patterns": ["ge"], "type": "Patient Monitor", "capabilities": ["CARESCAPE", "Wireless", "Clinical Information", "Interoperability"]},
+          "masimo": {"patterns": ["masimo"], "type": "Pulse Oximeter", "capabilities": ["SET Technology", "Wireless", "Continuous Monitoring", "Alarm Management"]},
+          "medtronic": {"patterns": ["medtronic"], "type": "Medical Device", "capabilities": ["Patient Monitoring", "Therapy Delivery", "Remote Monitoring", "Data Analytics"]}
+        }
+      },
+      "diagnostic_equipment": {
+        "patterns": ["ultrasound", "xray", "mri", "ct", "imaging"],
+        "hostnames": ["ultrasound", "xray", "mri", "ct", "imaging", "dicom"],
+        "vendors": {
+          "ge_healthcare": {"patterns": ["ge"], "type": "Imaging Equipment", "capabilities": ["DICOM", "Cloud Connectivity", "AI Analytics", "Remote Diagnostics"]},
+          "siemens_healthineers": {"patterns": ["siemens"], "type": "Medical Imaging", "capabilities": ["Imaging", "Laboratory Diagnostics", "Advanced Therapies", "Digital Health"]},
+          "canon_medical": {"patterns": ["canon", "toshiba"], "type": "Imaging System", "capabilities": ["CT", "MRI", "Ultrasound", "X-ray", "Advanced Imaging"]},
+          "fujifilm": {"patterns": ["fujifilm"], "type": "Medical Imaging", "capabilities": ["Digital Radiography", "Ultrasound", "Endoscopy", "AI Diagnostics"]}
+        }
+      }
+    },
+    "energy_management": {
+      "solar_systems": {
+        "patterns": ["solar", "inverter", "panel", "pv", "photovoltaic"],
+        "hostnames": ["solar", "inverter", "panel", "pv", "photovoltaic", "energy"],
+        "vendors": {
+          "solaredge": {"patterns": ["solaredge"], "type": "Solar Inverter", "capabilities": ["Power Optimization", "Monitoring", "Safety", "Grid Services"]},
+          "enphase": {"patterns": ["enphase"], "type": "Microinverter", "capabilities": ["Panel-level Monitoring", "Rapid Shutdown", "Grid Support", "Energy Storage"]},
+          "sma": {"patterns": ["sma"], "type": "Solar Inverter", "capabilities": ["String Inverters", "Power Plant Controller", "Grid Management", "Energy Storage"]},
+          "tesla_powerwall": {"patterns": ["tesla", "powerwall"], "type": "Energy Storage", "capabilities": ["Battery Storage", "Backup Power", "Solar Integration", "Time-based Control"]}
+        }
+      },
+      "smart_meters": {
+        "patterns": ["meter", "electric", "gas", "water", "utility"],
+        "hostnames": ["meter", "electric", "gas", "water", "utility", "ami"],
+        "vendors": {
+          "itron": {"patterns": ["itron"], "type": "Smart Meter", "capabilities": ["AMI", "Remote Reading", "Outage Detection", "Load Control"]},
+          "landis_gyr": {"patterns": ["landis", "gyr"], "type": "Smart Meter", "capabilities": ["Grid Intelligence", "Smart Infrastructure", "Energy Management", "Grid Analytics"]},
+          "aclara": {"patterns": ["aclara"], "type": "Smart Meter", "capabilities": ["RF Mesh Network", "AMI", "Grid Monitoring", "Demand Response"]},
+          "sensus": {"patterns": ["sensus", "xylem"], "type": "Smart Water Meter", "capabilities": ["AMI", "Leak Detection", "Water Quality", "Remote Disconnect"]}
+        }
+      }
+    },
+    "agriculture_iot": {
+      "precision_farming": {
+        "patterns": ["farm", "agriculture", "crop", "soil", "irrigation"],
+        "hostnames": ["farm", "agriculture", "crop", "soil", "irrigation", "field"],
+        "vendors": {
+          "john_deere": {"patterns": ["deere", "john-deere"], "type": "Farm Equipment", "capabilities": ["Precision Agriculture", "GPS Guidance", "Variable Rate", "Data Management"]},
+          "trimble": {"patterns": ["trimble"], "type": "Precision Agriculture", "capabilities": ["GPS Guidance", "Field Mapping", "Variable Rate", "Farm Management"]},
+          "climate_fieldview": {"patterns": ["climate", "fieldview"], "type": "Farm Data Platform", "capabilities": ["Field Analytics", "Planting", "Nitrogen Management", "Harvest"]},
+          "raven": {"patterns": ["raven"], "type": "Precision Agriculture", "capabilities": ["Application Control", "GPS Guidance", "Field Computers", "Connectivity"]}
+        }
+      },
+      "livestock_monitoring": {
+        "patterns": ["livestock", "cattle", "dairy", "animal", "tracking"],
+        "hostnames": ["livestock", "cattle", "dairy", "animal", "tracking", "herd"],
+        "vendors": {
+          "allflex": {"patterns": ["allflex"], "type": "Livestock Monitoring", "capabilities": ["Animal ID", "Health Monitoring", "Reproduction", "Behavior Tracking"]},
+          "cowmanager": {"patterns": ["cowmanager"], "type": "Dairy Monitoring", "capabilities": ["Health Monitoring", "Fertility", "Nutrition", "Activity Tracking"]},
+          "smartbow": {"patterns": ["smartbow"], "type": "Cattle Monitoring", "capabilities": ["Ear Tag Sensors", "Health Alerts", "Reproduction", "Behavior Analysis"]},
+          "moocall": {"patterns": ["moocall"], "type": "Calving Sensor", "capabilities": ["Calving Alerts", "SMS Notifications", "Tail Movement Detection", "Pregnancy Monitoring"]}
+        }
+      }
+    },
+    "retail_iot": {
+      "point_of_sale": {
+        "patterns": ["pos", "cash", "register", "terminal", "payment"],
+        "hostnames": ["pos", "cash", "register", "terminal", "payment", "checkout"],
+        "vendors": {
+          "square": {"patterns": ["square"], "type": "POS Terminal", "capabilities": ["Payment Processing", "Inventory", "Analytics", "Customer Management"]},
+          "shopify": {"patterns": ["shopify"], "type": "POS System", "capabilities": ["Omnichannel", "Inventory Sync", "Customer Profiles", "Analytics"]},
+          "clover": {"patterns": ["clover"], "type": "POS Terminal", "capabilities": ["Payment Processing", "Business Management", "Customer Engagement", "Reporting"]},
+          "toast": {"patterns": ["toast"], "type": "Restaurant POS", "capabilities": ["Order Management", "Kitchen Display", "Payment Processing", "Analytics"]}
+        }
+      },
+      "inventory_management": {
+        "patterns": ["inventory", "rfid", "barcode", "scanner", "tracking"],
+        "hostnames": ["inventory", "rfid", "barcode", "scanner", "tracking", "warehouse"],
+        "vendors": {
+          "zebra": {"patterns": ["zebra"], "type": "RFID Scanner", "capabilities": ["Barcode Scanning", "RFID Reading", "Mobile Computing", "Data Capture"]},
+          "honeywell": {"patterns": ["honeywell"], "type": "Barcode Scanner", "capabilities": ["1D/2D Scanning", "Wireless", "Rugged Design", "Data Collection"]},
+          "impinj": {"patterns": ["impinj"], "type": "RFID Reader", "capabilities": ["Rain RFID", "Real-time Tracking", "Inventory Accuracy", "Analytics"]},
+          "datalogic": {"patterns": ["datalogic"], "type": "Auto-ID Device", "capabilities": ["Barcode Reading", "Vision Systems", "Mobile Computers", "Sensors"]}
+        }
+      }
+    },
+    "transportation_iot": {
+      "traffic_management": {
+        "patterns": ["traffic", "signal", "controller", "intersection", "its"],
+        "hostnames": ["traffic", "signal", "controller", "intersection", "its", "road"],
+        "vendors": {
+          "econolite": {"patterns": ["econolite"], "type": "Traffic Controller", "capabilities": ["Signal Control", "ITS", "Connected Vehicle", "Smart City"]},
+          "trafficware": {"patterns": ["trafficware"], "type": "Traffic System", "capabilities": ["ATMS", "Signal Optimization", "Incident Management", "Analytics"]},
+          "siemens_mobility": {"patterns": ["siemens"], "type": "Traffic Control", "capabilities": ["Intelligent Traffic Systems", "Urban Mobility", "Rail Systems", "Airport Solutions"]},
+          "kapsch": {"patterns": ["kapsch"], "type": "ITS Solution", "capabilities": ["Traffic Management", "Tolling", "Connected Vehicles", "Smart Infrastructure"]}
+        }
+      },
+      "public_transit": {
+        "patterns": ["transit", "bus", "train", "metro", "fare"],
+        "hostnames": ["transit", "bus", "train", "metro", "fare", "ticket"],
+        "vendors": {
+          "cubic": {"patterns": ["cubic"], "type": "Transit System", "capabilities": ["Fare Collection", "Real-time Information", "Analytics", "Mobile Ticketing"]},
+          "thales": {"patterns": ["thales"], "type": "Transportation", "capabilities": ["Signaling", "Fare Collection", "Passenger Information", "Operations Control"]},
+          "alstom": {"patterns": ["alstom"], "type": "Rail System", "capabilities": ["Rolling Stock", "Signaling", "Infrastructure", "Services"]},
+          "bombardier": {"patterns": ["bombardier"], "type": "Rail Technology", "capabilities": ["Trains", "Signaling", "Rail Control", "Maintenance"]}
+        }
+      }
+    },
+    "entertainment_iot": {
+      "gaming_consoles": {
+        "patterns": ["gaming", "console", "xbox", "playstation", "nintendo"],
+        "hostnames": ["gaming", "console", "xbox", "playstation", "nintendo", "switch"],
+        "vendors": {
+          "microsoft_xbox": {"patterns": ["xbox", "microsoft"], "type": "Gaming Console", "capabilities": ["4K Gaming", "Xbox Live", "Game Pass", "Backward Compatibility"]},
+          "sony_playstation": {"patterns": ["playstation", "ps4", "ps5"], "type": "Gaming Console", "capabilities": ["4K Gaming", "PlayStation Network", "VR Support", "Exclusive Games"]},
+          "nintendo": {"patterns": ["nintendo", "switch"], "type": "Gaming Console", "capabilities": ["Portable Gaming", "Motion Controls", "Local Multiplayer", "Nintendo eShop"]},
+          "valve_steam": {"patterns": ["steam", "valve"], "type": "Gaming Device", "capabilities": ["PC Gaming", "Steam Library", "Remote Play", "Linux Gaming"]}
+        }
+      },
+      "streaming_devices": {
+        "patterns": ["streaming", "media", "roku", "appletv", "chromecast"],
+        "hostnames": ["streaming", "media", "roku", "appletv", "chromecast", "firetv"],
+        "vendors": {
+          "roku": {"patterns": ["roku"], "type": "Streaming Device", "capabilities": ["4K HDR", "Voice Remote", "Roku Channel", "Screen Mirroring"]},
+          "apple_tv": {"patterns": ["appletv", "apple-tv"], "type": "Streaming Device", "capabilities": ["4K HDR", "AirPlay", "HomeKit Hub", "Apple TV+"]},
+          "google_chromecast": {"patterns": ["chromecast"], "type": "Streaming Device", "capabilities": ["Cast Technology", "4K HDR", "Google Assistant", "Android TV"]},
+          "amazon_firetv": {"patterns": ["firetv", "fire-tv"], "type": "Streaming Device", "capabilities": ["4K HDR", "Alexa Voice Remote", "Fire TV OS", "Prime Video"]}
+        }
+      }
+    },
+    "commercial_systems": {
+      "building_automation": {
+        "patterns": ["bms", "hvac", "lighting", "access", "building"],
+        "hostnames": ["bms", "hvac", "lighting", "access", "building", "facility"],
+        "vendors": {
+          "johnson_controls": {"patterns": ["johnson", "metasys"], "type": "Building Management", "capabilities": ["HVAC Control", "Energy Management", "Security Integration", "Analytics"]},
+          "schneider_ecostruxure": {"patterns": ["schneider", "ecostruxure"], "type": "Building Platform", "capabilities": ["Energy Management", "Building Analytics", "Digital Services", "Cybersecurity"]},
+          "siemens_desigo": {"patterns": ["siemens", "desigo"], "type": "Building Control", "capabilities": ["HVAC", "Fire Safety", "Security", "Energy Optimization"]},
+          "honeywell_building": {"patterns": ["honeywell"], "type": "Building Solution", "capabilities": ["Building Management", "Energy Efficiency", "Occupant Comfort", "Maintenance"]}
+        }
+      },
+      "digital_signage": {
+        "patterns": ["signage", "display", "kiosk", "screen", "digital"],
+        "hostnames": ["signage", "display", "kiosk", "screen", "digital", "menu"],
+        "vendors": {
+          "samsung_displays": {"patterns": ["samsung"], "type": "Digital Display", "capabilities": ["4K UHD", "Commercial Grade", "MagicINFO", "Remote Management"]},
+          "lg_commercial": {"patterns": ["lg"], "type": "Commercial Display", "capabilities": ["webOS", "SuperSign", "Cloud Management", "Interactive Touch"]},
+          "brightsign": {"patterns": ["brightsign"], "type": "Digital Signage Player", "capabilities": ["4K Playback", "HTML5", "Interactive Content", "Remote Management"]},
+          "intel_nuc": {"patterns": ["intel", "nuc"], "type": "Signage Computer", "capabilities": ["Compact Form Factor", "4K Support", "Remote Management", "Energy Efficient"]}
+        }
+      }
+    },
+    "specialized_computing": {
+      "embedded_systems": {
+        "patterns": ["embedded", "microcontroller", "arduino", "raspberry", "beaglebone", "esp32", "stm32"],
+        "hostnames": ["arduino", "raspberry", "beagle", "esp", "embedded"],
+        "vendors": {
+          "raspberry_pi": {
+            "patterns": ["raspberry", "pi", "rpi"],
+            "type": "Single Board Computer",
+            "confidence": 95,
+            "capabilities": ["Linux", "GPIO", "Camera Interface", "Display Interface", "WiFi", "Bluetooth"],
+            "models": {
+              "pi4": {"name": "Raspberry Pi 4", "generation": "4th Gen", "age": "Latest"},
+              "pi3": {"name": "Raspberry Pi 3", "generation": "3rd Gen", "age": "Previous"},
+              "pizero": {"name": "Raspberry Pi Zero", "generation": "Compact", "age": "Minimal"},
+              "pi400": {"name": "Raspberry Pi 400", "generation": "Keyboard", "age": "All-in-One"}
+            }
+          },
+          "arduino": {
+            "patterns": ["arduino", "uno", "mega", "nano", "leonardo"],
+            "type": "Microcontroller Board",
+            "confidence": 95,
+            "capabilities": ["Digital IO", "Analog Input", "PWM", "SPI", "I2C", "UART"],
+            "models": {
+              "uno": {"name": "Arduino Uno", "generation": "ATmega328P", "age": "Standard"},
+              "mega": {"name": "Arduino Mega", "generation": "ATmega2560", "age": "Extended IO"},
+              "nano": {"name": "Arduino Nano", "generation": "Compact", "age": "Small Form"},
+              "esp32": {"name": "ESP32", "generation": "WiFi/Bluetooth", "age": "IoT Ready"}
+            }
+          },
+          "nvidia_jetson": {
+            "patterns": ["jetson", "nvidia", "agx", "xavier", "nano"],
+            "type": "AI Edge Computer",
+            "confidence": 90,
+            "capabilities": ["CUDA", "TensorRT", "Computer Vision", "Machine Learning", "ROS"],
+            "models": {
+              "agx_xavier": {"name": "Jetson AGX Xavier", "generation": "High Performance", "age": "AI Workstation"},
+              "nano": {"name": "Jetson Nano", "generation": "Entry Level", "age": "AI Development"},
+              "tx2": {"name": "Jetson TX2", "generation": "Previous Gen", "age": "Embedded AI"}
+            }
+          }
+        }
+      },
+
+      "quantum_computers": {
+        "patterns": ["quantum", "qubit", "ibm", "google", "rigetti", "ionq"],
+        "hostnames": ["quantum", "qubit", "qpu"],
+        "vendors": {
+          "ibm_quantum": {
+            "patterns": ["ibm", "quantum", "qiskit"],
+            "type": "Quantum Computer",
+            "confidence": 85,
+            "capabilities": ["Quantum Processing", "Superconducting Qubits", "Cloud Access", "Qiskit"],
+            "models": {
+              "q_system_one": {"name": "IBM Q System One", "generation": "Commercial", "age": "Cloud Quantum"}
+            }
+          }
+        }
+      },
+
+      "edge_ai_accelerators": {
+        "patterns": ["coral", "movidius", "neural", "compute", "stick", "tpu"],
+        "hostnames": ["coral", "tpu", "neural", "edge"],
+        "vendors": {
+          "google_coral": {
+            "patterns": ["coral", "google", "tpu"],
+            "type": "AI Accelerator",
+            "confidence": 90,
+            "capabilities": ["Edge TPU", "TensorFlow Lite", "Computer Vision", "Machine Learning"],
+            "models": {
+              "dev_board": {"name": "Coral Dev Board", "generation": "Development", "age": "Prototyping"},
+              "usb_accelerator": {"name": "Coral USB Accelerator", "generation": "USB", "age": "Plug-and-Play"}
+            }
+          },
+          "intel_movidius": {
+            "patterns": ["movidius", "intel", "neural", "compute"],
+            "type": "AI Accelerator",
+            "confidence": 85,
+            "capabilities": ["Neural Compute", "Computer Vision", "Low Power", "OpenVINO"],
+            "models": {
+              "ncs2": {"name": "Neural Compute Stick 2", "generation": "USB", "age": "Edge AI"}
+            }
+          }
+        }
+      }
+    },
+
+    "scientific_instruments": {
+      "telescopes": {
+        "patterns": ["telescope", "celestron", "meade", "observatory", "mount"],
+        "hostnames": ["telescope", "mount", "observatory", "scope"],
+        "vendors": {
+          "celestron": {
+            "patterns": ["celestron", "nexstar", "cpc"],
+            "type": "Telescope",
+            "confidence": 90,
+            "capabilities": ["GoTo Mount", "GPS", "Star Database", "Computer Control"],
+            "models": {
+              "nexstar": {"name": "NexStar Series", "generation": "Computerized", "age": "Consumer"},
+              "cpc": {"name": "CPC Series", "generation": "Schmidt-Cassegrain", "age": "Advanced"}
+            }
+          }
+        }
+      },
+
+      "weather_stations": {
+        "patterns": ["weather", "station", "meteorological", "davis", "ambient"],
+        "hostnames": ["weather", "station", "meteo", "davis"],
+        "vendors": {
+          "davis_instruments": {
+            "patterns": ["davis", "vantage", "weatherlink"],
+            "type": "Weather Station",
+            "confidence": 90,
+            "capabilities": ["Temperature", "Humidity", "Wind", "Rain", "Barometric Pressure", "UV"],
+            "models": {
+              "vantage_pro2": {"name": "Vantage Pro2", "generation": "Professional", "age": "Research Grade"},
+              "vantage_vue": {"name": "Vantage Vue", "generation": "Consumer", "age": "Home Weather"}
+            }
+          },
+          "ambient_weather": {
+            "patterns": ["ambient", "weather"],
+            "type": "Weather Station",
+            "confidence": 85,
+            "capabilities": ["WiFi Connectivity", "Weather Underground", "Multiple Sensors", "Mobile App"],
+            "models": {
+              "ws_2902": {"name": "WS-2902", "generation": "WiFi", "age": "Smart Weather"}
+            }
+          }
+        }
+      },
+
+      "seismic_equipment": {
+        "patterns": ["seismic", "seismometer", "earthquake", "geophone", "accelerometer"],
+        "hostnames": ["seismic", "earthquake", "geo", "accelerometer"],
+        "vendors": {
+          "kinemetrics": {
+            "patterns": ["kinemetrics", "quanterra"],
+            "type": "Seismic Equipment",
+            "confidence": 85,
+            "capabilities": ["Earthquake Detection", "Ground Motion", "Data Acquisition", "Real-time Monitoring"],
+            "models": {
+              "quanterra": {"name": "Quanterra Q330", "generation": "Digitizer", "age": "Professional"}
+            }
+          }
+        }
+      }
+    },
+
+    "agriculture_tech": {
+      "precision_farming": {
+        "patterns": ["farming", "agriculture", "tractor", "gps", "precision", "trimble", "john", "deere"],
+        "hostnames": ["tractor", "farm", "gps", "precision", "ag"],
+        "vendors": {
+          "john_deere": {
+            "patterns": ["john", "deere", "jd"],
+            "type": "Agricultural Equipment",
+            "confidence": 90,
+            "capabilities": ["GPS Guidance", "Variable Rate", "Telematics", "Precision Agriculture"],
+            "models": {
+              "8r_series": {"name": "8R Series Tractor", "generation": "Row Crop", "age": "High HP"},
+              "x9_series": {"name": "X9 Series Combine", "generation": "Harvester", "age": "High Capacity"}
+            }
+          },
+          "trimble_ag": {
+            "patterns": ["trimble", "agriculture"],
+            "type": "Precision Agriculture",
+            "confidence": 85,
+            "capabilities": ["GPS/GNSS", "Auto-Steer", "Variable Rate", "Field Mapping"],
+            "models": {
+              "nav_controller": {"name": "NAV Controller", "generation": "Guidance", "age": "Auto-Steer"}
+            }
+          }
+        }
+      },
+
+      "livestock_monitoring": {
+        "patterns": ["livestock", "cattle", "dairy", "milking", "animal", "monitoring"],
+        "hostnames": ["livestock", "cattle", "dairy", "animal"],
+        "vendors": {
+          "delaval": {
+            "patterns": ["delaval"],
+            "type": "Dairy Equipment",
+            "confidence": 85,
+            "capabilities": ["Milking Systems", "Herd Management", "Animal Health", "Automation"],
+            "models": {
+              "vms": {"name": "VMS Milking System", "generation": "Robotic", "age": "Automated Milking"}
+            }
+          }
+        }
+      },
+
+      "greenhouse_systems": {
+        "patterns": ["greenhouse", "hydroponic", "aeroponic", "climate", "growing"],
+        "hostnames": ["greenhouse", "grow", "climate", "hydro"],
+        "vendors": {
+          "priva": {
+            "patterns": ["priva"],
+            "type": "Greenhouse Control",
+            "confidence": 85,
+            "capabilities": ["Climate Control", "Irrigation", "Energy Management", "Process Computer"],
+            "models": {
+              "connext": {"name": "Connext", "generation": "Process Computer", "age": "Integrated Control"}
+            }
+          }
+        }
+      }
+    },
+
+    "space_technology": {
+      "satellite_systems": {
+        "patterns": ["satellite", "ground", "station", "antenna", "tracking", "space"],
+        "hostnames": ["satellite", "ground", "station", "antenna", "space"],
+        "vendors": {
+          "spacex": {
+            "patterns": ["spacex", "starlink"],
+            "type": "Satellite System",
+            "confidence": 90,
+            "capabilities": ["Satellite Internet", "Low Earth Orbit", "Phased Array", "Global Coverage"],
+            "models": {
+              "starlink": {"name": "Starlink Terminal", "generation": "User Terminal", "age": "Consumer Satellite Internet"}
+            }
+          }
+        }
+      },
+
+      "mission_control": {
+        "patterns": ["mission", "control", "telemetry", "command", "tracking"],
+        "hostnames": ["mission", "control", "telemetry", "command"],
+        "vendors": {
+          "nasa": {
+            "patterns": ["nasa", "jpl"],
+            "type": "Mission Control System",
+            "confidence": 85,
+            "capabilities": ["Spacecraft Control", "Telemetry", "Deep Space", "Ground Systems"],
+            "models": {
+              "dsn": {"name": "Deep Space Network", "generation": "Ground System", "age": "Deep Space Communication"}
+            }
+          }
+        }
+      }
+    },
+
+    "mining_equipment": {
+      "excavation": {
+        "patterns": ["mining", "excavator", "haul", "truck", "crusher", "conveyor"],
+        "hostnames": ["mining", "excavator", "haul", "crusher"],
+        "vendors": {
+          "caterpillar_mining": {
+            "patterns": ["caterpillar", "cat", "mining"],
+            "type": "Mining Equipment",
+            "confidence": 85,
+            "capabilities": ["Heavy Machinery", "Autonomous Operation", "Fleet Management", "Productivity"],
+            "models": {
+              "797f": {"name": "797F Mining Truck", "generation": "Ultra Class", "age": "400 Ton Capacity"},
+              "6090fs": {"name": "6090 FS Shovel", "generation": "Hydraulic", "age": "Large Shovel"}
+            }
+          }
+        }
+      }
+    },
+
+    "water_treatment": {
+      "filtration_systems": {
+        "patterns": ["water", "treatment", "filtration", "purification", "membrane", "reverse", "osmosis"],
+        "hostnames": ["water", "treatment", "filter", "purify", "membrane"],
+        "vendors": {
+          "ge_water": {
+            "patterns": ["ge", "water", "osmonics"],
+            "type": "Water Treatment",
+            "confidence": 85,
+            "capabilities": ["Reverse Osmosis", "Ultrafiltration", "Ion Exchange", "Chemical Treatment"],
+            "models": {
+              "ro_system": {"name": "RO System", "generation": "Reverse Osmosis", "age": "Industrial"}
+            }
+          }
+        }
+      },
+
+      "monitoring_systems": {
+        "patterns": ["water", "quality", "monitoring", "sensor", "ph", "chlorine", "turbidity"],
+        "hostnames": ["water", "quality", "monitor", "sensor"],
+        "vendors": {
+          "hach": {
+            "patterns": ["hach"],
+            "type": "Water Quality Monitor",
+            "confidence": 90,
+            "capabilities": ["pH Monitoring", "Chlorine Measurement", "Turbidity", "Real-time Analysis"],
+            "models": {
+              "sc1000": {"name": "sc1000 Controller", "generation": "Universal", "age": "Multi-Parameter"}
+            }
+          }
+        }
+      }
+    },
+
+    "financial_technology": {
+      "atm_systems": {
+        "patterns": ["atm", "cash", "dispenser", "ncr", "diebold", "wincor"],
+        "hostnames": ["atm", "cash", "dispenser", "kiosk"],
+        "vendors": {
+          "ncr": {
+            "patterns": ["ncr", "selfserv"],
+            "type": "ATM",
+            "confidence": 90,
+            "capabilities": ["Cash Dispensing", "Deposit Taking", "Balance Inquiry", "PIN Verification"],
+            "models": {
+              "selfserv": {"name": "SelfServ Series", "generation": "Multi-Function", "age": "Modern ATM"},
+              "personas": {"name": "Personas Series", "generation": "Teller Assist", "age": "Branch ATM"}
+            }
+          },
+          "diebold_nixdorf": {
+            "patterns": ["diebold", "nixdorf", "opteva"],
+            "type": "ATM",
+            "confidence": 90,
+            "capabilities": ["Cash Recycling", "Check Deposit", "Card Reader", "Security Features"],
+            "models": {
+              "opteva": {"name": "Opteva Series", "generation": "Full Service", "age": "Advanced ATM"},
+              "cineo": {"name": "Cineo Series", "generation": "Modular", "age": "Next-Gen ATM"}
+            }
+          }
+        }
+      },
+      "payment_terminals": {
+        "patterns": ["payment", "terminal", "card", "reader", "verifone", "ingenico"],
+        "hostnames": ["payment", "terminal", "card", "pos"],
+        "vendors": {
+          "verifone": {
+            "patterns": ["verifone", "vx"],
+            "type": "Payment Terminal",
+            "confidence": 90,
+            "capabilities": ["EMV", "NFC", "Contactless", "PIN Entry", "Signature Capture"],
+            "models": {
+              "vx520": {"name": "VX 520", "generation": "Countertop", "age": "Standard Terminal"},
+              "vx680": {"name": "VX 680", "generation": "Wireless", "age": "Mobile Terminal"},
+              "vx820": {"name": "VX 820", "generation": "PIN Pad", "age": "Customer Facing"}
+            }
+          },
+          "ingenico": {
+            "patterns": ["ingenico", "tetra", "move"],
+            "type": "Payment Terminal",
+            "confidence": 90,
+            "capabilities": ["Smart Card", "Contactless", "Mobile Payment", "Multi-Application"],
+            "models": {
+              "tetra": {"name": "Tetra Series", "generation": "All-in-One", "age": "Android Terminal"},
+              "move": {"name": "Move Series", "generation": "Portable", "age": "Mobile Payment"}
+            }
+          }
+        }
+      }
+    },
+
+    "telecommunications": {
+      "base_stations": {
+        "patterns": ["base", "station", "cell", "tower", "bts", "enodeb", "gnodeb", "5g", "lte"],
+        "hostnames": ["base", "station", "cell", "bts", "enodeb"],
+        "vendors": {
+          "ericsson": {
+            "patterns": ["ericsson", "rbs", "enodeb"],
+            "type": "Base Station",
+            "confidence": 90,
+            "capabilities": ["5G NR", "LTE", "Massive MIMO", "Carrier Aggregation", "Cloud RAN"],
+            "models": {
+              "air3218": {"name": "AIR 3218", "generation": "5G", "age": "Mid-Band Massive MIMO"},
+              "rbs6000": {"name": "RBS 6000", "generation": "LTE", "age": "Multi-Standard Radio"}
+            }
+          },
+          "nokia": {
+            "patterns": ["nokia", "aira", "aeqd"],
+            "type": "Base Station",
+            "confidence": 90,
+            "capabilities": ["5G", "LTE Advanced", "ReefShark Chipset", "Liquid Cooling"],
+            "models": {
+              "aira": {"name": "AirScale", "generation": "5G", "age": "Cloud Native"},
+              "flexi": {"name": "Flexi Multiradio", "generation": "Multi-Standard", "age": "Software Defined"}
+            }
+          },
+          "huawei": {
+            "patterns": ["huawei", "aat", "bbu"],
+            "type": "Base Station",
+            "confidence": 85,
+            "capabilities": ["5G AAU", "C-RAN", "Cloud BBU", "Massive MIMO"],
+            "models": {
+              "aat9906": {"name": "AAT9906", "generation": "5G", "age": "Active Antenna Unit"},
+              "bbu5900": {"name": "BBU5900", "generation": "Cloud", "age": "Baseband Unit"}
+            }
+          }
+        }
+      },
+      "fiber_equipment": {
+        "patterns": ["fiber", "optical", "ont", "olt", "gpon", "xgspon", "dwdm"],
+        "hostnames": ["fiber", "optical", "ont", "olt", "gpon"],
+        "vendors": {
+          "ciena": {
+            "patterns": ["ciena", "waveserver", "saos"],
+            "type": "Optical Equipment",
+            "confidence": 90,
+            "capabilities": ["Coherent Optics", "Packet Optical", "SDN", "Network Functions"],
+            "models": {
+              "waveserver": {"name": "WaveServer", "generation": "Compact", "age": "Metro/Edge"},
+              "6500": {"name": "6500 Series", "generation": "Modular", "age": "Core/Metro"}
+            }
+          },
+          "adtran": {
+            "patterns": ["adtran", "total", "access"],
+            "type": "Access Equipment",
+            "confidence": 85,
+            "capabilities": ["Fiber Access", "Ethernet", "GPON", "Voice Services"],
+            "models": {
+              "total_access": {"name": "Total Access", "generation": "Access", "age": "Multi-Service"}
+            }
+          }
+        }
+      }
+    },
+
+    "defense_military": {
+      "radar_systems": {
+        "patterns": ["radar", "surveillance", "tracking", "military", "defense", "phased", "array"],
+        "hostnames": ["radar", "surveillance", "tracking", "defense"],
+        "vendors": {
+          "raytheon": {
+            "patterns": ["raytheon", "patriot", "aegis"],
+            "type": "Radar System",
+            "confidence": 85,
+            "capabilities": ["Air Defense", "Missile Tracking", "Phased Array", "Multi-Function"],
+            "models": {
+              "patriot": {"name": "Patriot Radar", "generation": "Air Defense", "age": "Missile Defense"},
+              "aegis": {"name": "Aegis Combat System", "generation": "Naval", "age": "Ship Defense"}
+            }
+          },
+          "thales": {
+            "patterns": ["thales", "ground", "master"],
+            "type": "Radar System",
+            "confidence": 85,
+            "capabilities": ["Air Traffic Control", "Military Surveillance", "Weather Detection"],
+            "models": {
+              "ground_master": {"name": "Ground Master", "generation": "Surveillance", "age": "Long Range"}
+            }
+          }
+        }
+      },
+      "communication_systems": {
+        "patterns": ["military", "radio", "tactical", "communication", "encrypted", "secure"],
+        "hostnames": ["military", "radio", "tactical", "secure", "comms"],
+        "vendors": {
+          "harris_rf": {
+            "patterns": ["harris", "falcon"],
+            "type": "Military Radio",
+            "confidence": 85,
+            "capabilities": ["Secure Communications", "Software Defined Radio", "Waveform Agility"],
+            "models": {
+              "falcon": {"name": "Falcon III", "generation": "Tactical", "age": "Multi-Band Radio"}
+            }
+          }
+        }
+      }
+    },
+
+    "maritime_systems": {
+      "navigation_equipment": {
+        "patterns": ["marine", "gps", "chart", "plotter", "radar", "sonar", "ais"],
+        "hostnames": ["marine", "nav", "chart", "radar", "sonar"],
+        "vendors": {
+          "garmin_marine": {
+            "patterns": ["garmin", "gpsmap", "echomap"],
+            "type": "Marine Electronics",
+            "confidence": 90,
+            "capabilities": ["GPS/GLONASS", "Chart Plotting", "Fish Finder", "Radar Integration"],
+            "models": {
+              "gpsmap": {"name": "GPSMAP Series", "generation": "Chart Plotter", "age": "Navigation"},
+              "echomap": {"name": "ECHOMAP Series", "generation": "Fish Finder", "age": "Sonar/GPS Combo"}
+            }
+          },
+          "raymarine": {
+            "patterns": ["raymarine", "axiom", "quantum"],
+            "type": "Marine Electronics",
+            "confidence": 85,
+            "capabilities": ["Multifunction Display", "Radar", "Sonar", "Autopilot"],
+            "models": {
+              "axiom": {"name": "Axiom Series", "generation": "Multifunction", "age": "All-in-One Display"},
+              "quantum": {"name": "Quantum Radar", "generation": "Pulse Compression", "age": "CHIRP Radar"}
+            }
+          }
+        }
+      },
+      "engine_monitoring": {
+        "patterns": ["engine", "monitoring", "marine", "diesel", "outboard", "nmea"],
+        "hostnames": ["engine", "monitor", "marine", "nmea"],
+        "vendors": {
+          "caterpillar_marine": {
+            "patterns": ["caterpillar", "cat", "marine"],
+            "type": "Marine Engine System",
+            "confidence": 85,
+            "capabilities": ["Engine Monitoring", "Diagnostics", "Performance Analysis", "NMEA 2000"],
+            "models": {
+              "c32": {"name": "C32 Marine Engine", "generation": "Commercial", "age": "High Power Diesel"}
+            }
+          }
+        }
+      }
+    },
+
+    "entertainment_venues": {
+      "casino_systems": {
+        "patterns": ["casino", "gaming", "slot", "machine", "igt", "aristocrat", "scientific"],
+        "hostnames": ["casino", "gaming", "slot", "machine"],
+        "vendors": {
+          "igt": {
+            "patterns": ["igt", "international", "game"],
+            "type": "Gaming Machine",
+            "confidence": 90,
+            "capabilities": ["Slot Gaming", "Video Poker", "Progressive Jackpots", "Player Tracking"],
+            "models": {
+              "peak": {"name": "PEAK Series", "generation": "Video Slot", "age": "HD Gaming"},
+              "crystal": {"name": "Crystal Series", "generation": "Curved Display", "age": "Premium Gaming"}
+            }
+          },
+          "aristocrat": {
+            "patterns": ["aristocrat", "helix", "viridian"],
+            "type": "Gaming Machine",
+            "confidence": 85,
+            "capabilities": ["Electronic Gaming", "Linked Jackpots", "Digital Display", "Cashless Gaming"],
+            "models": {
+              "helix": {"name": "Helix Cabinet", "generation": "Premium", "age": "Feature Rich"},
+              "viridian": {"name": "Viridian Series", "generation": "Wide Area", "age": "Progressive Gaming"}
+            }
+          }
+        }
+      },
+      "theme_park_systems": {
+        "patterns": ["theme", "park", "ride", "control", "safety", "queue", "turnstile"],
+        "hostnames": ["ride", "control", "safety", "queue", "turnstile"],
+        "vendors": {
+          "disney_imagineering": {
+            "patterns": ["disney", "imagineering", "fastpass"],
+            "type": "Theme Park System",
+            "confidence": 85,
+            "capabilities": ["Ride Control", "Queue Management", "Safety Systems", "Guest Experience"],
+            "models": {
+              "fastpass": {"name": "FastPass System", "generation": "Queue Management", "age": "Guest Flow Control"}
+            }
+          }
+        }
+      }
+    },
+
+    "geological_systems": {
+      "seismic_monitoring": {
+        "patterns": ["seismic", "earthquake", "accelerometer", "seismograph", "geological"],
+        "hostnames": ["seismic", "earthquake", "geo", "monitor"],
+        "vendors": {
+          "guralp": {
+            "patterns": ["guralp", "cmg"],
+            "type": "Seismometer",
+            "confidence": 90,
+            "capabilities": ["Broadband Seismometry", "Strong Motion", "Real-time Data", "Digital Output"],
+            "models": {
+              "cmg_3t": {"name": "CMG-3T", "generation": "Compact", "age": "Broadband Seismometer"},
+              "cmg_40t": {"name": "CMG-40T", "generation": "Wide Band", "age": "High Sensitivity"}
+            }
+          }
+        }
+      },
+      "drilling_equipment": {
+        "patterns": ["drilling", "oil", "gas", "rig", "mud", "logging"],
+        "hostnames": ["drilling", "rig", "mud", "logging"],
+        "vendors": {
+          "schlumberger": {
+            "patterns": ["schlumberger", "slb"],
+            "type": "Drilling Equipment",
+            "confidence": 85,
+            "capabilities": ["Well Logging", "Drilling Optimization", "Formation Evaluation", "Real-time Data"],
+            "models": {
+              "powerdrive": {"name": "PowerDrive", "generation": "Rotary Steerable", "age": "Directional Drilling"}
+            }
+          }
+        }
+      }
+    },
+
+    "chemical_processing": {
+      "process_control": {
+        "patterns": ["chemical", "process", "control", "reactor", "distillation", "chromatography"],
+        "hostnames": ["chemical", "process", "reactor", "control"],
+        "vendors": {
+          "honeywell_process": {
+            "patterns": ["honeywell", "experion", "tdc"],
+            "type": "Process Control System",
+            "confidence": 85,
+            "capabilities": ["DCS", "Safety Systems", "Advanced Control", "Asset Management"],
+            "models": {
+              "experion": {"name": "Experion PKS", "generation": "DCS", "age": "Process Control"},
+              "tdc3000": {"name": "TDC 3000", "generation": "Legacy", "age": "Distributed Control"}
+            }
+          },
+          "emerson": {
+            "patterns": ["emerson", "deltav", "ovation"],
+            "type": "Process Control System",
+            "confidence": 85,
+            "capabilities": ["DeltaV DCS", "Safety Instrumented Systems", "Wireless", "Smart Devices"],
+            "models": {
+              "deltav": {"name": "DeltaV", "generation": "Digital", "age": "Modern DCS"},
+              "ovation": {"name": "Ovation", "generation": "Expert Control", "age": "Power & Water"}
+            }
+          }
+        }
+      }
+    },
+
+    "food_beverage": {
+      "packaging_equipment": {
+        "patterns": ["packaging", "filling", "bottling", "canning", "labeling", "conveyor"],
+        "hostnames": ["packaging", "filling", "bottling", "conveyor"],
+        "vendors": {
+          "tetra_pak": {
+            "patterns": ["tetra", "pak"],
+            "type": "Packaging Equipment",
+            "confidence": 90,
+            "capabilities": ["Aseptic Packaging", "Liquid Food", "Carton Packaging", "Processing"],
+            "models": {
+              "a3_flex": {"name": "A3/Flex", "generation": "Aseptic", "age": "Flexible Packaging"},
+              "tba_8": {"name": "TBA/8", "generation": "Base", "age": "Standard Carton"}
+            }
+          }
+        }
+      },
+      "brewing_equipment": {
+        "patterns": ["brewing", "brewery", "fermentation", "tank", "bottling", "kegging"],
+        "hostnames": ["brewery", "brewing", "ferment", "tank"],
+        "vendors": {
+          "krones": {
+            "patterns": ["krones"],
+            "type": "Brewery Equipment",
+            "confidence": 85,
+            "capabilities": ["Bottling Lines", "Packaging", "Process Technology", "Inspection"],
+            "models": {
+              "contiform": {"name": "Contiform", "generation": "Bottle Making", "age": "Stretch Blow Molding"}
+            }
+          }
+        }
+      }
+    },
+
+    "textile_manufacturing": {
+      "weaving_equipment": {
+        "patterns": ["textile", "weaving", "loom", "knitting", "spinning", "dyeing"],
+        "hostnames": ["textile", "weaving", "loom", "knitting"],
+        "vendors": {
+          "toyota_industries": {
+            "patterns": ["toyota", "air", "jet"],
+            "type": "Weaving Equipment",
+            "confidence": 85,
+            "capabilities": ["Air Jet Loom", "Water Jet Loom", "High Speed Weaving", "Quality Control"],
+            "models": {
+              "air_jet": {"name": "Air Jet Loom", "generation": "High Speed", "age": "Modern Weaving"}
+            }
+          }
+        }
+      }
+    },
+
+    "pharmaceutical": {
+      "manufacturing_equipment": {
+        "patterns": ["pharmaceutical", "tablet", "capsule", "coating", "granulation", "mixing"],
+        "hostnames": ["pharma", "tablet", "capsule", "coating"],
+        "vendors": {
+          "glatt": {
+            "patterns": ["glatt"],
+            "type": "Pharmaceutical Equipment",
+            "confidence": 85,
+            "capabilities": ["Fluid Bed Processing", "Granulation", "Coating", "Drying"],
+            "models": {
+              "gpcg": {"name": "GPCG Series", "generation": "Granulator", "age": "Fluid Bed Granulation"}
+            }
+          }
+        }
+      },
+      "analytical_equipment": {
+        "patterns": ["hplc", "lcms", "dissolution", "stability", "potency", "purity"],
+        "hostnames": ["hplc", "lcms", "dissolution", "stability"],
+        "vendors": {
+          "shimadzu": {
+            "patterns": ["shimadzu", "nexera"],
+            "type": "Analytical Instrument",
+            "confidence": 90,
+            "capabilities": ["HPLC", "LC-MS", "Method Development", "Pharmaceutical Analysis"],
+            "models": {
+              "nexera": {"name": "Nexera Series", "generation": "UHPLC", "age": "High Performance"},
+              "lcms_8060": {"name": "LCMS-8060", "generation": "Triple Quadrupole", "age": "Quantitative Analysis"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

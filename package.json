@@ -1,0 +1,29 @@
+{
+  "name": "nmap-network-scanner-api",
+  "version": "2.0.0",
+  "description": "Advanced network device discovery API using nmap with intelligent device identification",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test-scanner.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": ["nmap", "network", "scanner", "device", "discovery", "api", "security", "iot"],
+  "author": "Network Scanner Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/nmap-network-scanner-api.git"
+  }
+}
