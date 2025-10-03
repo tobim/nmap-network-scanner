@@ -26,8 +26,14 @@ class DeviceRuleEngine:
     def load_rules(self) -> bool:
         """Load device rules from JSON files"""
         try:
+            # Try config directory first, then fall back to root directory
+            config_dir = os.path.join(self.rules_dir, 'config')
+            
             # Load main device rules
-            main_rules_path = os.path.join(self.rules_dir, 'device_rules.json')
+            main_rules_path = os.path.join(config_dir, 'device_rules.json')
+            if not os.path.exists(main_rules_path):
+                main_rules_path = os.path.join(self.rules_dir, 'device_rules.json')
+            
             if os.path.exists(main_rules_path):
                 with open(main_rules_path, 'r', encoding='utf-8') as f:
                     content = f.read()
@@ -38,7 +44,10 @@ class DeviceRuleEngine:
                 logger.info(f"✅ Loaded main device rules from {main_rules_path}")
             
             # Load extended IoT rules
-            extended_rules_path = os.path.join(self.rules_dir, 'extended_device_rules.json')
+            extended_rules_path = os.path.join(config_dir, 'extended_device_rules.json')
+            if not os.path.exists(extended_rules_path):
+                extended_rules_path = os.path.join(self.rules_dir, 'extended_device_rules.json')
+            
             if os.path.exists(extended_rules_path):
                 with open(extended_rules_path, 'r', encoding='utf-8') as f:
                     content = f.read()
