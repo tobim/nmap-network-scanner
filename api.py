@@ -422,8 +422,7 @@ async def root():
             },
             "port_and_service_scanning": {
                 "/scan/ports/{ip}": "GET - Scan open ports and services on specific host",
-                "/scan/vulnerabilities/{ip}": "GET - Scan for vulnerabilities (optional: ?ports=22,80,443)",
-                "/scan/comprehensive/{ip}": "GET - Full scan: device info + ports + services + vulnerabilities"
+                "/scan/vulnerabilities/{ip}": "GET - Scan for vulnerabilities (optional: ?ports=22,80,443)"
             },
             "rules_management": {
                 "/rules/info": "GET - Get information about loaded device detection rules",
@@ -446,8 +445,7 @@ async def root():
         "usage_examples": {
             "network_scan": "GET /scan - Discover all devices on network",
             "port_scan": "GET /scan/ports/192.168.1.10 - Check open ports on specific device",
-            "vuln_scan": "GET /scan/vulnerabilities/192.168.1.10?ports=22,80,443 - Check vulnerabilities",
-            "full_scan": "GET /scan/comprehensive/192.168.1.10 - Complete security assessment"
+            "vuln_scan": "GET /scan/vulnerabilities/192.168.1.10?ports=22,80,443 - Check vulnerabilities"
         },
         "security_scripts": {
             "vulners": "CVE detection and CVSS scoring",
@@ -654,42 +652,6 @@ async def scan_host_vulnerabilities(ip: str, ports: Optional[str] = None):
         raise
     except Exception as e:
         logger.error(f"❌ API vulnerability scan error for {ip}: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-@app.get("/scan/comprehensive/{ip}")
-async def scan_host_comprehensive(ip: str):
-    """Comprehensive scan including device info, ports, services, and vulnerabilities"""
-    try:
-        logger.info(f"🎯 API: Comprehensive host scan requested for {ip}")
-        
-        # Validate IP format
-        if not re.match(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$', ip):
-            raise HTTPException(status_code=400, detail="Invalid IP address format")
-        
-        # Perform all scans
-        port_data = await scanner.scan_ports_and_services(ip)
-        
-        # Extract open ports for vulnerability scan
-        open_ports = [p["port"] for p in port_data.get("ports", [])]
-        vuln_data = await scanner.scan_vulnerabilities(ip, open_ports if open_ports else None)
-        
-        # Combine results
-        result = {
-            "ip": ip,
-            "timestamp": datetime.now().isoformat(),
-            "scan_type": "comprehensive",
-            "ports": port_data,
-            "vulnerabilities": vuln_data
-        }
-        
-        logger.info(f"✅ API: Comprehensive scan completed for {ip}")
-        return result
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"❌ API comprehensive host scan error for {ip}: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
