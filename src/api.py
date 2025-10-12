@@ -10,8 +10,10 @@ import asyncio
 import time
 import json
 import logging
-from datetime import datetime
+import ipaddress
+from datetime import datetime, timedelta
 from typing import List, Dict, Optional, Any
+from collections import defaultdict
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -92,7 +94,127 @@ class NetworkScanner:
         self.gateway = None
         self.network_range = None
         self.device_rule_engine = DeviceRuleEngine()
+        
+        # Rate limiting: track requests per IP
+        self.rate_limit_store = defaultdict(list)
+        self.rate_limit_window = 60  # seconds
+        self.rate_limit_max = 3  # max requests per window
+        
+        # Scan state tracking
+        self.active_scans = set()
+        
+        # Result caching
+        self.cache = {}
+        self.cache_ttl = 300  # 5 minutes
+        
+        # Check sudo and nmap availability
+        self._check_system_requirements()
+        
         logger.info("🚀 Network Scanner initialized with external device rules")
+    
+    def _check_system_requirements(self):
+        """Check if sudo and nmap are available"""
+        try:
+            # Check if sudo works with -n (non-interactive)
+            result = subprocess.run(
+                ["sudo", "-n", "true"], 
+                capture_output=True, 
+                timeout=5
+            )
+            if result.returncode != 0:
+                logger.warning("⚠️ sudo not configured for passwordless access. Port scanning may fail.")
+                logger.warning("   Configure with: sudo visudo (add 'username ALL=(ALL) NOPASSWD: /usr/bin/nmap')")
+            else:
+                logger.info("✅ sudo configured correctly")
+            
+            # Check if nmap is installed
+            result = subprocess.run(
+                ["which", "nmap"],
+                capture_output=True,
+                text=True,
+                timeout=5
+            )
+            if result.returncode != 0:
+                logger.error("❌ nmap not found! Install with: brew install nmap")
+            else:
+                nmap_path = result.stdout.strip()
+                logger.info(f"✅ nmap found at {nmap_path}")
+            
+            # Check for NSE scripts
+            self._check_nse_scripts()
+            
+        except Exception as e:
+            logger.warning(f"⚠️ System requirements check failed: {str(e)}")
+    
+    def _check_nse_scripts(self):
+        """Check if vulnerability scanning NSE scripts are available"""
+        try:
+            result = subprocess.run(
+                ["nmap", "--script-help", "vulners"],
+                capture_output=True,
+                text=True,
+                timeout=10
+            )
+            if "vulners" in result.stdout.lower():
+                logger.info("✅ NSE script 'vulners' available")
+            else:
+                logger.warning("⚠️ NSE script 'vulners' not found. Vulnerability scanning may be limited.")
+                logger.warning("   Install: curl -o ~/.nmap/scripts/vulners.nse https://raw.githubusercontent.com/vulnersCom/nmap-vulners/master/vulners.nse")
+        except Exception as e:
+            logger.warning(f"⚠️ Could not check NSE scripts: {str(e)}")
+    
+    def _validate_ip(self, ip: str) -> bool:
+        """Validate IP address format and range"""
+        try:
+            ipaddress.ip_address(ip)
+            return True
+        except ValueError:
+            return False
+    
+    def _validate_ports(self, ports: List[int]) -> bool:
+        """Validate port numbers are in valid range"""
+        return all(1 <= port <= 65535 for port in ports)
+    
+    def _check_rate_limit(self, client_ip: str) -> bool:
+        """Check if client has exceeded rate limit"""
+        now = time.time()
+        
+        # Clean old entries
+        self.rate_limit_store[client_ip] = [
+            timestamp for timestamp in self.rate_limit_store[client_ip]
+            if now - timestamp < self.rate_limit_window
+        ]
+        
+        # Check if limit exceeded
+        if len(self.rate_limit_store[client_ip]) >= self.rate_limit_max:
+            return False
+        
+        # Add new request
+        self.rate_limit_store[client_ip].append(now)
+        return True
+    
+    def _get_cached_result(self, cache_key: str) -> Optional[Dict[str, Any]]:
+        """Get cached scan result if still valid"""
+        if cache_key in self.cache:
+            result, timestamp = self.cache[cache_key]
+            if time.time() - timestamp < self.cache_ttl:
+                logger.info(f"📦 Returning cached result for {cache_key}")
+                return result
+            else:
+                del self.cache[cache_key]
+        return None
+    
+    def _cache_result(self, cache_key: str, result: Dict[str, Any]):
+        """Cache scan result"""
+        self.cache[cache_key] = (result, time.time())
+    
+    def _sanitize_error(self, error: str) -> str:
+        """Sanitize error messages to prevent information disclosure"""
+        # Remove system paths
+        error = re.sub(r'/[\w/.-]+', '[path]', error)
+        # Remove version numbers
+        error = re.sub(r'\d+\.\d+\.\d+', '[version]', error)
+        return error
     
     def reload_rules(self) -> bool:
         """Reload device detection rules"""
@@ -206,64 +328,118 @@ class NetworkScanner:
         """Scan ports and identify services on a specific host"""
         logger.info(f"🔍 Scanning ports and services on {ip}")
         
+        # Check cache first
+        cache_key = f"ports_{ip}"
+        cached = self._get_cached_result(cache_key)
+        if cached:
+            return cached
+        
+        # Check if scan already in progress
+        if ip in self.active_scans:
+            logger.warning(f"⚠️ Port scan already in progress for {ip}")
+            return {"ip": ip, "open_ports": 0, "ports": [], "services": [], "error": "Scan already in progress"}
+        
         try:
+            self.active_scans.add(ip)
+            
             # Comprehensive port scan with service version detection
-            cmd = f"sudo -n nmap -sV -sC --version-all -p- --max-retries 2 --host-timeout 5m {ip}"
-            result = subprocess.run(cmd.split(), capture_output=True, text=True, timeout=360)
+            # Use list format to prevent command injection
+            cmd = ["sudo", "-n", "nmap", "-sV", "-sC", "--version-all", "-p-", 
+                   "--max-retries", "2", "--host-timeout", "3m", ip]
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=240)
             
             if result.returncode != 0:
                 logger.warning(f"⚠️ Full port scan failed for {ip}, trying top ports")
                 # Fallback to top 1000 ports
-                cmd = f"sudo -n nmap -sV -sC --top-ports 1000 {ip}"
-                result = subprocess.run(cmd.split(), capture_output=True, text=True, timeout=120)
+                cmd = ["sudo", "-n", "nmap", "-sV", "-sC", "--top-ports", "1000", ip]
+                result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
             
-            return self.parse_port_scan(result.stdout, ip)
+            scan_result = self.parse_port_scan(result.stdout, ip)
+            self._cache_result(cache_key, scan_result)
+            return scan_result
             
         except subprocess.TimeoutExpired:
             logger.warning(f"⏱️ Port scan timed out for {ip}")
-            return {"ip": ip, "ports": [], "services": [], "error": "Scan timeout"}
+            return {"ip": ip, "open_ports": 0, "ports": [], "services": [], "error": "Scan timeout"}
         except Exception as e:
             logger.error(f"❌ Port scan failed for {ip}: {str(e)}")
-            return {"ip": ip, "ports": [], "services": [], "error": str(e)}
+            sanitized_error = self._sanitize_error(str(e))
+            return {"ip": ip, "open_ports": 0, "ports": [], "services": [], "error": sanitized_error}
+        finally:
+            self.active_scans.discard(ip)
     
     async def scan_vulnerabilities(self, ip: str, ports: List[int] = None) -> Dict[str, Any]:
         """Scan for vulnerabilities using nmap NSE scripts"""
         logger.info(f"🔎 Scanning vulnerabilities on {ip}")
         
+        # Validate ports if provided
+        if ports and not self._validate_ports(ports):
+            logger.error(f"❌ Invalid port numbers provided for {ip}")
+            return {"ip": ip, "vulnerability_count": 0, "vulnerabilities": [], "error": "Invalid port numbers (must be 1-65535)"}
+        
+        # Check cache first
+        cache_key = f"vulns_{ip}_{'all' if not ports else ','.join(map(str, ports))}"
+        cached = self._get_cached_result(cache_key)
+        if cached:
+            return cached
+        
+        # Check if scan already in progress
+        scan_id = f"{ip}_vuln"
+        if scan_id in self.active_scans:
+            logger.warning(f"⚠️ Vulnerability scan already in progress for {ip}")
+            return {"ip": ip, "vulnerability_count": 0, "vulnerabilities": [], "error": "Scan already in progress"}
+        
         try:
+            self.active_scans.add(scan_id)
+            
             port_spec = ",".join(map(str, ports)) if ports else "-"
             
             # Use vulners and other vulnerability detection scripts
             scripts = "vulners,vulscan,vuln"
-            cmd = f"sudo -n nmap -sV --script={scripts} --script-args mincvss=5.0 -p {port_spec} {ip}"
+            # Use list format to prevent command injection
+            cmd = ["sudo", "-n", "nmap", "-sV", f"--script={scripts}", 
+                   "--script-args", "mincvss=5.0", "-p", port_spec, ip]
             
-            result = subprocess.run(cmd.split(), capture_output=True, text=True, timeout=300)
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
             
-            return self.parse_vulnerability_scan(result.stdout, ip)
+            scan_result = self.parse_vulnerability_scan(result.stdout, ip)
+            self._cache_result(cache_key, scan_result)
+            return scan_result
             
         except subprocess.TimeoutExpired:
             logger.warning(f"⏱️ Vulnerability scan timed out for {ip}")
-            return {"ip": ip, "vulnerabilities": [], "error": "Scan timeout"}
+            return {"ip": ip, "vulnerability_count": 0, "vulnerabilities": [], "error": "Scan timeout"}
         except Exception as e:
             logger.error(f"❌ Vulnerability scan failed for {ip}: {str(e)}")
-            return {"ip": ip, "vulnerabilities": [], "error": str(e)}
+            sanitized_error = self._sanitize_error(str(e))
+            return {"ip": ip, "vulnerability_count": 0, "vulnerabilities": [], "error": sanitized_error}
+        finally:
+            self.active_scans.discard(scan_id)
     
     def parse_port_scan(self, output: str, ip: str) -> Dict[str, Any]:
-        """Parse nmap port scan output"""
+        """Parse nmap port scan output with improved pattern matching"""
         ports = []
         services = []
         os_info = None
         
         lines = output.split('\n')
         for line in lines:
-            # Parse open ports
-            port_match = re.search(r'(\d+)/(tcp|udp)\s+(open|filtered)\s+(\S+)\s*(.*)', line)
+            # Improved regex to handle all port states and service names
+            # Matches: open, closed, filtered, open|filtered, closed|filtered, tcpwrapped
+            port_match = re.search(
+                r'(\d+)/(tcp|udp)\s+(open|closed|filtered|open\|filtered|closed\|filtered)\s+(\S+)(?:\s+(.+))?',
+                line
+            )
             if port_match:
                 port_num = int(port_match.group(1))
                 protocol = port_match.group(2)
                 state = port_match.group(3)
                 service = port_match.group(4)
                 version = port_match.group(5).strip() if port_match.group(5) else ""
+                
+                # Handle tcpwrapped service
+                if service == "tcpwrapped":
+                    version = "Service wrapped"
                 
                 port_info = {
                     "port": port_num,
@@ -275,7 +451,8 @@ class NetworkScanner:
                 
                 ports.append(port_info)
                 
-                if service not in [s["name"] for s in services]:
+                # Only add to services if open
+                if "open" in state and service not in [s["name"] for s in services]:
                     services.append({
                         "name": service,
                         "version": version,
@@ -288,31 +465,50 @@ class NetworkScanner:
             if os_match:
                 os_info = os_match.group(1)
         
+        # Count only open ports
+        open_count = len([p for p in ports if "open" in p["state"]])
+        
         return {
             "ip": ip,
-            "open_ports": len(ports),
+            "open_ports": open_count,
+            "total_ports_scanned": len(ports),
             "ports": ports,
             "services": services,
             "os_detection": os_info
         }
     
     def parse_vulnerability_scan(self, output: str, ip: str) -> Dict[str, Any]:
-        """Parse nmap vulnerability scan output"""
+        """Parse nmap vulnerability scan output with improved pattern matching"""
         vulnerabilities = []
+        current_port = None
         
         lines = output.split('\n')
-        current_cve = None
         
-        for line in lines:
-            # Look for CVE references
-            cve_match = re.search(r'(CVE-\d{4}-\d+)', line)
+        for i, line in enumerate(lines):
+            # Track current port being scanned
+            port_match = re.search(r'(\d+)/(tcp|udp)\s+open', line)
+            if port_match:
+                current_port = int(port_match.group(1))
+            
+            # Look for CVE references with better context
+            cve_match = re.search(r'(CVE-\d{4}-\d{4,})', line)
             if cve_match:
                 cve_id = cve_match.group(1)
                 
-                # Extract severity/score if present
-                score_match = re.search(r'(\d+\.\d+)', line)
-                score = float(score_match.group(1)) if score_match else None
+                # Extract CVSS score more carefully (look for patterns like "7.5" or "CVSS: 7.5")
+                score = None
+                score_match = re.search(r'(?:CVSS|cvss|score)[:\s]*(\d+\.\d+)', line, re.IGNORECASE)
+                if score_match:
+                    score = float(score_match.group(1))
+                else:
+                    # Try to find any decimal number between 0-10
+                    score_match = re.search(r'\b([0-9]\.\d+|10\.0)\b', line)
+                    if score_match:
+                        potential_score = float(score_match.group(1))
+                        if 0 <= potential_score <= 10:
+                            score = potential_score
                 
+                # Determine severity
                 severity = "Unknown"
                 if score:
                     if score >= 9.0:
@@ -324,11 +520,27 @@ class NetworkScanner:
                     else:
                         severity = "Low"
                 
+                # Try to extract title/description from next few lines
+                description = line.strip()
+                title = ""
+                
+                # Look for title in next line
+                if i + 1 < len(lines):
+                    next_line = lines[i + 1].strip()
+                    if next_line and not next_line.startswith('|') and len(next_line) > 10:
+                        title = next_line[:100]  # Limit title length
+                
+                # Check for exploit availability
+                exploit_available = bool(re.search(r'exploit|metasploit|public', line, re.IGNORECASE))
+                
                 vuln = {
                     "cve": cve_id,
                     "cvss_score": score,
                     "severity": severity,
-                    "description": line.strip()
+                    "title": title,
+                    "description": description[:200],  # Limit description length
+                    "port": current_port,
+                    "exploit_available": exploit_available
                 }
                 
                 # Avoid duplicates
@@ -342,7 +554,8 @@ class NetworkScanner:
             "critical": len([v for v in vulnerabilities if v["severity"] == "Critical"]),
             "high": len([v for v in vulnerabilities if v["severity"] == "High"]),
             "medium": len([v for v in vulnerabilities if v["severity"] == "Medium"]),
-            "low": len([v for v in vulnerabilities if v["severity"] == "Low"])
+            "low": len([v for v in vulnerabilities if v["severity"] == "Low"]),
+            "with_exploits": len([v for v in vulnerabilities if v.get("exploit_available")])
         }
     
     async def perform_comprehensive_analysis(self, host: Dict[str, Any]) -> Dict[str, Any]:
@@ -598,14 +811,22 @@ async def scan_network_clean():
 
 
 @app.get("/scan/ports/{ip}")
-async def scan_host_ports(ip: str):
+async def scan_host_ports(ip: str, request: Request):
     """Scan open ports and services on a specific host"""
     try:
         logger.info(f"🔍 API: Port scan requested for {ip}")
         
-        # Validate IP format
-        if not re.match(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$', ip):
+        # Validate IP format using proper validation
+        if not scanner._validate_ip(ip):
             raise HTTPException(status_code=400, detail="Invalid IP address format")
+        
+        # Check rate limiting
+        client_ip = request.client.host
+        if not scanner._check_rate_limit(client_ip):
+            raise HTTPException(
+                status_code=429, 
+                detail=f"Rate limit exceeded. Maximum {scanner.rate_limit_max} requests per {scanner.rate_limit_window} seconds"
+            )
         
         result = await scanner.scan_ports_and_services(ip)
         result["timestamp"] = datetime.now().isoformat()
@@ -622,7 +843,7 @@ async def scan_host_ports(ip: str):
 
 
 @app.get("/scan/vulnerabilities/{ip}")
-async def scan_host_vulnerabilities(ip: str, ports: Optional[str] = None):
+async def scan_host_vulnerabilities(ip: str, request: Request, ports: Optional[str] = None):
     """Scan for vulnerabilities on a specific host
     
     Args:
@@ -632,15 +853,26 @@ async def scan_host_vulnerabilities(ip: str, ports: Optional[str] = None):
     try:
         logger.info(f"🔎 API: Vulnerability scan requested for {ip}")
         
-        # Validate IP format
-        if not re.match(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$', ip):
+        # Validate IP format using proper validation
+        if not scanner._validate_ip(ip):
             raise HTTPException(status_code=400, detail="Invalid IP address format")
         
-        # Parse ports if provided
+        # Check rate limiting
+        client_ip = request.client.host
+        if not scanner._check_rate_limit(client_ip):
+            raise HTTPException(
+                status_code=429, 
+                detail=f"Rate limit exceeded. Maximum {scanner.rate_limit_max} requests per {scanner.rate_limit_window} seconds"
+            )
+        
+        # Parse and validate ports if provided
         port_list = None
         if ports:
             try:
                 port_list = [int(p.strip()) for p in ports.split(',')]
+                # Validate port range
+                if not scanner._validate_ports(port_list):
+                    raise HTTPException(status_code=400, detail="Port numbers must be between 1 and 65535")
             except ValueError:
                 raise HTTPException(status_code=400, detail="Invalid port format. Use comma-separated numbers (e.g., 22,80,443)")
         
@@ -655,7 +887,8 @@ async def scan_host_vulnerabilities(ip: str, ports: Optional[str] = None):
         raise
     except Exception as e:
         logger.error(f"❌ API vulnerability scan error for {ip}: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
+        sanitized_error = scanner._sanitize_error(str(e))
+        raise HTTPException(status_code=500, detail=sanitized_error)
 
 
 if __name__ == "__main__":
