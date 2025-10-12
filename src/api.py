@@ -135,11 +135,12 @@ class NetworkScanner:
         """Perform host discovery using nmap"""
         logger.info(f"🔍 Starting host discovery on {scan_range}")
         
-        # Try different nmap approaches (same as cli-scanner.js)
+        # Try different nmap approaches with DNS resolution enabled
+        # -R: Always do DNS resolution to get hostnames
         commands = [
-            f"sudo -n nmap -sn -PE -PP -PM --script broadcast-dns-service-discovery,broadcast-dhcp-discover --script-timeout 10s {scan_range}",
-            f"sudo -n nmap -sn {scan_range}",
-            f"nmap -sn {scan_range}"
+            f"sudo -n nmap -sn -R -PE -PP -PM --script broadcast-dns-service-discovery,broadcast-dhcp-discover --script-timeout 10s {scan_range}",
+            f"sudo -n nmap -sn -R {scan_range}",
+            f"nmap -sn -R {scan_range}"
         ]
         
         for i, cmd in enumerate(commands):

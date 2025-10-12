@@ -15,7 +15,7 @@ Fast and accurate network device discovery with intelligent device identificatio
 source api_env/bin/activate
 
 # 2. Start the API server (requires sudo for accurate scanning)
-sudo ./api_env/bin/python3 api.py
+sudo ./api_env/bin/python3 run.py
 
 # 3. Run the demo
 ./scripts/demo.sh
@@ -30,14 +30,17 @@ open http://localhost:8001
 
 ```
 nmap-network-scanner/
-├── api.py                          # Main FastAPI application (v3.1.0)
-├── device_rule_engine.py           # Device detection engine
+├── run.py                          # API launcher script (NEW)
 ├── package.json                    # Node.js dependencies (legacy)
+│
+├── src/                            # Python source code (NEW)
+│   ├── __init__.py
+│   ├── api.py                     # Main FastAPI application (v3.1.0)
+│   └── device_rule_engine.py      # Device detection engine
 │
 ├── config/                         # Configuration files
 │   ├── device_rules.json          # Main device detection rules (10,000+)
-│   ├── extended_device_rules.json # Extended IoT rules
-│   └── comprehensive_device_rules.json
+│   └── extended_device_rules.json # Extended IoT rules
 │
 ├── docs/                           # Documentation
 │   ├── README.md                  # Main documentation
@@ -184,8 +187,8 @@ curl http://localhost:8001/scan/comprehensive/192.168.1.1
 ### Running Tests
 
 ```bash
-# Start API server
-sudo ./api_env/bin/python3 api.py
+# Start API server (new method)
+sudo ./api_env/bin/python3 run.py
 
 # Run full demo
 ./scripts/demo.sh
