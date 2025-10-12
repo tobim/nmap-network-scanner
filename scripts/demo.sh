@@ -170,51 +170,6 @@ except Exception as e:
     print(f'⚠️  Error: {e}')
 "
 
-echo ""
-echo -e "${BLUE}═══════════════════════════════════════════════════════════${NC}"
-echo -e "${BLUE}  Demo 5: Comprehensive Scan (NEW)${NC}"
-echo -e "${BLUE}═══════════════════════════════════════════════════════════${NC}"
-
-echo -e "${YELLOW}→ Running comprehensive scan on ${TEST_IP}...${NC}"
-echo -e "${YELLOW}  (Combines port scan + vulnerability scan)${NC}"
-echo -e "${YELLOW}  (This may take 7-15 minutes)${NC}"
-echo ""
-
-curl -s "${API_URL}/scan/comprehensive/${TEST_IP}" | python3 -c "
-import sys, json
-try:
-    data = json.load(sys.stdin)
-    print(f\"Target: {data['ip']}\")
-    print(f\"Scan Type: {data['scan_type']}\")
-    print(f\"Timestamp: {data['timestamp']}\")
-    
-    # Port info
-    if data.get('ports'):
-        ports_data = data['ports']
-        print(f\"\\n📊 Port Scan Results:\")
-        print(f\"   Open Ports: {ports_data.get('open_ports', 0)}\")
-        if ports_data.get('services'):
-            print(f\"   Services: {len(ports_data['services'])}\")
-    
-    # Vulnerability info
-    if data.get('vulnerabilities'):
-        vuln_data = data['vulnerabilities']
-        print(f\"\\n🔒 Vulnerability Scan Results:\")
-        print(f\"   Total: {vuln_data.get('vulnerability_count', 0)}\")
-        print(f\"   Critical: {vuln_data.get('critical', 0)}\")
-        print(f\"   High: {vuln_data.get('high', 0)}\")
-        print(f\"   Medium: {vuln_data.get('medium', 0)}\")
-    
-    print(f\"\\n✅ Comprehensive scan complete!\")
-    print(f\"   View full results in JSON format for detailed analysis.\")
-    
-except json.JSONDecodeError:
-    print('⚠️  Invalid JSON response or scan still in progress')
-except Exception as e:
-    print(f'⚠️  Error: {e}')
-"
-
-echo ""
 echo -e "${BLUE}╔════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${BLUE}║  Demo Complete!                                           ║${NC}"
 echo -e "${BLUE}╚════════════════════════════════════════════════════════════╝${NC}"
@@ -222,7 +177,7 @@ echo ""
 echo -e "${GREEN}✓ All new features demonstrated successfully!${NC}"
 echo ""
 echo -e "${YELLOW}Next Steps:${NC}"
-echo "  1. Review full documentation: PORT_SCANNING_GUIDE.md"
+echo "  1. Review full documentation: docs/PORT_SCANNING_GUIDE.md"
 echo "  2. Test with your own devices"
 echo "  3. Integrate into your security workflow"
 echo "  4. Merge feature branch to main when ready"
@@ -231,5 +186,8 @@ echo -e "${YELLOW}Useful Commands:${NC}"
 echo "  • Get API docs: curl ${API_URL}/"
 echo "  • Port scan: curl ${API_URL}/scan/ports/<ip>"
 echo "  • Vuln scan: curl \"${API_URL}/scan/vulnerabilities/<ip>?ports=22,80,443\""
-echo "  • Full scan: curl ${API_URL}/scan/comprehensive/<ip>"
+echo ""
+echo -e "${YELLOW}Note:${NC}"
+echo "  Comprehensive scan removed from demo (takes 7-15 minutes)"
+echo "  Use: curl ${API_URL}/scan/comprehensive/<ip> if needed"
 echo ""
