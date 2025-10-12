@@ -17,7 +17,12 @@ class DeviceRuleEngine:
     """Manages device detection rules from external JSON files"""
     
     def __init__(self, rules_dir: str = None):
-        self.rules_dir = rules_dir or os.path.dirname(os.path.abspath(__file__))
+        # Default to project root (parent of src directory)
+        if rules_dir is None:
+            src_dir = os.path.dirname(os.path.abspath(__file__))
+            self.rules_dir = os.path.dirname(src_dir)  # Go up to project root
+        else:
+            self.rules_dir = rules_dir
         self.rules = {}
         self.extended_rules = {}
         self.loaded_at = None
@@ -26,7 +31,7 @@ class DeviceRuleEngine:
     def load_rules(self) -> bool:
         """Load device rules from JSON files"""
         try:
-            # Try config directory first, then fall back to root directory
+            # Config directory is at project root
             config_dir = os.path.join(self.rules_dir, 'config')
             
             # Load main device rules
