@@ -108,6 +108,48 @@ class DeviceRuleEngine:
         hostname = (device_info.get('hostname', '') or '').lower()
         mac = (device_info.get('mac', '') or '').lower()
         
+        # CRITICAL FIX 3: Handle missing MAC addresses early
+        if not mac or mac in ['n/a', 'unknown', '']:
+            logger.info(f"Device {ip} has no MAC address - likely offline or firewalled")
+            return {
+                'name': f'Unresponsive Device ({ip})',
+                'type': 'Offline or Firewalled Device',
+                'category': 'Network Issue',
+                'vendor': 'Unknown',
+                'confidence': 50,
+                'capabilities': ['Not Responding to MAC Requests'],
+                'osGuess': 'Unknown',
+                'model': 'Unknown',
+                'generation': 'Unknown',
+                'deviceAge': 'Unknown',
+                'securityRisk': 'Low',
+                'note': 'Device not responding to ARP/MAC requests - may be offline or behind firewall'
+            }
+        
+        # CRITICAL FIX 2: Detect randomized MAC addresses (privacy feature)
+        if self.is_randomized_mac(mac):
+            logger.info(f"Device {ip} using randomized MAC address: {mac}")
+            return {
+                'name': 'Privacy-Protected Device',
+                'type': 'Device with MAC Randomization',
+                'category': 'Privacy Device',
+                'vendor': 'Unknown (Privacy Enabled)',
+                'confidence': 80,
+                'capabilities': ['MAC Randomization', 'Privacy Features', 'Network Connected'],
+                'osGuess': 'iOS/Android/Modern OS',
+                'model': 'Unknown',
+                'generation': 'Modern (2018+)',
+                'deviceAge': 'Recent',
+                'securityRisk': 'Low',
+                'note': 'Device using MAC address randomization for privacy. Disable in system settings to identify device.'
+            }
+        
+        # CRITICAL FIX 2: Check hostname patterns FIRST (highest priority)
+        hostname_match = self._check_hostname_patterns(hostname, mfg, device_info)
+        if hostname_match:
+            logger.info(f"Device {ip} matched by hostname pattern: {hostname}")
+            return hostname_match
+        
         # Initialize result
         result = {
             'name': device_info.get('hostname') or ip or 'Unknown Device',
@@ -133,6 +175,204 @@ class DeviceRuleEngine:
             result.update(self._fallback_analysis(hostname, mfg, mac, ip))
         
         return result
+    
+    def _check_hostname_patterns(self, hostname: str, mfg: str, device_info: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        """
+        Check hostname for device type patterns (highest priority detection).
+        This fixes misidentification issues like MacBook Air being detected as iPhone.
+        
+        Args:
+            hostname: Device hostname (e.g., "Anuradhas-Air", "Johns-iPhone")
+            mfg: Manufacturer name
+            device_info: Full device information dictionary
+            
+        Returns:
+            Device classification dict if pattern matched, None otherwise
+        """
+        if not hostname:
+            return None
+        
+        hostname_lower = hostname.lower()
+        vendor = device_info.get('manufacturer', 'Unknown')
+        
+        # Apple device patterns (most common misidentification)
+        if 'apple' in mfg.lower() or vendor.lower().startswith('apple'):
+            
+            # MacBook detection (includes Air, Pro, etc.)
+            if 'macbook' in hostname_lower or '-air' in hostname_lower or '-pro' in hostname_lower:
+                model = 'MacBook'
+                if 'air' in hostname_lower:
+                    model = 'MacBook Air'
+                elif 'pro' in hostname_lower:
+                    model = 'MacBook Pro'
+                
+                return {
+                    'name': f'Apple {model}',
+                    'type': 'Laptop',
+                    'category': 'Computer',
+                    'vendor': 'Apple Inc.',
+                    'confidence': 95,
+                    'capabilities': ['WiFi', 'Bluetooth', 'Computing', 'macOS'],
+                    'osGuess': 'macOS',
+                    'model': model,
+                    'generation': 'Modern',
+                    'deviceAge': 'Recent',
+                    'securityRisk': 'Low'
+                }
+            
+            # iMac detection
+            elif 'imac' in hostname_lower:
+                return {
+                    'name': 'Apple iMac',
+                    'type': 'Desktop',
+                    'category': 'Computer',
+                    'vendor': 'Apple Inc.',
+                    'confidence': 95,
+                    'capabilities': ['WiFi', 'Bluetooth', 'Computing', 'macOS'],
+                    'osGuess': 'macOS',
+                    'model': 'iMac',
+                    'generation': 'Modern',
+                    'deviceAge': 'Recent',
+                    'securityRisk': 'Low'
+                }
+            
+            # Mac Mini/Studio detection
+            elif 'mac-mini' in hostname_lower or 'mini' in hostname_lower or 'mac-studio' in hostname_lower:
+                model = 'Mac Mini' if 'mini' in hostname_lower else 'Mac Studio'
+                return {
+                    'name': f'Apple {model}',
+                    'type': 'Desktop',
+                    'category': 'Computer',
+                    'vendor': 'Apple Inc.',
+                    'confidence': 95,
+                    'capabilities': ['WiFi', 'Bluetooth', 'Computing', 'macOS'],
+                    'osGuess': 'macOS',
+                    'model': model,
+                    'generation': 'Modern',
+                    'deviceAge': 'Recent',
+                    'securityRisk': 'Low'
+                }
+            
+            # iPad detection
+            elif 'ipad' in hostname_lower:
+                model = 'iPad'
+                if 'pro' in hostname_lower:
+                    model = 'iPad Pro'
+                elif 'air' in hostname_lower:
+                    model = 'iPad Air'
+                elif 'mini' in hostname_lower:
+                    model = 'iPad Mini'
+                
+                return {
+                    'name': f'Apple {model}',
+                    'type': 'Tablet',
+                    'category': 'Mobile Device',
+                    'vendor': 'Apple Inc.',
+                    'confidence': 95,
+                    'capabilities': ['WiFi', 'Touchscreen', 'iPadOS', 'App Store'],
+                    'osGuess': 'iPadOS',
+                    'model': model,
+                    'generation': 'Modern',
+                    'deviceAge': 'Recent',
+                    'securityRisk': 'Low'
+                }
+            
+            # iPhone detection
+            elif 'iphone' in hostname_lower:
+                return {
+                    'name': 'Apple iPhone',
+                    'type': 'Smartphone',
+                    'category': 'Mobile Device',
+                    'vendor': 'Apple Inc.',
+                    'confidence': 95,
+                    'capabilities': ['WiFi', 'Cellular', 'Touchscreen', 'iOS', 'App Store'],
+                    'osGuess': 'iOS',
+                    'model': 'iPhone',
+                    'generation': 'Modern',
+                    'deviceAge': 'Recent',
+                    'securityRisk': 'Low'
+                }
+            
+            # Apple Watch detection
+            elif 'watch' in hostname_lower or 'apple-watch' in hostname_lower:
+                return {
+                    'name': 'Apple Watch',
+                    'type': 'Smartwatch',
+                    'category': 'Wearable',
+                    'vendor': 'Apple Inc.',
+                    'confidence': 95,
+                    'capabilities': ['WiFi', 'Bluetooth', 'watchOS', 'Health Tracking'],
+                    'osGuess': 'watchOS',
+                    'model': 'Apple Watch',
+                    'generation': 'Modern',
+                    'deviceAge': 'Recent',
+                    'securityRisk': 'Low'
+                }
+        
+        # Samsung device patterns
+        elif 'samsung' in mfg.lower() or 'samsung' in hostname_lower:
+            if 'galaxy-tab' in hostname_lower or 'tab-' in hostname_lower:
+                return {
+                    'name': 'Samsung Galaxy Tab',
+                    'type': 'Tablet',
+                    'category': 'Mobile Device',
+                    'vendor': 'Samsung Electronics',
+                    'confidence': 90,
+                    'capabilities': ['WiFi', 'Touchscreen', 'Android'],
+                    'osGuess': 'Android',
+                    'model': 'Galaxy Tab',
+                    'generation': 'Modern',
+                    'deviceAge': 'Recent',
+                    'securityRisk': 'Low'
+                }
+            elif 'galaxy' in hostname_lower or 'samsung' in hostname_lower:
+                return {
+                    'name': 'Samsung Galaxy Smartphone',
+                    'type': 'Smartphone',
+                    'category': 'Mobile Device',
+                    'vendor': 'Samsung Electronics',
+                    'confidence': 90,
+                    'capabilities': ['WiFi', 'Cellular', 'Touchscreen', 'Android'],
+                    'osGuess': 'Android',
+                    'model': 'Galaxy',
+                    'generation': 'Modern',
+                    'deviceAge': 'Recent',
+                    'securityRisk': 'Low'
+                }
+        
+        # Generic laptop/desktop patterns
+        elif any(pattern in hostname_lower for pattern in ['laptop', 'notebook', 'thinkpad', 'latitude', 'pavilion']):
+            return {
+                'name': f'{vendor} Laptop',
+                'type': 'Laptop',
+                'category': 'Computer',
+                'vendor': vendor,
+                'confidence': 85,
+                'capabilities': ['WiFi', 'Computing'],
+                'osGuess': 'Windows/Linux',
+                'model': 'Laptop',
+                'generation': 'Modern',
+                'deviceAge': 'Unknown',
+                'securityRisk': 'Low'
+            }
+        
+        elif any(pattern in hostname_lower for pattern in ['desktop', 'pc-', 'workstation']):
+            return {
+                'name': f'{vendor} Desktop',
+                'type': 'Desktop',
+                'category': 'Computer',
+                'vendor': vendor,
+                'confidence': 85,
+                'capabilities': ['WiFi/Ethernet', 'Computing'],
+                'osGuess': 'Windows/Linux',
+                'model': 'Desktop',
+                'generation': 'Modern',
+                'deviceAge': 'Unknown',
+                'securityRisk': 'Low'
+            }
+        
+        # No hostname pattern matched
+        return None
     
     def _find_best_match(self, hostname: str, mfg: str, mac: str, ip: str) -> Optional[Dict[str, Any]]:
         """Find the best matching rule for the device"""
@@ -224,9 +464,9 @@ class DeviceRuleEngine:
         patterns = vendor_rules.get('patterns', [])
         hostnames = vendor_rules.get('hostnames', [])
         
-        # Check if device matches this vendor
-        vendor_match = any(pattern in mfg for pattern in patterns)
-        hostname_match = any(hostname_pattern in hostname for hostname_pattern in hostnames)
+        # FIX #4: Use word boundary matching to prevent false positives
+        vendor_match = any(self._matches_with_word_boundary(mfg.lower(), pattern.lower()) for pattern in patterns)
+        hostname_match = any(self._matches_with_word_boundary(hostname.lower(), hostname_pattern.lower()) for hostname_pattern in hostnames)
         
         if not (vendor_match or hostname_match):
             return None
@@ -270,9 +510,69 @@ class DeviceRuleEngine:
         return {}
     
     def _matches_patterns(self, hostname: str, mfg: str, patterns: List[str]) -> bool:
-        """Check if hostname or manufacturer matches any pattern"""
-        text_to_check = f"{hostname} {mfg}".lower()
-        return any(pattern.lower() in text_to_check for pattern in patterns)
+        """
+        Check if hostname or manufacturer matches any pattern with word boundaries.
+        
+        FIX #4: Prevents false positives like 'ring' matching 'Murata'
+        Uses word boundary matching instead of simple substring search.
+        """
+        hostname_lower = hostname.lower()
+        mfg_lower = mfg.lower()
+        
+        for pattern in patterns:
+            pattern_lower = pattern.lower()
+            
+            # Check hostname with word boundaries
+            if self._matches_with_word_boundary(hostname_lower, pattern_lower):
+                logger.debug(f"Pattern '{pattern}' matched hostname '{hostname}'")
+                return True
+            
+            # Check manufacturer with word boundaries  
+            if self._matches_with_word_boundary(mfg_lower, pattern_lower):
+                logger.debug(f"Pattern '{pattern}' matched manufacturer '{mfg}'")
+                return True
+        
+        return False
+    
+    def _matches_with_word_boundary(self, text: str, pattern: str) -> bool:
+        """
+        Check if pattern matches text with word boundaries.
+        
+        This prevents false matches like:
+        - 'ring' matching 'Murata' (contains 'rat' but not 'ring' as whole word)
+        - 'art' matching 'Samsung' (contains 'amsung' but not 'art' as whole word)
+        
+        Valid matches:
+        - 'ring' in 'ring-doorbell' ✓
+        - 'ring' in 'ring camera' ✓
+        - 'ring' in 'My Ring Device' ✓
+        - 'samsung' in 'samsung-galaxy' ✓
+        
+        Invalid matches:
+        - 'ring' in 'murata' ✗ (no word boundary)
+        - 'art' in 'smart' ✗ (no word boundary)
+        
+        Args:
+            text: Text to search in (hostname or manufacturer)
+            pattern: Pattern to search for
+            
+        Returns:
+            True if pattern found as whole word, False otherwise
+        """
+        if not text or not pattern:
+            return False
+        
+        # Match pattern as whole word or with non-letter boundaries
+        # (^|[^a-z]) means: start of string OR non-letter character
+        # ($|[^a-z]) means: end of string OR non-letter character
+        regex = r'(^|[^a-z])' + re.escape(pattern) + r'($|[^a-z])'
+        
+        try:
+            return bool(re.search(regex, text))
+        except Exception as e:
+            logger.debug(f"Regex error matching '{pattern}' in '{text}': {e}")
+            # Fallback to simple substring match if regex fails
+            return pattern in text
     
     def _get_category_name(self, category_key: str) -> str:
         """Convert category key to display name"""
@@ -304,6 +604,56 @@ class DeviceRuleEngine:
             'deviceAge': 'Unknown',
             'securityRisk': 'Low'
         }
+        
+        # FIX #5: Detect OEM chipmakers (make components, not end devices)
+        oem_chipmakers = {
+            'murata': {'type': 'WiFi/Bluetooth Module', 'note': 'OEM WiFi module inside another device'},
+            'broadcom': {'type': 'Network Chip', 'note': 'OEM network chip inside another device'},
+            'realtek': {'type': 'Network Chip', 'note': 'OEM Ethernet/WiFi chip inside another device'},
+            'qualcomm': {'type': 'Mobile Chipset', 'note': 'OEM mobile chipset inside another device'},
+            'mediatek': {'type': 'WiFi/SOC Chip', 'note': 'OEM WiFi/processor chip inside another device'},
+            'texas instruments': {'type': 'Electronics Module', 'note': 'OEM electronic components inside another device'},
+            'espressif': {'type': 'ESP32/ESP8266 Module', 'note': 'OEM WiFi module (ESP32/ESP8266)'},
+            'atheros': {'type': 'WiFi Chip', 'note': 'OEM WiFi chip inside another device'},
+            'marvell': {'type': 'Network Chip', 'note': 'OEM network chip inside another device'},
+            'intel corporate': {'type': 'Network Adapter', 'note': 'Intel network adapter inside computer'},
+            'raspberry pi': {'type': 'Raspberry Pi', 'note': 'Single-board computer'}  # Exception: actual device
+        }
+        
+        mfg_lower = mfg.lower()
+        for chipmaker, info in oem_chipmakers.items():
+            if chipmaker in mfg_lower:
+                # Special case: Raspberry Pi IS the actual device
+                if chipmaker == 'raspberry pi':
+                    result.update({
+                        'type': 'Single-Board Computer',
+                        'name': 'Raspberry Pi',
+                        'category': 'Computer',
+                        'vendor': 'Raspberry Pi Foundation',
+                        'confidence': 85,
+                        'capabilities': ['Linux', 'GPIO', 'Computing', 'WiFi', 'Bluetooth'],
+                        'model': 'Raspberry Pi',
+                        'generation': 'Various',
+                        'deviceAge': 'Modern',
+                        'securityRisk': 'Medium',
+                        'note': 'Single-board computer (check hostname for model)'
+                    })
+                else:
+                    # OEM component - not the actual device
+                    result.update({
+                        'type': f'Unknown Device ({info["type"]})',
+                        'name': f'Device with {mfg.split()[0]} Module',
+                        'category': 'Unknown',
+                        'vendor': mfg.split()[0].title(),
+                        'confidence': 40,
+                        'capabilities': ['Network Connected', 'Contains OEM Components'],
+                        'model': 'Unknown',
+                        'generation': 'Unknown',
+                        'deviceAge': 'Unknown',
+                        'securityRisk': 'Low',
+                        'note': info['note']
+                    })
+                return result
         
         # IP-based analysis
         if ip.endswith('.1'):
@@ -368,3 +718,36 @@ class DeviceRuleEngine:
                     vendors.extend(subcategory['vendors'].keys())
         
         return sorted(list(set(vendors)))
+    
+    def is_randomized_mac(self, mac: str) -> bool:
+        """
+        Detect locally administered (randomized) MAC addresses.
+        
+        iOS, Android, and modern operating systems use MAC randomization for privacy.
+        These MACs have bit 1 of the first byte set to 1 (locally administered bit).
+        
+        Args:
+            mac: MAC address string (e.g., "DA:4C:A2:2E:5C:DB")
+            
+        Returns:
+            True if MAC is randomized/locally administered, False otherwise
+        """
+        if not mac or mac.upper() in ['N/A', 'UNKNOWN', '']:
+            return False
+        
+        try:
+            # Get first byte of MAC address
+            first_byte_hex = mac.split(':')[0]
+            first_byte = int(first_byte_hex, 16)
+            
+            # Check if bit 1 is set (0x02 = 00000010)
+            # Locally administered MACs have this bit set to 1
+            is_local = (first_byte & 0x02) != 0
+            
+            if is_local:
+                logger.debug(f"Detected randomized MAC: {mac} (first byte: {first_byte_hex})")
+            
+            return is_local
+        except (ValueError, IndexError, AttributeError) as e:
+            logger.debug(f"Error checking MAC {mac}: {e}")
+            return False

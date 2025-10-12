@@ -74,8 +74,8 @@ for i, device in enumerate(data['devices'][:10], 1):  # Show first 10
     print(f\"   Type: {device['type']}\")
     print(f\"   Manufacturer: {device['manufacturer']}\")
 
-if data['devices_found'] > 10:
-    print(f\"\\n... and {data['devices_found'] - 10} more devices\")
+if data['devices_found'] > 30:
+    print(f\"\\n... and {data['devices_found'] - 30} more devices\")
 "
 
 echo ""

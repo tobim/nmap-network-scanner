@@ -34,6 +34,7 @@ class Device(BaseModel):
     ipv4: str
     ipv6: str = "N/A"
     mac: str
+    hostname: str = "N/A"
     manufacturer: str
     type: str
 
@@ -573,6 +574,7 @@ async def scan_network_clean():
                 "ipv4": device["ipv4"],
                 "ipv6": device.get("ipv6", "N/A"),
                 "mac": device["mac"],
+                "hostname": device.get("hostname", "N/A"),
                 "manufacturer": device["manufacturer"],
                 "type": device["type"]
             }
