@@ -4,20 +4,22 @@ FastAPI Network Scanner
 Based on the working cli-scanner.js logic with external JSON rule integration
 """
 
-import subprocess
-import re
-import asyncio
-import time
+import ipaddress
 import json
 import logging
-import ipaddress
-from datetime import datetime, timedelta
-from typing import List, Dict, Optional, Any
+import platform
+import re
+import subprocess
+import time
 from collections import defaultdict
+from datetime import datetime
+from typing import Any, Dict, List, Optional
+
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
+
 from device_rule_engine import DeviceRuleEngine
 
 # Configure logging for live logs
@@ -223,17 +225,25 @@ class NetworkScanner:
     def get_rules_info(self) -> Dict[str, Any]:
         """Get information about loaded rules"""
         return self.device_rule_engine.get_rules_info()
-        
     async def get_network_info(self) -> Dict[str, str]:
         """Get network gateway and range"""
         try:
             logger.info("🌐 Getting network information...")
             # Get default gateway
-            result = subprocess.run(['route', 'get', 'default'], 
-                                  capture_output=True, text=True, timeout=10)
-            
-            gateway_match = re.search(r'gateway: ([\d.]+)', result.stdout)
-            gateway = gateway_match.group(1) if gateway_match else '192.168.1.1'
+            gateway = '192.168.1.1'
+            match platform.system():
+                case "Linux":
+                    result = subprocess.run(['ip', 'route', 'get', '1.1.1.1'],
+                                          capture_output=True, text=True, timeout=10)
+                    gateway_match = re.search(r'via ([\d.]+)', result.stdout)
+                    gateway = gateway_match.group(1) if gateway_match else gateway
+                case "Darwin":
+                    result = subprocess.run(['route', 'get', 'default'],
+                                          capture_output=True, text=True, timeout=10)
+                    gateway_match = re.search(r'gateway: ([\d.]+)', result.stdout)
+                    gateway = gateway_match.group(1) if gateway_match else gateway
+                case _:
+                    pass
             
             # Calculate network range
             parts = gateway.split('.')
@@ -268,7 +278,7 @@ class NetworkScanner:
         for i, cmd in enumerate(commands):
             try:
                 logger.info(f"⚡ Trying scan method {i+1}: {'Enhanced' if i==0 else 'Sudo' if i==1 else 'Basic'}")
-                result = subprocess.run(cmd.split(), capture_output=True, text=True, timeout=60)
+                result = subprocess.run(cmd.split(), capture_output=True, text=True, timeout=300)
                 
                 if result.returncode == 0 and result.stdout:
                     hosts = self.parse_host_discovery(result.stdout)
