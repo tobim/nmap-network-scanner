@@ -270,9 +270,9 @@ class NetworkScanner:
         # Try different nmap approaches with DNS resolution enabled
         # -R: Always do DNS resolution to get hostnames
         commands = [
-            f"sudo -n nmap -sn -R -PE -PP -PM --script broadcast-dns-service-discovery,broadcast-dhcp-discover --script-timeout 10s {scan_range}",
-            f"sudo -n nmap -sn -R {scan_range}",
-            f"nmap -sn -R {scan_range}"
+            f"sudo -n nmap -sn -R -PE -PP -PM --script broadcast-dns-service-discovery,broadcast-dhcp-discover --script-timeout 10s --host-timeout 2m {scan_range}",
+            f"sudo -n nmap -sn -R --host-timeout 2m {scan_range}",
+            f"nmap -sn -R --host-timeout 2m {scan_range}"
         ]
         
         for i, cmd in enumerate(commands):
